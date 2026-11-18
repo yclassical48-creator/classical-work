@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>入居審査の準備リスト｜クラシカル</title>
+<meta name="description" content="入居審査に必要な書類のチェックリスト、家賃と年収の目安計算、審査で落ちやすいポイントをまとめた準備ツールです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14418B;--navy-deep:#0D2E66;--navy-light:#2E62B8;
+  --orange:#F47B20;--green:#1E8B4A;
+  --ink:#1B2433;--ink-60:#5A6475;
+  --bg:#F5F7FB;--mist:#EDF2FA;--line:#DCE4EF;--paper:#FFFFFF;
+  --shadow:0 3px 14px rgba(13,46,102,.09);--r:16px;
+  --red:#C8423B;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:"Noto Sans JP",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);
+  font-size:15px;line-height:1.75;padding-bottom:calc(84px + env(safe-area-inset-bottom));overflow-x:hidden}
+h1,h2,h3{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif;margin:0}
+button,input,textarea{font-family:inherit}
+
+/* header */
+.hdr{background:linear-gradient(150deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:#fff}
+.hdr-in{max-width:640px;margin:0 auto;padding:14px 16px 22px}
+.back{display:inline-flex;align-items:center;gap:4px;color:#fff;text-decoration:none;font-size:12.5px;opacity:.88;
+  padding:4px 10px 4px 6px;border-radius:20px;background:rgba(255,255,255,.12)}
+.back:active{opacity:.7}
+.logo{display:flex;align-items:center;gap:7px;margin-top:14px}
+.logo svg{width:22px;height:22px;flex:0 0 auto}
+.logo span{font-family:"Noto Serif",serif;font-weight:700;letter-spacing:.06em;font-size:15px}
+.hdr h1{font-size:25px;font-weight:900;margin-top:6px;letter-spacing:.02em;line-height:1.4}
+.hdr p{margin:4px 0 0;font-size:13px;opacity:.9}
+
+.main{max-width:640px;margin:0 auto;padding:16px 16px 24px}
+.box{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-bottom:14px}
+.ttl{font-size:16px;font-weight:700;color:var(--navy-deep);display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.ttl::before{content:"";width:5px;height:19px;border-radius:3px;background:var(--navy);flex:0 0 auto}
+.small{font-size:11.5px;color:var(--ink-60);line-height:1.65}
+.intro{font-size:13.5px;margin:0 0 14px;color:var(--ink)}
+.intro b{color:var(--navy)}
+
+/* record name */
+.nm-l{display:block;font-size:12px;color:var(--ink-60);margin-bottom:4px;font-weight:500}
+.nm-in{width:100%;border:0;border-bottom:2px solid var(--line);padding:5px 0;font-size:16px;font-family:"Zen Maru Gothic",sans-serif;
+  font-weight:700;color:var(--ink);outline:none;background:transparent}
+.nm-in:focus{border-color:var(--navy)}
+.privacy{margin:10px 0 0;padding:10px 12px;border-radius:10px;background:var(--mist);font-size:11.5px;line-height:1.7;color:var(--ink-60)}
+.privacy b{color:var(--navy-deep)}
+
+/* toggle */
+.tgl{display:flex;gap:3px;padding:3px;border-radius:12px;background:var(--mist)}
+.tgl button{flex:1;border:0;background:transparent;border-radius:9px;padding:9px 4px;font-family:"Zen Maru Gothic",sans-serif;
+  font-weight:700;font-size:13.5px;color:var(--ink-60);cursor:pointer;transition:background .15s,color .15s}
+.tgl button[aria-pressed="true"]{background:#fff;color:var(--navy);box-shadow:0 1px 5px rgba(13,46,102,.14)}
+
+/* calculator */
+.calc{background:linear-gradient(150deg,var(--navy-deep),var(--navy) 60%,var(--navy-light));color:#fff;border-radius:var(--r);
+  padding:18px 16px;margin-bottom:8px;box-shadow:var(--shadow)}
+.calc h2{font-size:15.5px;font-weight:700;margin-bottom:12px}
+.calc .tgl{background:rgba(255,255,255,.16);margin-bottom:12px}
+.calc .tgl button{color:rgba(255,255,255,.82)}
+.calc .tgl button[aria-pressed="true"]{background:#fff;color:var(--navy)}
+.field{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.22);
+  border-radius:12px;padding:8px 12px}
+.field:focus-within{border-color:rgba(255,255,255,.6)}
+.field input{flex:1;min-width:0;width:100%;border:0;background:transparent;color:#fff;outline:none;
+  font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:23px}
+.field input::placeholder{color:rgba(255,255,255,.45)}
+.field .u{font-size:13px;font-weight:700;opacity:.9;white-space:nowrap}
+.res{margin-top:14px;font-size:12.5px;opacity:.95}
+.res strong{display:block;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:27px;line-height:1.35;color:#FFB070}
+.res-sub{margin-top:10px;padding-top:9px;border-top:1px solid rgba(255,255,255,.24);font-size:12px;opacity:.88;line-height:1.7}
+.calc-note{margin:0 0 16px;font-size:11.5px;color:var(--ink-60);line-height:1.65}
+
+/* checklist */
+.meter{display:flex;align-items:center;gap:10px;margin:12px 0 4px}
+.meter .track{flex:1;height:9px;border-radius:6px;background:var(--mist);overflow:hidden}
+.meter .fill{height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--navy-light),var(--navy));transition:width .3s}
+.meter.done .fill{background:var(--green)}
+.meter .cnt{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:14.5px;color:var(--navy);min-width:56px;text-align:right}
+.meter.done .cnt{color:var(--green)}
+.items{list-style:none;margin:0;padding:0}
+.it label{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line);cursor:pointer;font-size:13.5px}
+.it:last-child label{border-bottom:0}
+.it input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:21px;height:21px;margin:2px 0 0;border:2px solid #C3CFDF;
+  border-radius:6px;background:#fff;position:relative;cursor:pointer;transition:background .15s,border-color .15s}
+.it input:checked{background:var(--green);border-color:var(--green)}
+.it input:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.it input:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.it .tx{flex:1;min-width:0}
+.it input:checked + .tx .main-t{color:var(--ink-60);text-decoration:line-through;text-decoration-color:#B9C5D6}
+.it .sub-t{display:block;font-size:11.5px;color:var(--ink-60);margin-top:1px}
+.sub-h{font-size:14.5px;font-weight:700;color:var(--navy-deep);margin:18px 0 4px;padding-top:14px;border-top:2px solid var(--mist);
+  display:flex;align-items:center;gap:8px}
+.sub-h::before{content:"";width:5px;height:17px;border-radius:3px;background:var(--orange);flex:0 0 auto}
+.advice{margin:12px 0 0;padding:12px 14px;border-radius:12px;background:var(--mist);font-size:12.5px;line-height:1.75}
+.advice h3{font-size:13px;color:var(--navy);margin-bottom:4px}
+.advice ul{margin:0;padding-left:1.15em}
+.advice li{margin-bottom:5px}
+.advice li:last-child{margin-bottom:0}
+
+/* pitfalls */
+.pit{background:#FFF7F0;border:1px solid #F6D9C2;border-radius:var(--r);padding:16px;margin-bottom:14px}
+.pit .ttl{color:#8A3E08}
+.pit .ttl::before{background:var(--orange)}
+.pit ol{margin:0;padding:0;list-style:none;counter-reset:p}
+.pit li{position:relative;padding-left:30px;font-size:13.5px;margin-bottom:10px;counter-increment:p}
+.pit li:last-child{margin-bottom:0}
+.pit li::before{content:counter(p);position:absolute;left:0;top:2px;width:21px;height:21px;border-radius:50%;background:var(--orange);color:#fff;
+  font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:"Zen Maru Gothic",sans-serif}
+.pit li b{color:#B4500F}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;padding:12px 15px;cursor:pointer;
+  font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13.5px;text-decoration:none;white-space:nowrap;
+  background:var(--orange);color:#fff;box-shadow:0 4px 12px rgba(244,123,32,.32)}
+.btn:active{transform:scale(.97)}
+.btn.navy{background:var(--navy);box-shadow:0 4px 12px rgba(20,65,139,.28)}
+.btn.line{background:#06C755;box-shadow:0 4px 12px rgba(6,199,85,.28)}
+.btn.sub{background:#fff;color:var(--navy);border:1.5px solid var(--line);box-shadow:none}
+.btn.wide{width:100%}
+.consult p{margin:0;font-size:13.5px}
+.cta{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+
+/* fixed bar */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-top:1px solid var(--line)}
+.dock-in{max-width:640px;margin:0 auto;display:flex;gap:7px;padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.dock .btn{flex:1;padding:11px 6px;font-size:13px}
+.dock .btn.sub{flex:1}
+
+/* sheets */
+.ovl{position:fixed;inset:0;z-index:50;background:rgba(13,46,102,.45);display:none;align-items:flex-end;justify-content:center}
+.ovl.show{display:flex}
+.sheet{width:100%;max-width:640px;background:#fff;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));
+  max-height:88vh;overflow:auto}
+.sheet h3{font-size:16.5px;color:var(--navy-deep);margin-bottom:12px}
+.recs{margin:0;padding:0;list-style:none}
+.rec{display:flex;align-items:center;gap:8px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.rec .info{flex:1;min-width:0}
+.rec .rn{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rec .rn .cur{font-size:10.5px;color:#fff;background:var(--green);border-radius:10px;padding:1px 7px;margin-left:6px;vertical-align:2px}
+.rec .rm{font-size:11.5px;color:var(--ink-60)}
+.rec button{border:0;border-radius:9px;padding:7px 11px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:12.5px;cursor:pointer}
+.rec .op{background:var(--mist);color:var(--navy)}
+.rec .dl{background:transparent;color:var(--red)}
+.none{text-align:center;font-size:13px;color:var(--ink-60);padding:24px 0}
+.preview{display:block;width:100%;border:1px solid var(--line);border-radius:12px}
+.sheet .btn{margin-top:8px}
+
+.toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,12px);background:var(--navy-deep);color:#fff;padding:10px 18px;border-radius:24px;
+  font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:70;
+  max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.ft{text-align:center;font-size:11px;color:var(--ink-60);line-height:1.85;padding:10px 16px 18px}
+.ft .tag{display:block;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;color:var(--navy);font-size:12.5px;margin-bottom:4px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="back" href="../../">← 特典一覧</a>
+    <div class="logo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 11.5 12 3.5l9.5 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="5" y="10.5" width="14" height="10.5" rx="1.2" fill="#fff"/><rect x="10.2" y="13.6" width="3.6" height="3.6" rx=".5" fill="#14418B"/></svg>
+      <span>CLASSICAL</span>
+    </div>
+    <h1>入居審査の準備リスト</h1>
+    <p>必要書類・年収と家賃の目安・つまずきやすいポイント</p>
+  </div>
+</header>
+
+<main class="main">
+  <section class="box">
+    <label class="nm-l" for="recName">この記録の名前（お名前など）</label>
+    <input class="nm-in" id="recName" type="text" maxlength="40" placeholder="例）田中様 審査の準備" autocomplete="off">
+    <p class="privacy">入力・チェックした内容は<b>お使いの端末の中にだけ</b>保存されます。クラシカルを含め、どこにも送信されません。<br>
+    ほかの端末からは見られず、ブラウザの履歴やサイトデータを消去すると消えてしまいます。しっかり残したいときは「画像で保存」もご利用ください。</p>
+  </section>
+
+  <p class="intro">入居審査で見られているのは、<b>「家賃をきちんと払える人か」「連絡がとれる人か」</b>という点です。事前の準備で避けられるつまずきがほとんどなので、ひとつずつ確認していきましょう。</p>
+
+  <section class="calc" aria-labelledby="calcTtl">
+    <h2 id="calcTtl">家賃と年収のバランスをチェック</h2>
+    <div class="tgl" id="calcMode" role="group" aria-label="計算の向き">
+      <button type="button" data-mode="rent" aria-pressed="true">家賃から計算</button>
+      <button type="button" data-mode="income" aria-pressed="false">年収から計算</button>
+    </div>
+    <div class="field">
+      <input id="calcIn" type="number" inputmode="numeric" min="0" placeholder="70000" aria-label="金額">
+      <span class="u" id="calcUnit">円 / 月</span>
+    </div>
+    <div class="res"><span id="resLabel">この家賃で求められる年収の目安</span><strong id="resVal">—</strong></div>
+    <div class="res-sub" id="resSub">家賃は月の手取りの3分の1以内におさめるのが、よく使われる目安です。</div>
+  </section>
+  <p class="calc-note">※ 計算結果は一般的な目安です。年収が足りなくても、預貯金の額・連帯保証人・勤続年数などで補えることもよくあります。</p>
+
+  <section class="box" aria-labelledby="docTtl">
+    <h2 class="ttl" id="docTtl">そろえておきたい書類</h2>
+    <div class="tgl" id="natl" role="group" aria-label="国籍">
+      <button type="button" data-n="jp" aria-pressed="true">日本国籍の方</button>
+      <button type="button" data-n="fr" aria-pressed="false">外国籍の方</button>
+    </div>
+    <p class="small" style="margin:8px 0 0">国籍によって必要なものが一部変わります。あてはまるほうを選んでください。</p>
+    <div class="meter" id="meter"><div class="track"><div class="fill" id="fill"></div></div><div class="cnt" id="cnt">0 / 0</div></div>
+
+    <ul class="items" data-sec="そろえておきたい書類">
+      <li class="it"><label><input type="checkbox" data-k="id"><span class="tx"><span class="main-t">本人確認書類（運転免許証・マイナンバーカード・パスポートなど）</span></span></label></li>
+      <li class="it"><label><input type="checkbox" data-k="income"><span class="tx"><span class="main-t">収入を証明するもの（源泉徴収票、直近3ヶ月の給与明細、確定申告書のいずれか）</span></span></label></li>
+      <li class="it"><label><input type="checkbox" data-k="employ"><span class="tx"><span class="main-t">勤務先がわかるもの（社員証・内定通知書・雇用契約書など）</span></span></label></li>
+      <li class="it"><label><input type="checkbox" data-k="pay"><span class="tx"><span class="main-t">家賃引き落とし用の口座情報、またはクレジットカード</span></span></label></li>
+      <li class="it"><label><input type="checkbox" data-k="seal"><span class="tx"><span class="main-t">印鑑</span></span></label></li>
+      <li class="it"><label><input type="checkbox" data-k="emerg"><span class="tx"><span class="main-t">緊急連絡先の方の氏名・住所・電話番号</span><span class="sub-t">保証会社を利用する場合でも、たいてい1名分は求められます</span></span></label></li>
+      <li class="it"><label><input type="checkbox" data-k="guar"><span class="tx"><span class="main-t">連帯保証人を立てる場合：保証人の収入証明と印鑑証明</span></span></label></li>
+      <li class="it"><label><input type="checkbox" data-k="student"><span class="tx"><span class="main-t">学生の方：学生証または合格通知書と、保護者の方の収入証明</span></span></label></li>
+    </ul>
+
+    <div id="intl" hidden>
+      <h2 class="sub-h">外国籍の方は、あわせてこちらも</h2>
+      <ul class="items" data-sec="外国籍の方の追加書類">
+        <li class="it"><label><input type="checkbox" data-k="f_card"><span class="tx"><span class="main-t">在留カード（表面・裏面とも）</span><span class="sub-t">来日前の方は、ビザや入国予定がわかる書類で手続きを進められます</span></span></label></li>
+        <li class="it"><label><input type="checkbox" data-k="f_pass"><span class="tx"><span class="main-t">パスポート</span></span></label></li>
+        <li class="it"><label><input type="checkbox" data-k="f_school"><span class="tx"><span class="main-t">留学の方：入学許可書・在学証明書・学生証</span></span></label></li>
+        <li class="it"><label><input type="checkbox" data-k="f_work"><span class="tx"><span class="main-t">就労の方：雇用契約書・内定通知書・社員証</span></span></label></li>
+        <li class="it"><label><input type="checkbox" data-k="f_income"><span class="tx"><span class="main-t">収入がわかる書類</span><span class="sub-t">来日前であれば、勤務先が発行する給与見込みの書面で足りる場合が多いです</span></span></label></li>
+        <li class="it"><label><input type="checkbox" data-k="f_tel"><span class="tx"><span class="main-t">日本国内でつながる電話番号</span><span class="sub-t">まだない場合は、メールやアプリなど連絡手段を先に決めておくと安心です</span></span></label></li>
+        <li class="it"><label><input type="checkbox" data-k="f_emerg"><span class="tx"><span class="main-t">日本国内の緊急連絡先</span><span class="sub-t">勤務先や学校のご担当者で認められるケースも多くあります</span></span></label></li>
+        <li class="it"><label><input type="checkbox" data-k="f_bank"><span class="tx"><span class="main-t">日本の銀行口座（開設前でも進められることがあります）</span></span></label></li>
+      </ul>
+      <div class="advice">
+        <h3>スムーズに進めるコツ</h3>
+        <ul>
+          <li>在留期間の残りが短いと、審査は慎重になりがちです。更新予定があれば最初に伝えておきましょう。</li>
+          <li>パスポートと在留カードで、お名前のつづりをそろえてください。書類ごとに表記が違うと確認に時間がかかります。</li>
+          <li>保証会社によって受け入れの条件はさまざまです。状況に合う会社を選んでご案内します。</li>
+          <li>日本語でのやりとりが不安なときは、遠慮なくお知らせください。やさしい日本語や翻訳ツールを使って進めます。</li>
+          <li>来日前でも、オンライン内見と電子契約でお部屋を決めることができます。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="pit" aria-labelledby="pitTtl">
+    <h2 class="ttl" id="pitTtl">審査でつまずきやすいパターン</h2>
+    <ol>
+      <li><b>在籍確認の電話に出られない</b>、または勤務先に事前に伝えていない。審査期間中は電話を受けられるようにしておきましょう。</li>
+      <li><b>収入に対して家賃が高すぎる</b>。手取りの3分の1がひとつの基準です。</li>
+      <li><b>申込書の記入漏れや、電話番号の書き間違い</b>。連絡がつかないと、その時点で審査が止まってしまいます。</li>
+      <li><b>スマホ本体の分割払いやカード代金の延滞</b>。信販系の保証会社では特にチェックされます。</li>
+      <li><b>転職したばかり・入社前</b>。内定通知書があれば通ることも多いので、隠さず最初に提出しましょう。</li>
+      <li><b>年収や勤続年数を実際より多く書く</b>。書類と食い違うと、一気に不利になります。</li>
+      <li><b>内見や電話でのふるまい</b>。オーナーさんが判断する審査では、意外としっかり見られています。</li>
+    </ol>
+  </section>
+
+  <section class="box consult" aria-labelledby="conTtl">
+    <h2 class="ttl" id="conTtl">「審査が不安…」と感じたら</h2>
+    <p>フリーランス、転職したばかり、年金収入、外国籍の方なども、通りやすい物件や保証会社の組み合わせがあります。申し込みの前にご相談いただければ、審査を見すえたお部屋選びができます。落ちてから探し直すより、ずっと近道です。</p>
+    <div class="cta">
+      <button type="button" class="btn wide" data-copy>準備状況をコピーする</button>
+      <a class="btn line wide" id="lineBtn" href="#" target="_blank" rel="noopener">クラシカルにLINEで相談する</a>
+    </div>
+    <p class="small" style="margin:8px 0 0">そろった書類・まだの書類が文章でコピーされます。LINEのトークに貼り付けて送っていただければ、足りない書類の代わりになるものなどをご案内します。</p>
+  </section>
+</main>
+
+<footer class="ft">
+  <span class="tag">お部屋探しはクラシカルにお任せください！</span>
+  株式会社CLASSICAL／大阪府知事（1）第65247号<br>
+  〒564-0053 大阪府吹田市江の木町16-34-501<br>
+  ここに掲載している内容は一般的な目安です。実際の審査基準や必要書類は物件・保証会社ごとに異なりますので、個別にご案内いたします。
+</footer>
+
+<nav class="dock" aria-label="保存メニュー">
+  <div class="dock-in">
+    <button type="button" class="btn sub" id="openList">記録一覧</button>
+    <button type="button" class="btn sub" id="openImg">画像で保存</button>
+    <button type="button" class="btn" id="saveBtn">保存する</button>
+  </div>
+</nav>
+
+<div class="ovl" id="listSheet" role="dialog" aria-modal="true" aria-labelledby="listTtl"><div class="sheet">
+  <h3 id="listTtl">保存した記録</h3>
+  <p class="privacy" style="margin:0 0 8px">この一覧はお使いの端末の中にだけ保存されています。機種変更や履歴の消去では引き継がれません。</p>
+  <ul class="recs" id="recs"></ul>
+  <button type="button" class="btn navy wide" id="newRec">新しい記録をつくる</button>
+  <button type="button" class="btn sub wide" data-close>閉じる</button>
+</div></div>
+
+<div class="ovl" id="imgSheet" role="dialog" aria-modal="true" aria-labelledby="imgTtl"><div class="sheet">
+  <h3 id="imgTtl">画像を長押しで保存できます</h3>
+  <img class="preview" id="preview" alt="準備リストのチェック結果">
+  <a class="btn wide" id="dlLink" download="junbi.png" href="#">画像をダウンロード</a>
+  <button type="button" class="btn sub wide" data-copy>文章でコピーする</button>
+  <button type="button" class="btn sub wide" data-close>閉じる</button>
+</div></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const LINE_URL = "#";  // TODO: 公式LINEのURL
+
+(function(){
+  "use strict";
+  var KEY_RECORDS = "classical-junbi-records";
+  var KEY_DRAFT = "classical-junbi-draft";
+  var memStore = {};
+  function load(key, fallback){
+    try{ var v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+    catch(e){ return memStore[key] !== undefined ? memStore[key] : fallback; }
+  }
+  function persist(key, val){
+    try{ localStorage.setItem(key, JSON.stringify(val)); }
+    catch(e){ memStore[key] = val; }
+  }
+
+  var $ = function(id){ return document.getElementById(id); };
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.items input[type=checkbox]'));
+  var nameIn = $("recName"), calcIn = $("calcIn");
+  var state = { mode: "rent", natl: "jp", id: null };
+
+  $("lineBtn").href = LINE_URL;
+
+  function toast(msg){
+    var t = $("toast"); t.textContent = msg; t.classList.add("show");
+    clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove("show"); }, 2000);
+  }
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function recName(){ return nameIn.value.trim() || "名前なしの記録"; }
+
+  /* ---- 表示中の項目 ---- */
+  function isForeign(b){ return !!b.closest("#intl"); }
+  function active(b){ return !isForeign(b) || state.natl === "fr" || b.checked; }
+  function itemText(b){ return b.parentNode.querySelector(".main-t").textContent.trim(); }
+
+  function refreshMeter(){
+    var done = 0, total = 0;
+    boxes.forEach(function(b){ if(!active(b)) return; total++; if(b.checked) done++; });
+    $("fill").style.width = (total ? done / total * 100 : 0) + "%";
+    $("cnt").textContent = done + " / " + total;
+    $("meter").classList.toggle("done", total > 0 && done === total);
+    return { done: done, total: total };
+  }
+
+  /* ---- 計算 ---- */
+  var MODES = {
+    rent:   { unit:"円 / 月", ph:"70000", label:"この家賃で求められる年収の目安",
+              hint:"家賃は月の手取りの3分の1以内におさめるのが、よく使われる目安です。" },
+    income: { unit:"万円 / 年", ph:"350", label:"この年収で目安になる家賃",
+              hint:"審査で通りやすい上限と、暮らしにゆとりが残るラインの2つを表示します。" }
+  };
+  function setMode(m, keepValue){
+    state.mode = m;
+    Array.prototype.forEach.call($("calcMode").children, function(b){ b.setAttribute("aria-pressed", b.dataset.mode === m ? "true" : "false"); });
+    var c = MODES[m];
+    $("calcUnit").textContent = c.unit; calcIn.placeholder = c.ph; $("resLabel").textContent = c.label;
+    if(!keepValue) calcIn.value = "";
+    runCalc();
+  }
+  function runCalc(){
+    var v = parseFloat(calcIn.value), out = $("resVal"), sub = $("resSub");
+    if(!v || v <= 0){ out.textContent = "—"; sub.textContent = MODES[state.mode].hint; return; }
+    if(state.mode === "rent"){
+      out.textContent = "およそ " + Math.round(v * 36 / 10000).toLocaleString() + " 万円";
+      sub.textContent = "月の手取りが " + (Math.round(v * 3 / 1000) / 10).toLocaleString() + " 万円ほどあれば、無理のない家賃といえます。";
+    }else{
+      var upper = Math.round(v * 10000 / 36 / 1000) * 1000;
+      var easy = Math.round(v * 10000 / 42 / 1000) * 1000;
+      out.textContent = "上限 " + upper.toLocaleString() + " 円 / 月";
+      sub.textContent = "ゆとりを持つなら " + easy.toLocaleString() + " 円前後まで。管理費・共益費も家賃に含めて考えましょう。";
+    }
+  }
+  function calcSummary(){
+    if(!calcIn.value) return "";
+    var r = $("resVal").textContent;
+    return state.mode === "rent"
+      ? "家賃 " + (+calcIn.value).toLocaleString() + "円/月 → 必要な年収の目安 " + r
+      : "年収 " + (+calcIn.value).toLocaleString() + "万円 → 家賃の目安 " + r + "（ゆとりライン " + (Math.round(+calcIn.value * 10000 / 42 / 1000) * 1000).toLocaleString() + "円）";
+  }
+
+  /* ---- 国籍 ---- */
+  function setNatl(n){
+    state.natl = n;
+    Array.prototype.forEach.call($("natl").children, function(b){ b.setAttribute("aria-pressed", b.dataset.n === n ? "true" : "false"); });
+    $("intl").hidden = (n !== "fr");
+    refreshMeter();
+  }
+
+  /* ---- 集計 ---- */
+  function sections(){
+    return Array.prototype.map.call(document.querySelectorAll(".items"), function(ul){
+      var items = [];
+      ul.querySelectorAll("input[type=checkbox]").forEach(function(b){ if(active(b)) items.push({ t: itemText(b), c: b.checked }); });
+      return { t: ul.dataset.sec, items: items };
+    }).filter(function(s){ return s.items.length; });
+  }
+
+  /* ---- 記録 ---- */
+  function snapshot(){
+    var checks = {};
+    boxes.forEach(function(b){ if(b.checked) checks[b.dataset.k] = 1; });
+    return { id: state.id || ("r" + Date.now()), name: recName(), updated: new Date().toLocaleDateString("ja-JP"),
+             checks: checks, mode: state.mode, value: calcIn.value, natl: state.natl, rawName: nameIn.value };
+  }
+  function apply(o){
+    state.id = o.id || null;
+    nameIn.value = o.rawName !== undefined ? o.rawName : (o.name || "");
+    var ch = o.checks || {};
+    boxes.forEach(function(b){ b.checked = !!ch[b.dataset.k]; });
+    setNatl(o.natl === "fr" ? "fr" : "jp");
+    calcIn.value = o.value || "";
+    setMode(o.mode === "income" ? "income" : "rent", true);
+  }
+  function saveDraft(){ persist(KEY_DRAFT, snapshot()); }
+  function saveRecord(){
+    var o = snapshot(), list = load(KEY_RECORDS, []), idx = -1;
+    list.forEach(function(r, i){ if(r.id === o.id) idx = i; });
+    if(idx >= 0) list[idx] = o; else list.push(o);
+    persist(KEY_RECORDS, list); state.id = o.id; saveDraft();
+    toast("「" + o.name + "」を保存しました");
+  }
+  function countDone(o){ return Object.keys(o.checks || {}).length; }
+  function renderList(){
+    var list = load(KEY_RECORDS, []), el = $("recs");
+    if(!list.length){ el.innerHTML = '<li class="none">まだ保存した記録はありません</li>'; return; }
+    el.innerHTML = list.slice().reverse().map(function(o){
+      return '<li class="rec"><div class="info"><div class="rn">' + esc(o.name) + (o.id === state.id ? '<span class="cur">表示中</span>' : '') +
+        '</div><div class="rm">' + esc(o.updated || "") + '　チェック ' + countDone(o) + '件</div></div>' +
+        '<button type="button" class="op" data-id="' + esc(o.id) + '">開く</button>' +
+        '<button type="button" class="dl" data-id="' + esc(o.id) + '">削除</button></li>';
+    }).join("");
+  }
+  $("recs").addEventListener("click", function(e){
+    var b = e.target.closest("button"); if(!b) return;
+    var id = b.dataset.id, list = load(KEY_RECORDS, []);
+    var rec = list.filter(function(r){ return r.id === id; })[0];
+    if(!rec) return;
+    if(b.classList.contains("op")){
+      apply(rec); saveDraft(); closeAll(); toast("「" + rec.name + "」を開きました");
+    }else{
+      if(!confirm("「" + rec.name + "」を削除しますか？")) return;
+      persist(KEY_RECORDS, list.filter(function(r){ return r.id !== id; }));
+      if(state.id === id){ state.id = null; saveDraft(); }
+      renderList(); toast("削除しました");
+    }
+  });
+  $("newRec").addEventListener("click", function(){
+    apply({ id: null, rawName: "", checks: {}, mode: "rent", value: "", natl: "jp" });
+    saveDraft(); closeAll(); toast("新しい記録を始めます");
+  });
+
+  /* ---- テキストコピー ---- */
+  function buildText(){
+    var t = "【入居審査の準備リスト】" + recName() + "\n";
+    var rest = [], m = refreshMeter();
+    t += "チェック " + m.done + " / " + m.total + "（" + (state.natl === "fr" ? "外国籍" : "日本国籍") + "）\n";
+    sections().forEach(function(s){
+      var on = s.items.filter(function(i){ return i.c; });
+      s.items.forEach(function(i){ if(!i.c) rest.push(i.t); });
+      if(!on.length) return;
+      t += "\n■ " + s.t + "（そろった）\n";
+      on.forEach(function(i){ t += "・" + i.t + "\n"; });
+    });
+    if(rest.length){ t += "\n■ まだのもの\n"; rest.forEach(function(x){ t += "・" + x + "\n"; }); }
+    var c = calcSummary(); if(c) t += "\n■ 家賃と年収の目安\n" + c + "\n";
+    return t;
+  }
+  function copyText(){
+    var text = buildText();
+    function ok(){ toast("コピーしました。LINEのトークに貼り付けてください"); $("imgSheet").classList.remove("show"); }
+    function legacy(){
+      var ta = document.createElement("textarea"); ta.value = text; ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;top:0;left:0;opacity:0"; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand("copy") ? ok() : toast("コピーできませんでした"); }catch(e){ toast("コピーできませんでした"); }
+      document.body.removeChild(ta);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(ok, legacy); }
+    else legacy();
+  }
+  document.querySelectorAll("[data-copy]").forEach(function(b){ b.addEventListener("click", copyText); });
+
+  /* ---- 画像 ---- */
+  function wrapLines(ctx, text, max){
+    var lines = [], line = "";
+    for(var i = 0; i < text.length; i++){
+      var test = line + text[i];
+      if(ctx.measureText(test).width > max && line){ lines.push(line); line = text[i]; } else line = test;
+    }
+    if(line) lines.push(line);
+    return lines;
+  }
+  function drawImage(){
+    var W = 880, P = 44, LH = 36, HEAD = 196;
+    var cv = document.createElement("canvas"), ctx = cv.getContext("2d");
+    var F = '"Noto Sans JP",sans-serif';
+    var secs = sections(), rows = [], m = refreshMeter();
+    var c = calcSummary();
+    ctx.font = "400 22px " + F;
+    secs.forEach(function(s){
+      rows.push({ k: "h", t: s.t });
+      s.items.forEach(function(it){
+        wrapLines(ctx, it.t, W - P * 2 - 34).forEach(function(l, i){ rows.push({ k: "i", t: l, c: it.c, first: i === 0 }); });
+      });
+      rows.push({ k: "gap" });
+    });
+    if(c){
+      rows.push({ k: "h", t: "家賃と年収の目安" });
+      wrapLines(ctx, c, W - P * 2 - 10).forEach(function(l){ rows.push({ k: "p", t: l }); });
+      rows.push({ k: "gap" });
+    }
+    var H = HEAD + 30 + rows.reduce(function(a, r){ return a + (r.k === "gap" ? 14 : r.k === "h" ? 46 : LH); }, 0) + 70;
+    cv.width = W; cv.height = H;
+    ctx.fillStyle = "#F5F7FB"; ctx.fillRect(0, 0, W, H);
+    var g = ctx.createLinearGradient(0, 0, W, HEAD);
+    g.addColorStop(0, "#0D2E66"); g.addColorStop(.6, "#14418B"); g.addColorStop(1, "#2E62B8");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, HEAD);
+    ctx.fillStyle = "#fff";
+    ctx.font = '700 22px "Noto Serif",serif'; ctx.fillText("CLASSICAL", P, 54);
+    ctx.font = "500 18px " + F; ctx.fillText("入居審査の準備リスト", P + 150, 53);
+    ctx.font = "700 38px " + F; ctx.fillText(wrapLines(ctx, recName(), W - P * 2)[0], P, 112);
+    ctx.font = "400 20px " + F;
+    ctx.fillText(new Date().toLocaleDateString("ja-JP") + "　チェック " + m.done + " / " + m.total + "　" + (state.natl === "fr" ? "外国籍の方" : "日本国籍の方"), P, 154);
+    ctx.fillStyle = "#F47B20"; ctx.fillRect(0, HEAD - 6, W * (m.total ? m.done / m.total : 0), 6);
+    var y = HEAD + 46;
+    rows.forEach(function(r){
+      if(r.k === "gap"){ y += 14; return; }
+      if(r.k === "h"){
+        y += 10;
+        ctx.fillStyle = "#14418B"; ctx.fillRect(P, y - 21, 5, 24);
+        ctx.font = "700 24px " + F; ctx.fillStyle = "#0D2E66"; ctx.fillText(r.t, P + 15, y);
+        y += 36; return;
+      }
+      ctx.font = "400 22px " + F;
+      if(r.k === "i" && r.first){
+        ctx.lineWidth = 2.5;
+        if(r.c){
+          ctx.fillStyle = "#1E8B4A"; ctx.fillRect(P, y - 19, 22, 22);
+          ctx.strokeStyle = "#fff"; ctx.beginPath(); ctx.moveTo(P + 5, y - 8); ctx.lineTo(P + 10, y - 3); ctx.lineTo(P + 18, y - 14); ctx.stroke();
+        }else{
+          ctx.strokeStyle = "#B7C4D6"; ctx.strokeRect(P + 1, y - 18, 20, 20);
+        }
+      }
+      ctx.fillStyle = r.k === "i" && r.c ? "#5A6475" : "#1B2433";
+      ctx.fillText(r.t, P + (r.k === "i" ? 34 : 0), y);
+      y += LH;
+    });
+    ctx.fillStyle = "#5A6475"; ctx.font = "400 18px " + F;
+    ctx.fillText("株式会社CLASSICAL　大阪府知事（1）第65247号", P, H - 30);
+    var url = cv.toDataURL("image/png");
+    $("preview").src = url;
+    var a = $("dlLink"); a.href = url; a.download = (recName().replace(/[\\/:*?"<>|]/g, "_")) + "_審査準備.png";
+    $("imgSheet").classList.add("show");
+  }
+  function makeImage(){
+    var go = function(){ try{ drawImage(); }catch(e){ toast("画像を作成できませんでした"); } };
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(go, go); else go();
+  }
+
+  /* ---- モーダル ---- */
+  function closeAll(){ document.querySelectorAll(".ovl").forEach(function(o){ o.classList.remove("show"); }); }
+  document.querySelectorAll("[data-close]").forEach(function(b){ b.addEventListener("click", closeAll); });
+  document.querySelectorAll(".ovl").forEach(function(o){ o.addEventListener("click", function(e){ if(e.target === o) closeAll(); }); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeAll(); });
+
+  /* ---- イベント ---- */
+  $("calcMode").addEventListener("click", function(e){ var b = e.target.closest("button"); if(b){ setMode(b.dataset.mode); saveDraft(); } });
+  $("natl").addEventListener("click", function(e){ var b = e.target.closest("button"); if(b){ setNatl(b.dataset.n); saveDraft(); } });
+  calcIn.addEventListener("input", function(){ runCalc(); saveDraft(); });
+  nameIn.addEventListener("input", saveDraft);
+  boxes.forEach(function(b){ b.addEventListener("change", function(){ refreshMeter(); saveDraft(); }); });
+  $("saveBtn").addEventListener("click", saveRecord);
+  $("openList").addEventListener("click", function(){ renderList(); $("listSheet").classList.add("show"); });
+  $("openImg").addEventListener("click", makeImage);
+
+  /* ---- 初期化（前回の作業中の内容を復元） ---- */
+  var draft = load(KEY_DRAFT, null);
+  if(draft) apply(draft); else { setNatl("jp"); setMode("rent"); }
+})();
+</script>
+</body>
+</html>
