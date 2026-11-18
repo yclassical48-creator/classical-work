@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>退去費用チェッカー｜クラシカル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14418B;--navy-deep:#0D2E66;--navy-light:#2E62B8;
+  --orange:#F47B20;--green:#1E8B4A;
+  --ink:#1B2433;--ink-60:#5A6475;
+  --bg:#F5F7FB;--mist:#EDF2FA;--line:#DCE4EF;--paper:#FFFFFF;
+  --shadow:0 3px 14px rgba(13,46,102,.09);--r:16px;
+  --red:#C8443C;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:"Noto Sans JP",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.75;overflow-x:hidden}
+h1,h2,h3{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif;margin:0}
+button{font-family:inherit}
+
+/* header */
+.hdr{background:linear-gradient(155deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:#fff}
+.hdr-in{max-width:640px;margin:0 auto;padding:12px 16px 22px}
+.back{display:inline-block;color:#fff;text-decoration:none;font-size:12.5px;opacity:.88;padding:4px 0}
+.back:hover{opacity:1}
+.logo{display:flex;align-items:center;gap:8px;margin-top:10px}
+.logo svg{width:22px;height:22px;flex:0 0 auto}
+.logo span{font-family:"Noto Serif",serif;font-weight:700;font-size:15px;letter-spacing:.06em}
+.hdr h1{font-size:25px;font-weight:900;margin:8px 0 2px;letter-spacing:.02em}
+.hdr .sub{margin:0;font-size:13px;opacity:.92}
+
+main{max-width:640px;margin:0 auto;padding:18px 16px 28px}
+.intro{font-size:13.5px;color:var(--ink-60);margin:0 0 16px}
+.small{font-size:11.5px;color:var(--ink-60);line-height:1.7}
+
+/* years box */
+.yrs{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 16px;margin-bottom:10px;border-top:5px solid var(--navy)}
+.yrs h2{font-size:16px;font-weight:700;color:var(--navy-deep)}
+.yrs .hint{margin:2px 0 12px;font-size:12.5px;color:var(--ink-60)}
+.yin{display:flex;align-items:center;gap:10px;background:var(--mist);border:1.5px solid var(--line);border-radius:12px;padding:6px 14px}
+.yin:focus-within{border-color:var(--navy-light)}
+.yin input{flex:1;min-width:0;width:100%;border:0;background:none;outline:none;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:24px;color:var(--navy-deep)}
+.yin input::placeholder{color:#A9B6CA}
+.yin .u{font-weight:700;color:var(--ink-60)}
+.ratio{margin-top:14px}
+.ratio .lbl{font-size:12.5px;color:var(--ink-60)}
+.ratio .num{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:30px;line-height:1.3;color:var(--orange)}
+.ratio .num small{font-size:15px;color:var(--ink);font-weight:700;margin-right:4px}
+.meter{height:10px;border-radius:6px;background:var(--mist);overflow:hidden;margin:6px 0 6px}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),#F9A05A);border-radius:6px;transition:width .3s}
+.ratio .msg{font-size:12.5px;color:var(--ink)}
+.ratio .msg.ok{color:var(--green);font-weight:700}
+.yrs-note{margin:0 2px 18px}
+
+/* checklist */
+.grp{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-bottom:14px}
+.grp h2{font-size:16px;font-weight:700;color:var(--navy-deep);display:flex;align-items:center;gap:8px}
+.grp h2::before{content:"";width:6px;height:18px;border-radius:3px;background:var(--navy);flex:0 0 auto}
+.grp .gd{margin:2px 0 4px}
+.it{display:flex;gap:11px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.it:last-child{border-bottom:0;padding-bottom:2px}
+.it input{appearance:none;-webkit-appearance:none;margin:2px 0 0;width:22px;height:22px;flex:0 0 auto;border:2px solid #B9C6D9;border-radius:7px;background:#fff;position:relative;cursor:pointer;transition:background .15s,border-color .15s}
+.it input:checked{background:var(--green);border-color:var(--green)}
+.it input:checked::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.it input:focus-visible{outline:3px solid rgba(46,98,184,.35);outline-offset:2px}
+.it .tx{flex:1;min-width:0;font-size:14px;line-height:1.6}
+.it .nm{display:block;font-weight:500}
+.tag{display:inline-block;margin-top:5px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11px;padding:1px 10px;border-radius:999px;white-space:nowrap}
+.tag.L{background:#E4F3EA;color:var(--green)}
+.tag.T{background:#FBE9E7;color:var(--red)}
+.tag.C{background:#FEEFE2;color:#B85A10}
+.it .ex{display:block;margin-top:3px;font-size:12px;color:var(--ink-60);line-height:1.65}
+.it.on .nm{color:var(--navy-deep);font-weight:700}
+
+/* result */
+.res{background:linear-gradient(155deg,var(--navy-deep),var(--navy));color:#fff;border-radius:var(--r);padding:18px 16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.res h2{font-size:16px;font-weight:700;margin-bottom:10px}
+.cnt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.cnt div{background:rgba(255,255,255,.13);border-radius:12px;padding:10px 4px;text-align:center}
+.cnt b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:26px;line-height:1.2}
+.cnt .L b{color:#7EE0A6}
+.cnt .T b{color:#FFB2A8}
+.cnt .C b{color:#FFC48F}
+.cnt span{font-size:11px;opacity:.92}
+.btn{display:block;width:100%;border:0;border-radius:12px;padding:13px 14px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:14.5px;text-align:center;text-decoration:none;cursor:pointer}
+.btn:active{transform:scale(.98)}
+.btn.pri{background:var(--orange);color:#fff;box-shadow:0 4px 12px rgba(244,123,32,.35)}
+.btn.line{background:#fff;color:var(--navy-deep);margin-top:8px}
+.btn.reset{background:transparent;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.35);font-size:12.5px;padding:9px;margin-top:10px}
+.res .how{margin:10px 0 0;font-size:12px;opacity:.92;line-height:1.7}
+
+/* tips */
+.tips{background:#FFF7F0;border:1px solid #F8D5B8;border-radius:var(--r);padding:16px;margin-bottom:14px}
+.tips h2{font-size:16px;font-weight:700;color:#A54C0B;display:flex;align-items:center;gap:8px}
+.tips h2::before{content:"";width:6px;height:18px;border-radius:3px;background:var(--orange);flex:0 0 auto}
+.tips ol{margin:10px 0 0;padding-left:1.3em;font-size:13.5px}
+.tips li{margin-bottom:7px}
+.tips li:last-child{margin-bottom:0}
+
+.disc{margin:0 2px 18px}
+.foot{text-align:center;font-size:11px;color:var(--ink-60);line-height:1.85;padding:4px 16px 24px}
+
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,12px);background:var(--ink);color:#fff;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13px;padding:10px 18px;border-radius:24px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="back" href="../../">← 特典一覧</a>
+    <div class="logo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3.5 21 11" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="5.5" y="10.5" width="13" height="10" rx="1" fill="none" stroke="#fff" stroke-width="2"/><rect x="10" y="13.5" width="4" height="4" fill="#fff"/></svg>
+      <span>CLASSICAL</span>
+    </div>
+    <h1>退去費用チェッカー</h1>
+    <p class="sub">その請求、本当にあなたが払うべきもの？</p>
+  </div>
+</header>
+
+<main>
+  <p class="intro">退去時の修繕費を貸主・借主のどちらが負担するかは、国土交通省のガイドラインに基本的な考え方がまとめられています。お部屋の状態に近いものを選んで、負担の目安を確認してみましょう。</p>
+
+  <section class="yrs" aria-labelledby="yrsTitle">
+    <h2 id="yrsTitle">何年住みましたか？</h2>
+    <p class="hint">住んだ期間が長いほど、クロスなどの借主負担は小さくなります</p>
+    <div class="yin">
+      <input type="number" id="years" inputmode="decimal" min="0" step="0.5" placeholder="例）4" aria-label="居住年数">
+      <span class="u">年</span>
+    </div>
+    <div class="ratio" aria-live="polite">
+      <div class="lbl">クロス（壁紙）を借主負担で張り替える場合の負担割合の目安</div>
+      <div class="num" id="ratioNum">—</div>
+      <div class="meter"><i id="ratioBar"></i></div>
+      <div class="msg" id="ratioMsg">年数を入れると計算します</div>
+    </div>
+  </section>
+  <p class="small yrs-note">※ ガイドラインでは、クロス・カーペット・クッションフロアは耐用年数6年で価値が直線的に下がり、6年経つと残る価値はほぼゼロ（1円）と考えます。そのため6年以上住んだ場合は、借主の不注意による傷でも負担額はごく小さくなります。ただし、張り替え工事の手間賃などは別に請求されることがあります。上の数字は入居時に新品だった場合の目安です。</p>
+
+  <div id="groups"></div>
+
+  <section class="res" aria-labelledby="resTitle">
+    <h2 id="resTitle">チェック結果</h2>
+    <div class="cnt">
+      <div class="L"><b id="nL">0</b><span>貸主の負担</span></div>
+      <div class="T"><b id="nT">0</b><span>借主の負担</span></div>
+      <div class="C"><b id="nC">0</b><span>契約しだい</span></div>
+    </div>
+    <button class="btn pri" id="copyBtn" type="button">結果をコピーしてクラシカルに相談</button>
+    <a class="btn line" id="lineBtn" href="#" target="_blank" rel="noopener">LINEでトークを開く</a>
+    <p class="how">チェックした項目と居住年数が文章でコピーされます。LINEのトークに貼り付けて、見積書や請求書の写真と一緒に送ってください。金額が妥当かどうか、一緒に確認します。</p>
+    <button class="btn reset" id="resetBtn" type="button">チェックをすべてリセット</button>
+  </section>
+
+  <section class="tips" aria-labelledby="tipsTitle">
+    <h2 id="tipsTitle">請求書を受け取ったら確認したいこと</h2>
+    <ol>
+      <li><b>明細があるか。</b>「原状回復費 一式」とだけ書かれていたら、項目ごとの内訳を出してもらいましょう。</li>
+      <li><b>入居時の状態と比べる。</b>入居時の写真やチェックシートを見返し、最初からあった傷なら支払う必要はありません。</li>
+      <li><b>その場でサインしない。</b>立ち会い時の確認書に署名すると、後から争うのが難しくなります。「持ち帰って確認します」と伝えて問題ありません。</li>
+      <li><b>敷金は原則として返ってくるお金。</b>差し引かれた金額の理由を説明してもらうのは、借主として当然の権利です。</li>
+    </ol>
+  </section>
+
+  <p class="small disc">※ この判定は、国土交通省「原状回復をめぐるトラブルとガイドライン」の考え方に沿った一般的な目安です。実際にどちらが負担するかは、賃貸借契約書（特約）の内容、お部屋の状態、当事者間の合意によって異なります。迷ったときは、契約書と請求書を用意してご相談ください。</p>
+</main>
+
+<footer class="foot">
+  株式会社CLASSICAL／大阪府知事（1）第65247号<br>
+  〒564-0053 大阪府吹田市江の木町16-34-501<br>
+  本ツールの結果は目安であり、法的な判断を保証するものではありません。
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const LINE_URL = "#";  // TODO: 公式LINEのURL
+
+(function(){
+  "use strict";
+  var KEY = "classical_taikyo_v1";
+  var TYPE = {
+    L:{tag:"貸主の負担", head:"貸主の負担（通常損耗・経年変化）"},
+    T:{tag:"借主の負担", head:"借主の負担になりやすいもの"},
+    C:{tag:"契約しだい", head:"契約しだい・要確認"}
+  };
+
+  var GROUPS = [
+    {title:"壁・天井", desc:"あてはまるものにチェックしてください", items:[
+      ["w1","L","日差しでクロスが色あせた","日照による変色は経年変化として扱われます"],
+      ["w2","L","画びょう・ピンの小さな穴（下地ボードの交換が不要な程度）","普通に暮らしていればできる範囲の穴とされています"],
+      ["w3","T","釘・ネジの穴（下地ボードの張り替えが必要なもの）","重い物を掛けるための穴は、通常の使い方を超えると判断されます"],
+      ["w4","L","冷蔵庫・テレビの裏の壁の黒ずみ","いわゆる「電気ヤケ」で、自然に起こる変色です"],
+      ["w5","T","タバコのヤニによる変色・においの付着","通常の使用を超える汚れとされ、部屋全体のクリーニングや張り替えの負担を求められる場合があります"],
+      ["w6","T","結露を放置して広がったカビ・シミ","結露に気づいた時点で拭き取りや管理会社への連絡をしていれば防げた、と判断されます"],
+      ["w7","T","キッチンの油汚れ（手入れをしていなかったもの）","日ごろの掃除を怠ったことによる汚れとみなされます"],
+      ["w8","L","エアコン設置のためのビス穴・跡","生活に必要な設備の取り付けとして通常損耗とされます"],
+      ["w9","T","壁への落書き",""]
+    ]},
+    {title:"床", items:[
+      ["f1","L","家具を置いていた跡・へこみ","家具を置くのは通常の生活なので、通常損耗に含まれます"],
+      ["f2","L","畳・フローリングの日焼けによる色落ち",""],
+      ["f3","T","飲み物などをこぼして放置したシミ","こぼしたことより、すぐに手入れしなかったことが理由になります"],
+      ["f4","T","キャスター付きの椅子などによる傷・へこみ",""],
+      ["f5","T","引っ越しの搬入・搬出でついた傷",""],
+      ["f6","T","ペットによる傷・におい","ペット可の物件でも、傷やにおいは借主負担になるのが一般的です"]
+    ]},
+    {title:"建具・設備", items:[
+      ["e1","L","網戸の張り替え（破れていないもの）",""],
+      ["e2","T","鍵をなくした・壊した","シリンダー交換などの費用を求められます"],
+      ["e3","T","自分で取り付けた棚・照明などの跡",""],
+      ["e4","L","地震で割れた窓ガラス",""],
+      ["e5","L","エアコン・給湯器などが寿命で故障した",""]
+    ]},
+    {title:"水まわり", items:[
+      ["b1","T","浴室・トイレの水あか・カビ（掃除をしていなかったもの）",""],
+      ["b2","L","普段どおり掃除していても残る程度の汚れ",""],
+      ["b3","L","設備そのものの経年劣化",""]
+    ]},
+    {title:"よく請求される項目", desc:"契約書の記載によって結論が変わるものです", items:[
+      ["c1","C","ハウスクリーニング代","特約として契約書に金額まで明記され、内容に納得して署名していれば有効とされることが多いです。記載がなく通常の掃除をしていれば、原則は貸主負担です"],
+      ["c2","C","退去時の鍵交換代","鍵の紛失・破損がなければ本来は貸主負担ですが、特約で借主負担と定めている場合があります"],
+      ["c3","C","エアコン内部のクリーニング","喫煙などで汚した事情がなければ、原則は貸主負担です"],
+      ["c4","C","部屋全体のクロス張り替え","借主負担になるのは原則として傷んだ箇所を含む一面分までです。全面の張り替えを求められたら理由を確認しましょう"]
+    ]}
+  ];
+
+  var $ = function(id){return document.getElementById(id);};
+  var wrap = $("groups");
+  var all = [];
+
+  GROUPS.forEach(function(g, gi){
+    var sec = document.createElement("section");
+    sec.className = "grp";
+    var h = document.createElement("h2");
+    h.textContent = g.title;
+    sec.appendChild(h);
+    if(g.desc){
+      var d = document.createElement("p");
+      d.className = "small gd";
+      d.textContent = g.desc;
+      sec.appendChild(d);
+    }
+    g.items.forEach(function(it){
+      var lab = document.createElement("label");
+      lab.className = "it";
+      var cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.dataset.id = it[0];
+      cb.dataset.t = it[1];
+      var tx = document.createElement("span");
+      tx.className = "tx";
+      var nm = document.createElement("span");
+      nm.className = "nm";
+      nm.textContent = it[2];
+      var tg = document.createElement("span");
+      tg.className = "tag " + it[1];
+      tg.textContent = it[1] === "C" && it[0] === "c4" ? "要確認" : TYPE[it[1]].tag;
+      tx.appendChild(nm);
+      tx.appendChild(tg);
+      if(it[3]){
+        var ex = document.createElement("span");
+        ex.className = "ex";
+        ex.textContent = it[3];
+        tx.appendChild(ex);
+      }
+      lab.appendChild(cb);
+      lab.appendChild(tx);
+      sec.appendChild(lab);
+      all.push({cb:cb, row:lab, name:it[2], t:it[1]});
+    });
+    wrap.appendChild(sec);
+  });
+
+  /* storage */
+  function load(){
+    try{ var s = localStorage.getItem(KEY); return s ? JSON.parse(s) : null; }catch(e){ return null; }
+  }
+  function save(){
+    var data = {y: yearsEl.value, c: all.filter(function(a){return a.cb.checked;}).map(function(a){return a.cb.dataset.id;})};
+    try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(e){}
+  }
+
+  /* counts */
+  function refresh(){
+    var n = {L:0,T:0,C:0};
+    all.forEach(function(a){
+      a.row.classList.toggle("on", a.cb.checked);
+      if(a.cb.checked) n[a.t]++;
+    });
+    $("nL").textContent = n.L;
+    $("nT").textContent = n.T;
+    $("nC").textContent = n.C;
+  }
+
+  /* years -> ratio (定額法・耐用年数6年) */
+  var yearsEl = $("years");
+  function readYears(){
+    var v = parseFloat(yearsEl.value);
+    return (isNaN(v) || v < 0) ? null : v;
+  }
+  function calcRatio(){
+    var v = readYears(), num = $("ratioNum"), bar = $("ratioBar"), msg = $("ratioMsg");
+    if(v === null){
+      num.textContent = "—";
+      bar.style.width = "0";
+      msg.textContent = "年数を入れると計算します";
+      msg.className = "msg";
+      return;
+    }
+    var r = Math.max(0, Math.round((6 - v) / 6 * 100));
+    num.innerHTML = "<small>およそ</small>" + r + "％";
+    bar.style.width = r + "%";
+    if(v >= 6){
+      msg.textContent = "6年以上住んでいるので、クロスの残りの価値はほとんどありません";
+      msg.className = "msg ok";
+    }else{
+      msg.textContent = "6年で0％になります（あと" + (Math.round((6 - v) * 10) / 10) + "年）";
+      msg.className = "msg";
+    }
+  }
+
+  /* restore */
+  var saved = load();
+  if(saved){
+    if(typeof saved.y === "string") yearsEl.value = saved.y;
+    if(Array.isArray(saved.c)){
+      all.forEach(function(a){ a.cb.checked = saved.c.indexOf(a.cb.dataset.id) !== -1; });
+    }
+  }
+  refresh();
+  calcRatio();
+
+  all.forEach(function(a){ a.cb.addEventListener("change", function(){ refresh(); save(); }); });
+  yearsEl.addEventListener("input", function(){ calcRatio(); save(); });
+
+  /* toast */
+  var tt;
+  function toast(m){
+    var el = $("toast");
+    el.textContent = m;
+    el.classList.add("on");
+    clearTimeout(tt);
+    tt = setTimeout(function(){ el.classList.remove("on"); }, 2000);
+  }
+
+  /* copy */
+  function buildText(){
+    var t = "【退去費用チェッカー】\n";
+    var v = readYears();
+    if(v !== null) t += "居住年数：" + v + "年\n";
+    var any = false;
+    ["T","C","L"].forEach(function(k){
+      var list = all.filter(function(a){ return a.cb.checked && a.t === k; });
+      if(list.length){
+        any = true;
+        t += "\n■ " + TYPE[k].head + "\n";
+        list.forEach(function(a){ t += "・" + a.name + "\n"; });
+      }
+    });
+    if(!any) t += "\n（チェックした項目はありません）\n";
+    t += "\nこの内容で、退去費用の請求が妥当か見ていただけますか？";
+    return t;
+  }
+  function fallbackCopy(text){
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed"; ta.style.top = "0"; ta.style.left = "0"; ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try{ ok = document.execCommand("copy"); }catch(e){ ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  $("copyBtn").addEventListener("click", function(){
+    var text = buildText();
+    var done = function(){ toast("コピーしました。LINEのトークに貼り付けてください"); };
+    var fail = function(){ if(fallbackCopy(text)) done(); else toast("コピーできませんでした"); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, fail);
+    }else{ fail(); }
+  });
+
+  /* LINE */
+  var lineBtn = $("lineBtn");
+  lineBtn.href = LINE_URL;
+  lineBtn.addEventListener("click", function(e){
+    if(!LINE_URL || LINE_URL === "#"){ e.preventDefault(); toast("LINEのURLは準備中です"); }
+  });
+
+  /* reset */
+  $("resetBtn").addEventListener("click", function(){
+    if(!window.confirm("チェックと年数をリセットしますか？")) return;
+    all.forEach(function(a){ a.cb.checked = false; });
+    yearsEl.value = "";
+    refresh(); calcRatio(); save();
+    toast("リセットしました");
+  });
+})();
+</script>
+</body>
+</html>
