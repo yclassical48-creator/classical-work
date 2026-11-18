@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>引越しやることカレンダー｜クラシカル</title>
+<meta name="description" content="引越し日から逆算して、1ヶ月前から入居後までの手続きと期限を一覧にできる無料ツール。進み具合はこの端末に保存できます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14418B;--navy-deep:#0D2E66;--navy-light:#2E62B8;
+  --orange:#F47B20;--green:#1E8B4A;
+  --ink:#1B2433;--ink-60:#5A6475;
+  --bg:#F5F7FB;--mist:#EDF2FA;--line:#DCE4EF;--paper:#FFFFFF;
+  --red:#C8423B;
+  --shadow:0 3px 14px rgba(13,46,102,.09);--r:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:"Noto Sans JP",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);
+  font-size:15px;line-height:1.72;padding-bottom:96px;overflow-x:hidden}
+h1,h2,h3{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif;margin:0}
+button,input,textarea{font-family:inherit}
+
+/* header */
+.hdr{background:linear-gradient(155deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:#fff;padding:14px 16px 22px}
+.hdr-in{max-width:640px;margin:0 auto}
+.back{display:inline-block;color:#fff;text-decoration:none;font-size:12.5px;opacity:.88;padding:2px 0}
+.back:hover{opacity:1;text-decoration:underline}
+.logo{display:flex;align-items:center;gap:8px;margin-top:12px}
+.logo svg{width:22px;height:22px;flex:0 0 auto}
+.logo span{font-family:"Noto Serif",serif;font-weight:700;letter-spacing:.06em;font-size:15px}
+.hdr h1{font-size:25px;font-weight:900;margin-top:8px;letter-spacing:.02em}
+.hdr p{margin:4px 0 0;font-size:13px;opacity:.9}
+
+.main{max-width:640px;margin:0 auto;padding:16px 16px 24px}
+.panel{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-bottom:14px}
+.intro{font-size:13px;color:var(--ink-60);margin:0 0 14px}
+.intro .dot{display:inline-block;width:10px;height:10px;border-radius:50%;border:3px solid var(--orange);vertical-align:-1px;margin:0 2px}
+
+/* record name */
+.name-l{display:block;font-size:12px;color:var(--ink-60);margin-bottom:3px}
+.name-i{width:100%;border:0;border-bottom:2px solid var(--line);background:none;padding:5px 0;font-size:16px;
+  font-family:"Zen Maru Gothic",sans-serif;font-weight:700;color:var(--ink);outline:none}
+.name-i:focus{border-bottom-color:var(--navy)}
+.privacy{margin:11px 0 0;padding:10px 12px;background:var(--mist);border-radius:10px;font-size:11.5px;line-height:1.65;color:var(--ink-60)}
+.privacy strong{color:var(--navy)}
+
+/* date box */
+.datebox{background:linear-gradient(150deg,var(--navy-deep),var(--navy) 60%,var(--navy-light));color:#fff;border-radius:var(--r);padding:18px 16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.datebox h2{font-size:15px;font-weight:700;margin-bottom:10px}
+.date-wrap{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border-radius:12px;padding:8px 12px}
+.date-wrap input{flex:1;min-width:0;width:100%;border:0;background:none;color:#fff;outline:none;color-scheme:dark;
+  font-family:"Zen Maru Gothic",sans-serif;font-size:19px;font-weight:900}
+.date-clear{border:0;background:rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;border-radius:8px;padding:6px 10px;cursor:pointer;white-space:nowrap}
+.count{margin-top:12px;font-size:12.5px;line-height:1.6}
+.count .big{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:25px;font-weight:900;line-height:1.35}
+.count .big em{font-style:normal;color:#FFB677}
+.count .sub{opacity:.88}
+
+/* progress */
+.prog{display:flex;align-items:center;gap:12px;background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:12px 14px;margin-bottom:14px}
+.prog-l{font-size:12px;font-weight:700;color:var(--ink-60);white-space:nowrap}
+.track{flex:1;height:9px;background:var(--mist);border-radius:6px;overflow:hidden}
+.track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--navy-light),var(--green));border-radius:6px;transition:width .3s}
+.prog-n{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:14px;color:var(--navy);min-width:54px;text-align:right}
+.prog-n.all{color:var(--green)}
+
+/* timeline */
+.phases{position:relative;padding-left:28px}
+.phases::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.phase{position:relative;padding-bottom:6px;margin-bottom:12px}
+.phase:last-child{margin-bottom:0}
+.phase::before{content:"";position:absolute;left:-27px;top:5px;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--navy)}
+.phase.key::before{border-color:var(--orange)}
+.phase.done::before{background:var(--green);border-color:var(--green)}
+.ph-head{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.ph-t{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:16px;color:var(--navy)}
+.phase.key .ph-t{color:#C35E12}
+.ph-c{font-size:11px;color:var(--ink-60);font-weight:700}
+.due{font-family:"Zen Maru Gothic",sans-serif;font-size:11.5px;font-weight:700;border-radius:20px;padding:1px 10px;background:var(--mist);color:var(--navy)}
+.due:empty{display:none}
+.due.near{background:#FFEFE2;color:#B8560E}
+.due.late{background:#FBE9E8;color:var(--red)}
+.due.ok{background:#E5F4EB;color:var(--green)}
+.ph-why{font-size:12px;color:var(--ink-60);margin:2px 0 4px}
+
+.task{display:flex;align-items:flex-start;gap:11px;padding:10px 0;border-bottom:1px dashed var(--line);cursor:pointer;font-size:14px}
+.task:last-child{border-bottom:0}
+.task input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:22px;height:22px;margin:1px 0 0;border:2px solid #C5D1E2;
+  border-radius:7px;background:#fff;position:relative;cursor:pointer;transition:background .15s,border-color .15s}
+.task input:checked{background:var(--green);border-color:var(--green)}
+.task input:checked::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.task input:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.task .tx{flex:1;min-width:0}
+.task input:checked + .tx .tt{color:var(--ink-60);text-decoration:line-through;text-decoration-color:#AFBBCC}
+.task .tn{display:block;font-size:11.5px;color:var(--ink-60);line-height:1.55;margin-top:1px}
+
+/* send */
+.send-t{font-size:15px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.send-t::before{content:"";width:6px;height:18px;border-radius:3px;background:var(--orange)}
+.send p{font-size:12px;color:var(--ink-60);margin:8px 0 0;line-height:1.65}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;cursor:pointer;text-decoration:none;
+  font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13.5px;padding:11px 15px;border-radius:12px;white-space:nowrap;
+  background:var(--orange);color:#fff;box-shadow:0 3px 10px rgba(244,123,32,.32)}
+.btn:active{transform:scale(.97)}
+.btn.sub{background:#fff;color:var(--navy);border:1.5px solid var(--line);box-shadow:none}
+.btn.navy{background:var(--navy);box-shadow:0 3px 10px rgba(20,65,139,.28)}
+.btn.line{background:#06C755;box-shadow:0 3px 10px rgba(6,199,85,.28)}
+.btn.wide{display:flex;width:100%}
+.btn + .btn.wide{margin-top:8px}
+
+/* footer */
+.foot{text-align:center;font-size:11px;color:var(--ink-60);line-height:1.85;padding:8px 16px 18px}
+
+/* bottom bar */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.dock-in{max-width:640px;margin:0 auto;display:flex;gap:8px}
+.dock .btn{flex:1;padding:11px 6px;font-size:13px}
+
+/* sheet */
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(13,46,102,.42);display:none;align-items:flex-end;justify-content:center}
+.overlay.open{display:flex}
+.sheet{background:#fff;width:100%;max-width:640px;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));max-height:86vh;overflow-y:auto}
+.sheet h3{font-size:16px;color:var(--navy);margin-bottom:10px}
+.rec{display:flex;align-items:center;gap:8px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.rec.cur{background:linear-gradient(90deg,var(--mist),transparent);border-radius:8px;padding-left:8px}
+.rec-i{flex:1;min-width:0}
+.rec-n{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rec-m{font-size:11px;color:var(--ink-60)}
+.rec button{border:0;cursor:pointer;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:12px;padding:7px 10px;border-radius:8px}
+.rec .r-open{background:var(--mist);color:var(--navy)}
+.rec .r-del{background:none;color:var(--red)}
+.none{text-align:center;color:var(--ink-60);font-size:13px;padding:22px 0}
+.preview{display:block;width:100%;border:1px solid var(--line);border-radius:10px}
+
+.toast{position:fixed;left:50%;bottom:104px;z-index:60;transform:translate(-50%,10px);opacity:0;pointer-events:none;transition:.25s;
+  background:var(--navy-deep);color:#fff;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13px;padding:10px 18px;border-radius:22px;
+  max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="back" href="../../">← 特典一覧</a>
+    <div class="logo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 11.2 12 3l9.5 8.2" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="5" y="10.5" width="14" height="10.5" rx="1.2" fill="#fff"/><rect x="10" y="13.5" width="4" height="4" rx=".6" fill="#14418B"/></svg>
+      <span>CLASSICAL</span>
+    </div>
+    <h1>引越しやることカレンダー</h1>
+    <p>1ヶ月前から入居後まで、やることと期限をまとめて管理。</p>
+  </div>
+</header>
+
+<main class="main">
+  <section class="panel">
+    <label class="name-l" for="recName">この記録の名前（お名前・引越し先など）</label>
+    <input class="name-i" id="recName" type="text" maxlength="40" placeholder="例）3月引越し 吹田市">
+    <p class="privacy">入力した内容は<strong>お使いの端末（このブラウザ）の中だけ</strong>に保存され、クラシカルを含めどこにも送信されません。<br>
+    そのため他の端末からは見られず、閲覧履歴やサイトデータを削除すると消えてしまいます。きちんと残したい場合は「画像で保存」もご利用ください。</p>
+  </section>
+
+  <p class="intro">引越し日から逆算したやることリストです。<span class="dot"></span>オレンジの印は、遅れると当日に困りやすい項目です。</p>
+
+  <section class="datebox">
+    <h2>引越し（入居）予定日を入力してください</h2>
+    <div class="date-wrap">
+      <input type="date" id="moveDate" aria-label="引越し予定日">
+      <button type="button" class="date-clear" id="dateClear">クリア</button>
+    </div>
+    <div class="count" id="count">日付を入れると、各手続きの目安の期限が表示されます。</div>
+  </section>
+
+  <div class="prog" aria-live="polite">
+    <span class="prog-l">進み具合</span>
+    <div class="track"><i id="bar"></i></div>
+    <span class="prog-n" id="progN">0 / 0</span>
+  </div>
+
+  <section class="panel"><div class="phases" id="phases"></div></section>
+
+  <section class="panel send">
+    <h2 class="send-t">進み具合をクラシカルに送る</h2>
+    <button type="button" class="btn wide" data-act="copy">進み具合をコピーする</button>
+    <a class="btn wide line" id="lineBtn" href="#" target="_blank" rel="noopener">LINEでクラシカルに相談する</a>
+    <p>済んだ項目とまだの項目が文章でコピーされます。手続きで分からないことがあれば、LINEのトークに貼り付けて送ってください。</p>
+  </section>
+
+  <p class="foot">
+    株式会社CLASSICAL／大阪府知事（1）第65247号<br>
+    〒564-0053 大阪府吹田市江の木町16-34-501<br>
+    期限や手続きは一般的な目安です。実際の条件は契約内容やお住まいの自治体・各事業者にご確認ください。
+  </p>
+</main>
+
+<nav class="dock"><div class="dock-in">
+  <button type="button" class="btn sub" id="openList">記録一覧</button>
+  <button type="button" class="btn sub" id="openImg">画像で保存</button>
+  <button type="button" class="btn navy" id="saveBtn">保存する</button>
+</div></nav>
+
+<div class="overlay" id="listSheet" role="dialog" aria-modal="true" aria-labelledby="listTitle"><div class="sheet">
+  <h3 id="listTitle">保存した記録</h3>
+  <p class="privacy" style="margin:0 0 8px">この一覧はこの端末の中だけにあります。機種変更や履歴の削除では引き継がれません。</p>
+  <div id="recList"></div>
+  <button type="button" class="btn sub wide" id="newRec" style="margin-top:14px">＋ 新しい記録をはじめる</button>
+  <button type="button" class="btn sub wide" data-act="close">閉じる</button>
+</div></div>
+
+<div class="overlay" id="imgSheet" role="dialog" aria-modal="true" aria-labelledby="imgTitle"><div class="sheet">
+  <h3 id="imgTitle">画像を長押しすると保存できます</h3>
+  <img class="preview" id="preview" alt="チェックリストの画像">
+  <a class="btn wide" id="dlLink" download style="margin-top:12px">画像をダウンロード</a>
+  <button type="button" class="btn sub wide" data-act="copy">文章でコピーする</button>
+  <button type="button" class="btn sub wide" data-act="close">閉じる</button>
+</div></div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const LINE_URL = "#";  // TODO: 公式LINEのURL
+
+(function(){
+"use strict";
+var STORE_KEY = "classical-hikkoshi-records";
+var LAST_KEY = "classical-hikkoshi-last";
+var TOOL_NAME = "引越しやることカレンダー";
+
+/* ===== やること（offset = 引越し日からの日数） ===== */
+var PHASES = [
+  {id:"m30", label:"1ヶ月前", offset:-30, kind:"by", why:"費用と日程にいちばん影響する時期です", items:[
+    {id:"kaiyaku", t:"今の住まいの管理会社・大家さんへ解約を連絡", n:"解約予告は「1ヶ月前まで」が多め。遅れた分だけ家賃が二重にかかります"},
+    {id:"keiyaku", t:"新居の賃貸借契約と初期費用の入金"},
+    {id:"gyosha", t:"引越し業者の相見積もり（目安3社）"},
+    {id:"sodai", t:"粗大ごみの回収を申し込む", n:"予約制で、時期によっては数週間先になることも"}
+  ]},
+  {id:"m14", label:"2週間前", offset:-14, kind:"by", key:true, why:"工事や手配に日数がかかるものを先に", items:[
+    {id:"net", t:"インターネット回線を申し込む", n:"開通工事が必要だと1ヶ月ほど待つ場合も。最優先で"},
+    {id:"life", t:"電気・ガス・水道の停止／使用開始を連絡"},
+    {id:"gas", t:"ガス開栓の立ち会い日を予約", n:"立ち会い当日は在宅が必要です"},
+    {id:"post", t:"郵便局に転居届（転送届）を出す", n:"インターネットからでも手続きできます"},
+    {id:"tenshutsu", t:"転出届を出す（別の市区町村へ引越す場合）"}
+  ]},
+  {id:"m7", label:"1週間前", offset:-7, kind:"by", why:"荷造りと住所変更を進めましょう", items:[
+    {id:"nidukuri", t:"使わない物から荷造り。箱に中身と置く部屋を書く"},
+    {id:"reizo", t:"冷蔵庫・冷凍庫の中身を計画的に減らす"},
+    {id:"jusho", t:"銀行・クレジットカード・携帯・各種サービスの住所変更"},
+    {id:"tachiai", t:"旧居の退去立ち会い日時を確定する"}
+  ]},
+  {id:"d0", label:"前日・当日", offset:0, kind:"day", key:true, why:"忘れると当日の作業が止まります", items:[
+    {id:"mizunuki", t:"冷蔵庫・洗濯機の水抜き（前日のうちに）"},
+    {id:"temochi", t:"貴重品・スマホ充電器・トイレットペーパーは手荷物に"},
+    {id:"kizu", t:"荷物を入れる前に新居の傷・汚れを写真に残す"},
+    {id:"kagi", t:"旧居の退去立ち会いと鍵の返却"},
+    {id:"breaker", t:"新居のブレーカーを入れる／ガス開栓に立ち会う"}
+  ]},
+  {id:"p14", label:"入居後2週間以内", offset:14, kind:"until", why:"法律で期限が決まっているものがあります", items:[
+    {id:"tennyu", t:"転入届（または転居届）を出す", n:"引越しから14日以内。正当な理由なく遅れると過料の対象になることがあります"},
+    {id:"mynumber", t:"マイナンバーカードの住所変更"},
+    {id:"menkyo", t:"運転免許証の住所変更"},
+    {id:"car", t:"車をお持ちなら車庫証明・車検証の住所変更"},
+    {id:"aisatsu", t:"ご近所へのあいさつ（任意。顔見知りになっておくと安心です）"}
+  ]}
+];
+
+/* ===== 保存（localStorage は try/catch。使えない環境はメモリで代用） ===== */
+var memStore = null;
+function loadAll(){
+  try{ var s = localStorage.getItem(STORE_KEY); var v = s ? JSON.parse(s) : []; return Array.isArray(v) ? v : []; }
+  catch(e){ return memStore || []; }
+}
+function setLast(id){ try{ if(id) localStorage.setItem(LAST_KEY, id); else localStorage.removeItem(LAST_KEY); }catch(e){} }
+function getLast(){ try{ return localStorage.getItem(LAST_KEY); }catch(e){ return null; } }
+function saveAll(list){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(list)); }
+  catch(e){ memStore = list; }
+}
+
+/* ===== 日付（タイムゾーンの影響を受けないよう「日数」で扱う） ===== */
+var WEEK = "日月火水木金土";
+function ymdToDays(str){
+  var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(str || "");
+  if(!m) return null;
+  return Math.floor(Date.UTC(+m[1], +m[2]-1, +m[3]) / 86400000);
+}
+function todayDays(){
+  var d = new Date();
+  return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
+}
+function daysToDate(n){ return new Date(n * 86400000); } // UTC として扱う
+function fmt(n){ var d = daysToDate(n); return (d.getUTCMonth()+1) + "/" + d.getUTCDate() + "（" + WEEK[d.getUTCDay()] + "）"; }
+function fmtFull(n){ var d = daysToDate(n); return d.getUTCFullYear() + "年" + (d.getUTCMonth()+1) + "月" + d.getUTCDate() + "日（" + WEEK[d.getUTCDay()] + "）"; }
+
+/* ===== 描画 ===== */
+var $ = function(id){ return document.getElementById(id); };
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+var phasesEl = $("phases");
+phasesEl.innerHTML = PHASES.map(function(p){
+  return '<div class="phase' + (p.key ? ' key' : '') + '" data-ph="' + p.id + '">' +
+    '<div class="ph-head"><h3 class="ph-t">' + p.label + '</h3><span class="due" data-due></span><span class="ph-c" data-cnt></span></div>' +
+    '<p class="ph-why">' + p.why + '</p>' +
+    p.items.map(function(it){
+      return '<label class="task"><input type="checkbox" data-id="' + p.id + '.' + it.id + '">' +
+        '<span class="tx"><span class="tt">' + it.t + '</span>' + (it.n ? '<span class="tn">' + it.n + '</span>' : '') + '</span></label>';
+    }).join("") + '</div>';
+}).join("");
+
+var boxes = Array.prototype.slice.call(phasesEl.querySelectorAll("input[type=checkbox]"));
+var currentId = null;
+
+function updateProgress(){
+  var done = 0;
+  boxes.forEach(function(b){ if(b.checked) done++; });
+  $("bar").style.width = (boxes.length ? done / boxes.length * 100 : 0) + "%";
+  var pn = $("progN"); pn.textContent = done + " / " + boxes.length;
+  pn.classList.toggle("all", done === boxes.length && done > 0);
+  PHASES.forEach(function(p){
+    var el = phasesEl.querySelector('[data-ph="' + p.id + '"]');
+    var bs = el.querySelectorAll("input"), d = 0;
+    Array.prototype.forEach.call(bs, function(b){ if(b.checked) d++; });
+    el.querySelector("[data-cnt]").textContent = d + "/" + bs.length;
+    el.classList.toggle("done", d === bs.length);
+  });
+  updateDates();
+}
+
+function updateDates(){
+  var base = ymdToDays($("moveDate").value), out = $("count");
+  PHASES.forEach(function(p){
+    var el = phasesEl.querySelector('[data-ph="' + p.id + '"]'), due = el.querySelector("[data-due]");
+    if(base === null){ due.textContent = ""; due.className = "due"; return; }
+    var target = base + p.offset, diff = target - todayDays();
+    var allDone = el.classList.contains("done"), txt, cls = "due";
+    if(p.kind === "day"){
+      txt = fmt(target) + " が当日";
+      if(diff === 0) txt += "（今日）";
+    }else{
+      txt = fmt(target) + (p.kind === "until" ? "まで" : "ごろまで");
+      txt += diff >= 0 ? "（あと" + diff + "日）" : "（" + (-diff) + "日すぎています）";
+    }
+    if(allDone){ cls += " ok"; txt += " ✓完了"; }
+    else if(diff < 0 && p.kind !== "day") cls += " late";
+    else if(diff <= 3) cls += " near";
+    due.textContent = txt; due.className = cls;
+  });
+  if(base === null){ out.innerHTML = "日付を入れると、各手続きの目安の期限が表示されます。"; return; }
+  var left = base - todayDays();
+  if(left > 0) out.innerHTML = '<span class="big">引越しまで <em>あと ' + left + ' 日</em></span><span class="sub">' + fmtFull(base) + ' が入居予定日です</span>';
+  else if(left === 0) out.innerHTML = '<span class="big"><em>今日が引越し当日です</em></span><span class="sub">忘れ物がないか、前日・当日の項目を確認しましょう</span>';
+  else out.innerHTML = '<span class="big">' + fmtFull(base) + ' に引越し済み</span><span class="sub">入居から ' + (-left) + ' 日。転入届などの期限に注意しましょう</span>';
+}
+
+/* ===== 記録 ===== */
+function nowLabel(){ var d = new Date(); return d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate(); }
+function snapshot(){
+  var checks = {};
+  boxes.forEach(function(b){ if(b.checked) checks[b.dataset.id] = 1; });
+  return { id: currentId || ("r" + Date.now()), name: $("recName").value.trim() || "名前なしの記録",
+    saved: nowLabel(), moveDate: $("moveDate").value || "", checks: checks };
+}
+function applyRecord(r){
+  currentId = r ? r.id : null; setLast(currentId);
+  $("recName").value = r ? (r.name === "名前なしの記録" ? "" : r.name) : "";
+  $("moveDate").value = r && r.moveDate ? r.moveDate : "";
+  boxes.forEach(function(b){ b.checked = !!(r && r.checks && r.checks[b.dataset.id]); });
+  updateProgress();
+}
+function countChecks(r){ return r.checks ? Object.keys(r.checks).filter(function(k){ return boxes.some(function(b){ return b.dataset.id === k; }); }).length : 0; }
+function saveRecord(){
+  var r = snapshot(), list = loadAll(), i;
+  for(i = 0; i < list.length; i++){ if(list[i].id === r.id) break; }
+  if(i < list.length) list[i] = r; else list.push(r);
+  saveAll(list); currentId = r.id; setLast(currentId);
+  toast("「" + r.name + "」を保存しました");
+}
+function renderList(){
+  var list = loadAll(), h = "";
+  if(!list.length) h = '<p class="none">まだ保存した記録はありません</p>';
+  list.slice().reverse().forEach(function(r){
+    var md = ymdToDays(r.moveDate);
+    h += '<div class="rec' + (r.id === currentId ? ' cur' : '') + '"><div class="rec-i"><div class="rec-n">' + esc(r.name) + '</div>' +
+      '<div class="rec-m">保存 ' + esc(r.saved || "") + (md !== null ? '　引越し ' + fmt(md) : '') + '　' + countChecks(r) + ' / ' + boxes.length + '</div></div>' +
+      '<button type="button" class="r-open" data-id="' + esc(r.id) + '">開く</button>' +
+      '<button type="button" class="r-del" data-id="' + esc(r.id) + '">削除</button></div>';
+  });
+  $("recList").innerHTML = h;
+}
+$("recList").addEventListener("click", function(e){
+  var b = e.target.closest("button"); if(!b) return;
+  var id = b.dataset.id, list = loadAll();
+  if(b.classList.contains("r-open")){
+    var r = list.filter(function(x){ return x.id === id; })[0];
+    if(r){ applyRecord(r); closeAll(); toast("「" + r.name + "」を読み込みました"); }
+  }else{
+    var t = list.filter(function(x){ return x.id === id; })[0];
+    if(t && !confirm("「" + t.name + "」を削除しますか？")) return;
+    saveAll(list.filter(function(x){ return x.id !== id; }));
+    if(id === currentId){ currentId = null; setLast(null); }
+    renderList(); toast("削除しました");
+  }
+});
+$("newRec").addEventListener("click", function(){ applyRecord(null); closeAll(); toast("新しい記録をはじめます"); window.scrollTo(0,0); });
+
+/* ===== テキスト化・コピー ===== */
+function sections(){
+  return PHASES.map(function(p){
+    return { label: p.label, items: p.items.map(function(it){
+      var b = boxes.filter(function(x){ return x.dataset.id === p.id + "." + it.id; })[0];
+      return { t: it.t, c: !!(b && b.checked) };
+    })};
+  });
+}
+function buildText(){
+  var name = $("recName").value.trim() || "名前なしの記録", base = ymdToDays($("moveDate").value);
+  var done = boxes.filter(function(b){ return b.checked; }).length;
+  var t = "【" + TOOL_NAME + "】" + name + "\n";
+  if(base !== null) t += "引越し予定日 " + fmtFull(base) + "\n";
+  t += "進み具合 " + done + " / " + boxes.length + "\n";
+  var rest = [];
+  sections().forEach(function(s){
+    var on = s.items.filter(function(i){ return i.c; });
+    s.items.forEach(function(i){ if(!i.c) rest.push(s.label + "：" + i.t); });
+    if(on.length){ t += "\n■ 済み（" + s.label + "）\n"; on.forEach(function(i){ t += "・" + i.t + "\n"; }); }
+  });
+  if(rest.length){ t += "\n■ まだのもの\n"; rest.forEach(function(x){ t += "・" + x + "\n"; }); }
+  return t;
+}
+function copyText(){
+  var text = buildText();
+  function ok(){ toast("コピーしました。LINEのトークに貼り付けてください"); closeAll(); }
+  function legacy(){
+    var ta = document.createElement("textarea"); ta.value = text; ta.setAttribute("readonly", "");
+    ta.style.cssText = "position:fixed;top:0;left:0;opacity:0"; document.body.appendChild(ta); ta.select();
+    var success = false; try{ success = document.execCommand("copy"); }catch(e){}
+    document.body.removeChild(ta);
+    if(success) ok(); else toast("コピーできませんでした");
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, legacy);
+  else legacy();
+}
+
+/* ===== 画像で保存 ===== */
+function wrapText(ctx, text, max){
+  var lines = [], line = "";
+  for(var i = 0; i < text.length; i++){
+    var test = line + text[i];
+    if(ctx.measureText(test).width > max && line){ lines.push(line); line = text[i]; } else line = test;
+  }
+  if(line) lines.push(line);
+  return lines;
+}
+function makeImage(){
+  var W = 880, P = 44, LH = 36, cv = document.createElement("canvas"), ctx = cv.getContext("2d");
+  var name = $("recName").value.trim() || "名前なしの記録", base = ymdToDays($("moveDate").value);
+  var FONT = '"Noto Sans JP",sans-serif', rows = [], done = 0, total = 0;
+  ctx.font = "400 22px " + FONT;
+  sections().forEach(function(s, si){
+    var p = PHASES[si], label = s.label;
+    if(base !== null) label += "　" + (p.kind === "day" ? fmt(base + p.offset) : fmt(base + p.offset) + "まで");
+    rows.push({ k: "h", t: label, key: p.key });
+    s.items.forEach(function(it){
+      total++; if(it.c) done++;
+      wrapText(ctx, it.t, W - P*2 - 40).forEach(function(l, i){ rows.push({ k: "i", t: l, c: it.c, first: i === 0 }); });
+    });
+    rows.push({ k: "gap" });
+  });
+  var HEAD = 200, H = HEAD + 30 + rows.reduce(function(a, r){ return a + (r.k === "gap" ? 12 : LH); }, 0) + 80;
+  cv.width = W; cv.height = H;
+  ctx.fillStyle = "#F5F7FB"; ctx.fillRect(0, 0, W, H);
+  var g = ctx.createLinearGradient(0, 0, W, HEAD); g.addColorStop(0, "#0D2E66"); g.addColorStop(1, "#2E62B8");
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, HEAD);
+  ctx.fillStyle = "#fff"; ctx.font = '700 20px "Noto Serif",serif'; ctx.fillText("CLASSICAL", P, 50);
+  ctx.font = "500 18px " + FONT; ctx.fillText("｜" + TOOL_NAME, P + 132, 50);
+  ctx.font = "700 38px " + FONT; wrapText(ctx, name, W - P*2).slice(0,1).forEach(function(l){ ctx.fillText(l, P, 108); });
+  ctx.font = "400 20px " + FONT;
+  ctx.fillText((base !== null ? "引越し予定日 " + fmtFull(base) + "　" : "") + "完了 " + done + " / " + total, P, 150);
+  ctx.globalAlpha = .75; ctx.font = "400 16px " + FONT; ctx.fillText("作成 " + nowLabel(), P, 180); ctx.globalAlpha = 1;
+  var y = HEAD + 46;
+  rows.forEach(function(r){
+    if(r.k === "gap"){ y += 12; return; }
+    if(r.k === "h"){
+      ctx.fillStyle = r.key ? "#F47B20" : "#14418B"; ctx.fillRect(P, y - 21, 6, 24);
+      ctx.fillStyle = "#14418B"; ctx.font = "700 23px " + FONT; ctx.fillText(r.t, P + 16, y);
+    }else{
+      if(r.first){
+        ctx.lineWidth = 2.5;
+        if(r.c){ ctx.fillStyle = "#1E8B4A"; ctx.fillRect(P + 2, y - 19, 22, 22);
+          ctx.strokeStyle = "#fff"; ctx.beginPath(); ctx.moveTo(P + 7, y - 8); ctx.lineTo(P + 12, y - 3); ctx.lineTo(P + 20, y - 14); ctx.stroke(); }
+        else{ ctx.strokeStyle = "#A9B6C8"; ctx.strokeRect(P + 3, y - 18, 20, 20); }
+      }
+      ctx.font = "400 22px " + FONT; ctx.fillStyle = r.c ? "#8A94A6" : "#1B2433"; ctx.fillText(r.t, P + 38, y);
+    }
+    y += LH;
+  });
+  ctx.fillStyle = "#5A6475"; ctx.font = "400 17px " + FONT;
+  ctx.fillText("株式会社CLASSICAL　大阪府知事（1）第65247号", P, H - 32);
+  var url = cv.toDataURL("image/png");
+  $("preview").src = url;
+  var a = $("dlLink"); a.href = url; a.download = (name.replace(/[\\/:*?"<>|]/g, "_") || "hikkoshi") + ".png";
+  openSheet("imgSheet");
+}
+
+/* ===== UI ===== */
+var toastTimer;
+function toast(msg){ var el = $("toast"); el.textContent = msg; el.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(function(){ el.classList.remove("show"); }, 2000); }
+function openSheet(id){ $(id).classList.add("open"); }
+function closeAll(){ Array.prototype.forEach.call(document.querySelectorAll(".overlay"), function(o){ o.classList.remove("open"); }); }
+
+boxes.forEach(function(b){ b.addEventListener("change", updateProgress); });
+$("moveDate").addEventListener("change", updateDates);
+$("moveDate").addEventListener("input", updateDates);
+$("dateClear").addEventListener("click", function(){ $("moveDate").value = ""; updateDates(); });
+$("saveBtn").addEventListener("click", saveRecord);
+$("openList").addEventListener("click", function(){ renderList(); openSheet("listSheet"); });
+$("openImg").addEventListener("click", function(){
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(makeImage, makeImage); else makeImage();
+});
+Array.prototype.forEach.call(document.querySelectorAll('[data-act="copy"]'), function(b){ b.addEventListener("click", copyText); });
+Array.prototype.forEach.call(document.querySelectorAll('[data-act="close"]'), function(b){ b.addEventListener("click", closeAll); });
+Array.prototype.forEach.call(document.querySelectorAll(".overlay"), function(o){ o.addEventListener("click", function(e){ if(e.target === o) closeAll(); }); });
+document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeAll(); });
+
+var lb = $("lineBtn"); lb.href = LINE_URL;
+if(LINE_URL === "#"){ lb.removeAttribute("target"); lb.addEventListener("click", function(e){ e.preventDefault(); toast("LINEのURLは準備中です"); }); }
+
+(function restore(){
+  var last = getLast(), r = last && loadAll().filter(function(x){ return x.id === last; })[0];
+  if(r) applyRecord(r); else updateProgress();
+})();
+})();
+</script>
+</body>
+</html>
