@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>初期費用シミュレーター｜株式会社CLASSICAL</title>
+<meta name="description" content="家賃と見積書の金額を入力すると、賃貸契約の初期費用の合計と、契約前にチェックしたいポイントがわかります。">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14418B; --navy-deep:#0D2E66; --navy-light:#2E62B8;
+  --orange:#F47B20; --green:#1E8B4A;
+  --ink:#1B2433; --ink-60:#5A6475;
+  --bg:#F5F7FB; --mist:#EDF2FA; --line:#DCE4EF; --paper:#FFFFFF;
+  --shadow:0 3px 14px rgba(13,46,102,.09); --r:16px;
+  --head:"Zen Maru Gothic",-apple-system,"Hiragino Sans",sans-serif;
+  --text:"Noto Sans JP",-apple-system,"Hiragino Sans",sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--text);color:var(--ink);background:var(--bg);
+  font-size:15px;line-height:1.7;padding-bottom:84px;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,p{margin:0}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.container{max-width:640px;margin:0 auto;padding:0 16px}
+
+/* ===== ヘッダー ===== */
+.top{
+  background:linear-gradient(150deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);
+  color:#fff;padding:14px 0 26px;
+}
+.back{
+  display:inline-flex;align-items:center;gap:4px;color:#fff;opacity:.86;
+  font-size:12.5px;text-decoration:none;margin-bottom:14px;
+}
+.back:hover{opacity:1;text-decoration:underline}
+.brand{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.brand svg{width:28px;height:28px;flex:none}
+.brand-name{font-family:"Noto Serif",serif;font-weight:700;font-size:18px;letter-spacing:.06em}
+.top h1{font-family:var(--head);font-weight:900;font-size:25px;line-height:1.4}
+.top .lead{font-size:13px;opacity:.86;margin-top:8px;line-height:1.75}
+
+/* ===== 入力パネル ===== */
+.panel{
+  background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);
+  padding:4px 16px 14px;margin-top:16px;
+}
+.panel-title{
+  display:flex;align-items:center;gap:9px;
+  font-family:var(--head);font-weight:900;font-size:16px;color:var(--navy);
+  padding:14px 0 12px;border-bottom:2px solid var(--mist);
+}
+.step{
+  flex:none;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;
+  font-size:12.5px;display:grid;place-items:center;font-family:var(--text);font-weight:700;
+}
+.row{padding:12px 0;border-bottom:1px solid var(--mist)}
+.row:last-child{border-bottom:none}
+.row-main{display:flex;align-items:center;gap:10px}
+.row-label{flex:1;min-width:0}
+.row-label label{display:block;font-size:14px;font-weight:500;line-height:1.5}
+.row-label .hint{display:block;font-size:11px;color:var(--ink-60);line-height:1.5;margin-top:1px}
+.ctrl{flex:none;display:flex;align-items:center;gap:5px}
+.ctrl .unit{font-size:12px;color:var(--ink-60)}
+.num{
+  width:116px;padding:9px 10px;border:1.5px solid var(--line);border-radius:10px;
+  background:var(--paper);color:var(--ink);text-align:right;
+  font-family:var(--head);font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;
+}
+.num.short{width:72px}
+.num:focus,.pick:focus{border-color:var(--navy-light);outline:none;box-shadow:0 0 0 3px rgba(46,98,184,.15)}
+.pick{
+  padding:9px 8px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);
+  color:var(--ink);font-family:var(--head);font-weight:700;font-size:15px;
+}
+.override{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin-top:8px}
+.override .tip{margin-right:auto;font-size:11px;color:var(--ink-60)}
+.override .num{background:var(--mist);border-color:transparent;font-size:14.5px;padding:7px 10px;color:var(--ink-60)}
+.override .num:focus{background:var(--paper);color:var(--ink);border-color:var(--navy-light)}
+.override .unit{font-size:11.5px;color:var(--ink-60)}
+.optional-box{
+  margin:14px 0 2px;padding:11px 13px;border-radius:12px;
+  background:#FFF4EA;border-left:4px solid var(--orange);
+  font-size:11.5px;color:#7A4A22;line-height:1.7;
+}
+
+/* ===== 結果 ===== */
+.summary{
+  margin-top:18px;border-radius:var(--r);padding:20px 17px 14px;color:#fff;
+  background:linear-gradient(160deg,var(--navy-deep) 0%,var(--navy) 100%);box-shadow:var(--shadow);
+}
+.summary h2{font-family:var(--head);font-weight:900;font-size:16px;margin-bottom:12px}
+.sum-box{background:#fff;color:var(--ink);border-radius:14px;padding:16px;text-align:center}
+.sum-box .cap{font-size:12px;color:var(--ink-60)}
+.sum-value{
+  display:block;font-family:var(--head);font-weight:900;font-size:36px;line-height:1.25;
+  color:var(--orange);font-variant-numeric:tabular-nums;margin-top:2px;
+}
+.sum-months{display:block;font-size:12px;color:var(--navy);font-weight:500;margin-top:4px;min-height:1em}
+.items{margin:14px 0 0;padding:0}
+.items .it{
+  display:flex;justify-content:space-between;gap:10px;padding:7px 2px;font-size:13px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+}
+.items .it:last-child{border-bottom:none}
+.items dt{opacity:.88}
+.items dd{margin:0;font-family:var(--head);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* ===== チェック ===== */
+.points{margin-top:16px}
+.point{
+  display:flex;gap:11px;align-items:flex-start;padding:13px 14px;border-radius:14px;
+  margin-bottom:10px;background:var(--paper);box-shadow:var(--shadow);border-left:5px solid var(--line);
+}
+.point .mark{
+  flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;font-size:12.5px;font-weight:700;margin-top:1px;
+}
+.point h3{font-family:var(--head);font-weight:700;font-size:14px;line-height:1.5}
+.point p{font-size:12px;color:var(--ink-60);line-height:1.75;margin-top:4px}
+.point.good{border-left-color:var(--green)} .point.good .mark{background:var(--green)}
+.point.alert{border-left-color:#D6402F;background:#FFF5F3} .point.alert .mark{background:#D6402F}
+.point.note{border-left-color:var(--orange)} .point.note .mark{background:var(--orange)}
+
+/* ===== アクション ===== */
+.btn-line{
+  display:block;margin-top:18px;padding:16px;border-radius:14px;text-align:center;text-decoration:none;
+  background:var(--orange);color:#fff;box-shadow:0 5px 0 #C9600F;
+}
+.btn-line:active{transform:translateY(3px);box-shadow:0 2px 0 #C9600F}
+.btn-line strong{display:block;font-family:var(--head);font-weight:900;font-size:17px}
+.btn-line span{display:block;font-size:11.5px;opacity:.95;margin-top:3px}
+.btn-copy{
+  display:block;width:100%;margin-top:12px;padding:13px;border-radius:12px;cursor:pointer;
+  background:var(--paper);border:1.5px solid var(--navy);color:var(--navy);
+  font-family:var(--head);font-weight:700;font-size:14px;
+}
+.btn-copy:active{background:var(--mist)}
+.btn-copy.done{border-color:var(--green);color:var(--green)}
+
+.notes{margin:20px 0 0;padding:0 0 0 1.1em;font-size:11px;color:var(--ink-60);line-height:1.8}
+.notes li{margin-bottom:3px}
+
+.foot{margin-top:26px;padding:18px 0 12px;border-top:1px solid var(--line);text-align:center;font-size:10.5px;color:var(--ink-60);line-height:1.9}
+
+/* ===== 固定バー ===== */
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  background:rgba(255,255,255,.97);border-top:1px solid var(--line);
+  box-shadow:0 -3px 12px rgba(13,46,102,.07);
+  padding:10px 0 calc(10px + env(safe-area-inset-bottom));
+}
+.dock .container{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dock .lbl{font-size:12px;color:var(--navy);font-weight:500}
+.dock .val{font-family:var(--head);font-weight:900;font-size:24px;color:var(--orange);font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="container">
+    <a class="back" href="../../">← 特典一覧</a>
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 5l12 10" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="14" width="16" height="13" rx="1.5" fill="none" stroke="#fff" stroke-width="2.4"/><rect x="13.5" y="18" width="5" height="5" rx=".8" fill="#F47B20"/></svg>
+      <span class="brand-name">CLASSICAL</span>
+    </div>
+    <h1>初期費用シミュレーター</h1>
+    <p class="lead">見積書を手元に用意して、金額を入力してみましょう。初期費用の合計と、契約前に見ておきたいポイントがすぐにわかります。</p>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="panel" aria-labelledby="t1">
+    <h2 class="panel-title" id="t1"><span class="step">1</span>物件の基本条件</h2>
+
+    <div class="row">
+      <div class="row-main">
+        <div class="row-label"><label for="rent">家賃</label><span class="hint">毎月の金額</span></div>
+        <div class="ctrl"><input class="num" id="rent" type="number" inputmode="numeric" min="0" value="70000"><span class="unit">円</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row-main">
+        <div class="row-label"><label for="kanri">管理費・共益費</label><span class="hint">毎月の金額</span></div>
+        <div class="ctrl"><input class="num" id="kanri" type="number" inputmode="numeric" min="0" value="5000"><span class="unit">円</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row-main">
+        <div class="row-label"><label for="shikiM">敷金</label><span class="hint">家賃の何ヶ月分か</span></div>
+        <div class="ctrl">
+          <select class="pick" id="shikiM">
+            <option value="0">なし</option><option value="0.5">0.5ヶ月</option>
+            <option value="1" selected>1ヶ月</option><option value="2">2ヶ月</option><option value="3">3ヶ月</option>
+          </select>
+        </div>
+      </div>
+      <div class="override"><span class="tip">見積書の金額に修正できます</span><input class="num" id="shikiY" type="number" inputmode="numeric" min="0" aria-label="敷金の金額"><span class="unit">円</span></div>
+    </div>
+
+    <div class="row">
+      <div class="row-main">
+        <div class="row-label"><label for="reiM">礼金</label><span class="hint">家賃の何ヶ月分か</span></div>
+        <div class="ctrl">
+          <select class="pick" id="reiM">
+            <option value="0">なし</option><option value="0.5">0.5ヶ月</option>
+            <option value="1" selected>1ヶ月</option><option value="2">2ヶ月</option><option value="3">3ヶ月</option>
+          </select>
+        </div>
+      </div>
+      <div class="override"><span class="tip">見積書の金額に修正できます</span><input class="num" id="reiY" type="number" inputmode="numeric" min="0" aria-label="礼金の金額"><span class="unit">円</span></div>
+    </div>
+
+    <div class="row">
+      <div class="row-main">
+        <div class="row-label"><label for="days">日割り家賃の日数</label><span class="hint">入居する日から月末までの日数</span></div>
+        <div class="ctrl"><input class="num short" id="days" type="number" inputmode="numeric" min="0" max="31" value="15"><span class="unit">日</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="t2">
+    <h2 class="panel-title" id="t2"><span class="step">2</span>見積書に載っている費用</h2>
+
+    <div class="row">
+      <div class="row-main">
+        <div class="row-label"><label for="feeM">仲介手数料</label><span class="hint">法律上の上限は家賃1ヶ月分＋消費税</span></div>
+        <div class="ctrl">
+          <select class="pick" id="feeM">
+            <option value="0">無料</option><option value="0.5">0.5ヶ月</option><option value="1" selected>1ヶ月</option>
+          </select>
+        </div>
+      </div>
+      <div class="override"><span class="tip">税込金額に修正できます</span><input class="num" id="feeY" type="number" inputmode="numeric" min="0" aria-label="仲介手数料の金額（税込）"><span class="unit">円</span></div>
+    </div>
+
+    <div class="row">
+      <div class="row-main">
+        <div class="row-label"><label for="guarP">保証会社の初回保証料</label><span class="hint">家賃＋管理費に対する割合</span></div>
+        <div class="ctrl"><input class="num short" id="guarP" type="number" inputmode="decimal" min="0" value="50"><span class="unit">％</span></div>
+      </div>
+      <div class="override"><span class="tip">見積書の金額に修正できます</span><input class="num" id="guarY" type="number" inputmode="numeric" min="0" aria-label="保証料の金額"><span class="unit">円</span></div>
+    </div>
+
+    <div class="row">
+      <div class="row-main">
+        <div class="row-label"><label for="fire">火災保険料</label></div>
+        <div class="ctrl"><input class="num" id="fire" type="number" inputmode="numeric" min="0" value="20000"><span class="unit">円</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row-main">
+        <div class="row-label"><label for="key">鍵交換費用</label></div>
+        <div class="ctrl"><input class="num" id="key" type="number" inputmode="numeric" min="0" value="22000"><span class="unit">円</span></div>
+      </div>
+    </div>
+
+    <div class="optional-box">
+      以下は、物件によって任意加入となっていることがある費用です。<br>
+      見積書に書かれていなければ「0」のままで大丈夫です。
+    </div>
+
+    <div class="row">
+      <div class="row-main">
+        <div class="row-label"><label for="clean">室内消毒・抗菌施工</label></div>
+        <div class="ctrl"><input class="num" id="clean" type="number" inputmode="numeric" min="0" value="16500"><span class="unit">円</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row-main">
+        <div class="row-label"><label for="support">24時間サポート・安心サービス</label></div>
+        <div class="ctrl"><input class="num" id="support" type="number" inputmode="numeric" min="0" value="19800"><span class="unit">円</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row-main">
+        <div class="row-label"><label for="other">その他（クリーニング代など）</label></div>
+        <div class="ctrl"><input class="num" id="other" type="number" inputmode="numeric" min="0" value="0"><span class="unit">円</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="summary" aria-labelledby="t3" aria-live="polite">
+    <h2 id="t3">初期費用の合計</h2>
+    <div class="sum-box">
+      <span class="cap">お支払い総額の目安</span>
+      <b class="sum-value" id="sumValue">¥0</b>
+      <span class="sum-months" id="sumMonths"></span>
+    </div>
+    <dl class="items" id="itemList"></dl>
+  </section>
+
+  <section class="points" id="pointList" aria-label="確認ポイント"></section>
+
+  <a class="btn-line" id="lineLink" href="#">
+    <strong>この見積もりをクラシカルに相談する</strong>
+    <span>LINEで物件名を送るだけ。安くできるか無料でお調べします</span>
+  </a>
+  <button class="btn-copy" id="copyResult" type="button">計算結果をコピー</button>
+
+  <ul class="notes">
+    <li>本ツールは入力いただいた金額から合計を算出する目安です。実際の請求額は物件や契約条件によって変わります。</li>
+    <li>仲介手数料は、宅地建物取引業法により家賃1ヶ月分＋消費税が上限とされています。</li>
+    <li>任意加入となる場合がある費用でも、貸主の条件で外せないことがあります。外せるかどうかは本ツールでは判断できません。</li>
+    <li>保証料・火災保険料は会社やプランによって異なります。日割り家賃は1ヶ月を30日として計算しています。</li>
+  </ul>
+
+  <footer class="foot">
+    株式会社CLASSICAL／大阪府知事（1）第65247号<br>
+    〒564-0053 大阪府吹田市江の木町16-34-501<br>
+    表示される金額はあくまで概算です。正式なお見積りは物件ごとにご確認ください。
+  </footer>
+</main>
+
+<div class="dock">
+  <div class="container">
+    <span class="lbl">初期費用の合計</span>
+    <b class="val" id="dockValue">¥0</b>
+  </div>
+</div>
+
+<script>
+const LINE_URL = "#";  // TODO: 公式LINEのURL
+
+(function(){
+  "use strict";
+  const el = (id) => document.getElementById(id);
+
+  const readNum = (id) => {
+    const v = parseFloat(el(id).value);
+    return (isNaN(v) || v < 0) ? 0 : v;
+  };
+  const fmt = (n) => "¥" + Math.round(n).toLocaleString("ja-JP");
+
+  /* 月数・割合が変わったら、下の金額欄を自動で入れ直す（金額欄は手入力で上書き可） */
+  function fillAmounts(){
+    const rent = readNum("rent");
+    const kanri = readNum("kanri");
+    el("shikiY").value = Math.round(rent * parseFloat(el("shikiM").value));
+    el("reiY").value   = Math.round(rent * parseFloat(el("reiM").value));
+    el("feeY").value   = Math.round(rent * parseFloat(el("feeM").value) * 1.1);
+    el("guarY").value  = Math.round((rent + kanri) * readNum("guarP") / 100);
+  }
+
+  let resultText = "";
+
+  function update(){
+    const rent  = readNum("rent");
+    const kanri = readNum("kanri");
+    const days  = Math.min(31, Math.max(0, readNum("days")));
+    const monthly = rent + kanri;
+    const prorated = Math.round(monthly / 30 * days);
+    const fee = readNum("feeY");
+    const optional = readNum("clean") + readNum("support") + readNum("other");
+
+    const lines = [
+      ["敷金", readNum("shikiY")],
+      ["礼金", readNum("reiY")],
+      ["前家賃・管理費（翌月分）", monthly],
+      ["日割り家賃・管理費", prorated],
+      ["仲介手数料", fee],
+      ["保証会社の初回保証料", readNum("guarY")],
+      ["火災保険料", readNum("fire")],
+      ["鍵交換費用", readNum("key")],
+      ["室内消毒・抗菌施工", readNum("clean")],
+      ["24時間サポート等", readNum("support")],
+      ["その他", readNum("other")]
+    ];
+    const total = lines.reduce((s, l) => s + l[1], 0);
+
+    el("sumValue").textContent = fmt(total);
+    el("dockValue").textContent = fmt(total);
+    el("sumMonths").textContent = rent > 0 ? "家賃のおよそ " + (total / rent).toFixed(1) + " ヶ月分" : "";
+
+    const list = el("itemList");
+    list.textContent = "";
+    lines.filter((l) => l[1] > 0).forEach((l) => {
+      const wrap = document.createElement("div");
+      wrap.className = "it";
+      const dt = document.createElement("dt"); dt.textContent = l[0];
+      const dd = document.createElement("dd"); dd.textContent = fmt(l[1]);
+      wrap.append(dt, dd);
+      list.appendChild(wrap);
+    });
+
+    /* 確認ポイント */
+    const limit = Math.floor(rent * 1.1);
+    const pts = [];
+    if (rent > 0 && fee > limit) {
+      pts.push(["alert", "!", "仲介手数料が法定の上限を超えています",
+        "この家賃での上限額は " + fmt(limit) + "（家賃1ヶ月分＋消費税）で、入力額はそれより " + fmt(fee - limit) + " 高くなっています。内訳や根拠を担当者に確認しましょう。"]);
+    } else if (rent > 0 && fee > 0 && fee >= limit - 100) {
+      pts.push(["note", "?", "仲介手数料が上限ちょうどの金額です",
+        "この家賃での上限額は " + fmt(limit) + " で、ほぼ同じ金額です。物件によっては手数料を抑えられる可能性があります。"]);
+    } else if (rent > 0 && fee > 0) {
+      pts.push(["good", "✓", "仲介手数料は上限内に収まっています",
+        "この家賃での上限額は " + fmt(limit) + " です。入力額は上限より低い金額になっています。"]);
+    }
+    if (optional > 0) {
+      pts.push(["note", "?", "任意加入の場合がある費用が " + fmt(optional) + " 入っています",
+        "室内消毒・24時間サポート・その他を合わせた金額です。外せる物件もありますが、貸主の条件で加入が必須のケースもあります。"]);
+    }
+    if (rent > 0 && total > rent * 5.5) {
+      pts.push(["note", "?", "初期費用が家賃の " + (total / rent).toFixed(1) + " ヶ月分になっています",
+        "一般的には家賃の4〜5ヶ月分がひとつの目安といわれます。どの項目が大きくなっているか、内訳を見直してみると安心です。"]);
+    }
+    pts.push(["good", "✓", "費用を抑えられるかは物件によって変わります",
+      "同じ条件に見えても、取り扱える物件かどうかで初期費用が変わることがあります。物件名を送っていただければ無料でお調べします。"]);
+
+    const box = el("pointList");
+    box.textContent = "";
+    pts.forEach((p) => {
+      const card = document.createElement("div");
+      card.className = "point " + p[0];
+      const mark = document.createElement("span"); mark.className = "mark"; mark.textContent = p[1];
+      const body = document.createElement("div");
+      const h = document.createElement("h3"); h.textContent = p[2];
+      const tx = document.createElement("p"); tx.textContent = p[3];
+      body.append(h, tx);
+      card.append(mark, body);
+      box.appendChild(card);
+    });
+
+    resultText =
+      "【初期費用シミュレーター 計算結果】\n" +
+      "家賃 " + fmt(rent) + "／管理費 " + fmt(kanri) + "\n" +
+      lines.filter((l) => l[1] > 0).map((l) => l[0] + "：" + fmt(l[1])).join("\n") +
+      "\n---\n合計：" + fmt(total);
+  }
+
+  ["rent", "kanri", "shikiM", "reiM", "feeM", "guarP"].forEach((id) => {
+    ["input", "change"].forEach((ev) => el(id).addEventListener(ev, () => { fillAmounts(); update(); }));
+  });
+  ["shikiY", "reiY", "days", "feeY", "guarY", "fire", "key", "clean", "support", "other"].forEach((id) => {
+    el(id).addEventListener("input", update);
+  });
+
+  el("lineLink").setAttribute("href", LINE_URL);
+
+  const copyBtn = el("copyResult");
+  copyBtn.addEventListener("click", () => {
+    const finish = () => {
+      copyBtn.textContent = "コピーしました";
+      copyBtn.classList.add("done");
+      setTimeout(() => { copyBtn.textContent = "計算結果をコピー"; copyBtn.classList.remove("done"); }, 1800);
+    };
+    const fallback = () => {
+      const ta = document.createElement("textarea");
+      ta.value = resultText;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      finish();
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(resultText).then(finish, fallback);
+    } else {
+      fallback();
+    }
+  });
+
+  window.__getResultText = () => resultText;
+
+  fillAmounts();
+  update();
+})();
+</script>
+</body>
+</html>
