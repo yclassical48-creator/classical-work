@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>とめる場所さがし｜クラシカル</title>
+<meta name="description" content="時間貸し・月極駐車場、駐輪場、バイク置き場、市の公営駐輪場をまとめて探せるリンク集。株式会社CLASSICALのLINE友だち限定特典です。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14418B;
+  --navy-deep:#0D2E66;
+  --navy-light:#2E62B8;
+  --orange:#F47B20;
+  --green:#1E8B4A;
+  --ink:#1B2433;  --ink-60:#5A6475;
+  --bg:#F5F7FB;  --mist:#EDF2FA;  --line:#DCE4EF;  --paper:#FFFFFF;
+  --shadow:0 3px 14px rgba(13,46,102,.09);  --r:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Noto Sans JP",sans-serif;font-size:15px;line-height:1.75;
+  overflow-x:hidden;
+}
+a{color:inherit}
+h1,h2,h3{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif}
+.wrap{max-width:640px;margin:0 auto}
+
+/* header */
+.top{
+  background:linear-gradient(150deg,var(--navy-light) 0%,var(--navy) 45%,var(--navy-deep) 100%);
+  color:#fff;padding:14px 16px 26px;
+}
+.top-in{max-width:640px;margin:0 auto}
+.back{display:inline-block;font-size:13px;color:rgba(255,255,255,.85);text-decoration:none;padding:4px 0}
+.back:hover{color:#fff}
+.logo{display:flex;align-items:center;gap:9px;margin:14px 0 14px}
+.logo svg{width:30px;height:30px;flex:none}
+.logo span{font-family:"Noto Serif",serif;font-weight:700;font-size:19px;letter-spacing:.06em}
+.top .kicker{font-size:12px;font-weight:700;letter-spacing:.08em;color:#FFD2AE}
+.top h1{font-size:27px;font-weight:900;line-height:1.35;margin:2px 0 10px}
+.top .intro{font-size:14px;color:rgba(255,255,255,.88);line-height:1.85}
+
+/* jump chips */
+.jump{
+  display:flex;flex-wrap:wrap;gap:8px;padding:16px;max-width:640px;margin:0 auto;
+}
+.jump a{
+  padding:7px 14px;border-radius:999px;background:var(--paper);border:1px solid var(--line);
+  font-size:13px;font-weight:700;color:var(--navy);text-decoration:none;
+}
+.jump a:hover{border-color:var(--navy-light)}
+
+/* blocks */
+.block{padding:22px 16px 4px;max-width:640px;margin:0 auto;scroll-margin-top:8px}
+.eyebrow{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--orange);letter-spacing:.06em}
+.eyebrow::before{content:"";width:16px;height:3px;border-radius:2px;background:var(--orange)}
+.block h2{font-size:21px;font-weight:900;color:var(--navy-deep);line-height:1.4;margin-top:4px}
+.block .note{font-size:14px;color:var(--ink-60);margin-top:6px}
+
+.links{display:grid;gap:12px;margin-top:16px}
+.svc{
+  display:flex;flex-direction:column;gap:6px;background:var(--paper);border-radius:var(--r);
+  padding:16px 18px;text-decoration:none;box-shadow:var(--shadow);border:1px solid transparent;
+  transition:transform .15s,border-color .15s;
+}
+.svc:hover{transform:translateY(-2px);border-color:var(--line)}
+.svc:focus-visible{outline:2px solid var(--navy-light);outline-offset:3px}
+.svc-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.chip{
+  display:inline-block;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:7px;
+  background:var(--mist);color:var(--navy);white-space:nowrap;
+}
+.chip.now{background:#FFEBDC;color:#B5530A}
+.svc-name{font-family:"Zen Maru Gothic",sans-serif;font-size:17px;font-weight:900;color:var(--ink);line-height:1.45}
+.svc-text{font-size:13.5px;color:var(--ink-60);line-height:1.8}
+.svc-go{font-size:13px;font-weight:700;color:var(--orange);margin-top:2px}
+.ext{font-size:11.5px;color:var(--ink-60)}
+
+/* points list */
+.points{margin-top:14px;background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:4px 18px;list-style:none}
+.points li{display:flex;gap:10px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink-60);line-height:1.8}
+.points li:last-child{border-bottom:0}
+.points li::before{
+  content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--orange);margin-top:9px;
+}
+.points strong{color:var(--ink);font-weight:700}
+
+/* city finder */
+.finder{margin-top:16px;background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:18px}
+.finder label{display:block;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.finder select{
+  width:100%;padding:13px 12px;font:inherit;font-size:16px;color:var(--ink);
+  background:var(--bg);border:1px solid var(--line);border-radius:12px;appearance:auto;
+}
+.finder select:focus{outline:2px solid var(--navy-light);outline-offset:-1px}
+.result{margin-top:12px;display:grid;gap:10px}
+.result[hidden]{display:none}
+.result a{
+  display:block;padding:13px 14px;border-radius:12px;background:var(--mist);text-decoration:none;
+  border-left:4px solid var(--navy-light);
+}
+.result a:hover{background:#E3EBF8}
+.result a b{display:block;font-size:14.5px;color:var(--navy-deep)}
+.result a span{display:block;font-size:12.5px;color:var(--ink-60);margin-top:2px}
+
+/* LINE CTA */
+.ask{
+  margin:30px 16px 0;padding:24px 20px;border-radius:20px;color:#fff;
+  background:linear-gradient(155deg,var(--navy-light),var(--navy-deep));box-shadow:0 10px 24px rgba(13,46,102,.22);
+}
+@media (min-width:672px){.ask{margin:30px auto 0;max-width:608px}}
+.ask .eyebrow{color:#FFD2AE}
+.ask .eyebrow::before{background:#FFD2AE}
+.ask h2{font-size:20px;font-weight:900;margin-top:4px;line-height:1.45}
+.ask p{font-size:14px;color:rgba(255,255,255,.88);margin-top:8px}
+.ask-btn{
+  display:block;margin-top:18px;padding:15px 12px;border-radius:14px;text-align:center;
+  background:var(--orange);color:#fff;text-decoration:none;box-shadow:0 4px 12px rgba(244,123,32,.35);
+}
+.ask-btn:hover{filter:brightness(1.05)}
+.ask-btn b{display:block;font-size:16.5px;font-weight:700}
+.ask-btn small{display:block;font-size:12px;opacity:.92;margin-top:2px}
+
+/* footer */
+.foot{max-width:640px;margin:0 auto;padding:30px 16px 36px;text-align:center;font-size:11.5px;color:var(--ink-60);line-height:1.9}
+.foot .disc{margin-top:10px}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="back" href="../../">← 特典一覧</a>
+    <div class="logo">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M4 15 16 5l12 10" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="8" y="14" width="16" height="13" rx="1.5" stroke="#fff" stroke-width="2.2"/>
+        <rect x="13.5" y="18" width="5" height="5" rx=".8" fill="#F47B20"/>
+      </svg>
+      <span>CLASSICAL</span>
+    </div>
+    <p class="kicker">LINE友だち限定・無料ツール</p>
+    <h1>とめる場所さがし</h1>
+    <p class="intro">車の時間貸し・月極、自転車やバイクの置き場まで。内見の日も、新生活がはじまってからも、お客さまが来るときも、ここから探せるようにまとめました。</p>
+  </div>
+</header>
+
+<nav class="jump" aria-label="ページ内メニュー">
+  <a href="#hourly">時間貸し</a>
+  <a href="#monthly">月極</a>
+  <a href="#cycle">自転車・バイク</a>
+  <a href="#public">市の駐輪場</a>
+  <a href="#hints">知っておきたいこと</a>
+</nav>
+
+<main>
+  <section class="block" id="hourly">
+    <p class="eyebrow">駐車場</p>
+    <h2>車を短時間とめたい（時間貸し）</h2>
+    <p class="note">内見や来客など、数時間だけとめたいとき向け。予約できるサービスを使えば、着いてから満車で慌てることがありません。サービスごとに載っている駐車場が異なるので、いくつか見比べるのがコツです。</p>
+    <div class="links" id="list-hourly"></div>
+  </section>
+
+  <section class="block" id="monthly">
+    <p class="eyebrow">駐車場</p>
+    <h2>毎日とめる場所を借りたい（月極）</h2>
+    <p class="note">暮らしはじめてから使う駐車場は、時間貸しとは別のサイトで探します。人気のエリアは空きが出るとすぐ埋まるため、お部屋が決まったら早めにチェックしましょう。</p>
+    <div class="links" id="list-monthly"></div>
+    <ul class="points">
+      <li><span>月極の空きは<strong>引っ越しが多い2〜4月ごろに動きやすい</strong>です。入居日が決まった段階で探しはじめるのが安心です。</span></li>
+      <li><span>満車の駐車場でも<strong>空き待ちの登録</strong>を受け付けているサービスがあります。登録しておくと、空いたときに知らせてもらえます。</span></li>
+      <li><span>車庫証明を取る予定なら、駐車場側に<strong>保管場所使用承諾証明書</strong>を出してもらう必要があります。申し込みの際に忘れずに伝えましょう。</span></li>
+    </ul>
+  </section>
+
+  <section class="block" id="cycle">
+    <p class="eyebrow">駐輪場</p>
+    <h2>自転車・バイクをとめたい</h2>
+    <p class="note">駐輪場は駐車場に比べてネットの情報が少なく、地図アプリでも見落としがちです。予約制のサービスと市の公営駐輪場、どちらも確認しておくと選択肢が広がります。</p>
+    <div class="links" id="list-cycle"></div>
+  </section>
+
+  <section class="block" id="public">
+    <p class="eyebrow">公営</p>
+    <h2>市の公営駐輪場を調べる</h2>
+    <p class="note">市が運営する駐輪場は料金が手ごろで、定期利用ができるところも多いです。市区町村を選ぶと、駐輪場と放置禁止区域の情報をすぐ検索できます。</p>
+    <div class="finder">
+      <label for="city">市区町村を選ぶ</label>
+      <select id="city">
+        <option value="">選択してください</option>
+      </select>
+      <div class="result" id="city-result" hidden aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="block" id="hints">
+    <p class="eyebrow">豆知識</p>
+    <h2>知っておきたいこと</h2>
+    <ul class="points">
+      <li><span>駅のまわりは<strong>自転車等の放置禁止区域</strong>に指定されていることがあります。区域内にとめると撤去され、引き取りに手数料がかかります。範囲は市のサイトで地図とともに公開されています。</span></li>
+      <li><span>公営駐輪場の<strong>定期利用は申込の時期が決まっている</strong>場合があり、年度の変わり目は特に混み合います。早めに募集時期を確認しておきましょう。</span></li>
+      <li><span>コインパーキングの<strong>最大料金</strong>は「入庫後24時間まで」と「当日24時まで」など条件がさまざまで、同じ時間とめても金額が変わります。看板の注意書きまで確認を。</span></li>
+      <li><span>予約制の駐車場は個人の敷地を貸していることも多く、<strong>とめられる車のサイズに制限</strong>があります。大きめの車は、予約前に幅・長さ・高さの条件をチェックしてください。</span></li>
+    </ul>
+  </section>
+
+  <section class="ask" aria-labelledby="ask-title">
+    <p class="eyebrow">ご相談</p>
+    <h2 id="ask-title">探しても見つからないときは</h2>
+    <p>月極の空き具合や契約できるかどうか、実際のとめやすさなど、ネットだけではわからないことはクラシカルにお気軽にご相談ください。物件名や住所をそのまま送っていただければOKです。</p>
+    <a class="ask-btn" id="line-btn" href="#" target="_blank" rel="noopener">
+      <b>LINEで相談する</b>
+      <small>お部屋探しはクラシカルにお任せください！</small>
+    </a>
+  </section>
+</main>
+
+<footer class="foot">
+  株式会社CLASSICAL／大阪府知事（1）第65247号<br>〒564-0053 大阪府吹田市江の木町16-34-501
+  <p class="disc">このページは外部サービスへのご案内です。各サービスの内容・料金・掲載情報は変更されることがあるため、ご利用前に各公式サイトで最新情報をご確認ください。</p>
+</footer>
+
+<script>
+const LINE_URL = "#";  // TODO: 公式LINEのURL
+
+/* 外部サービス一覧（アフィリエイトリンクに変える場合は、該当セクションに「PR」「広告」表記を入れてください） */
+const MAP = q => "https://www.google.com/maps/search/" + encodeURIComponent(q);
+const SEARCH = q => "https://www.google.com/search?q=" + encodeURIComponent(q);
+
+const HOURLY = [
+  { name:"akippa（アキッパ）", tag:"予約OK", url:"https://www.akippa.com/",
+    text:"住宅の駐車スペースや月極の空き区画などを、事前に予約してとめられます。住宅街で探したいときに便利です。" },
+  { name:"タイムズのB", tag:"予約OK", url:"https://btimes.jp/",
+    text:"駅の近くや商業施設、イベント会場の周辺で見つけやすい予約制の駐車場サービスです。" },
+  { name:"特P（とくぴー）", tag:"予約OK", url:"https://toku-p.earth-car.com/",
+    text:"全国の駐車場をまとめて検索できるサービス。時間貸しだけでなく月極・マンスリーも扱っています。" },
+  { name:"近くのコインパーキングを地図で見る", tag:"すぐ行ける", now:true, url:MAP("駐車場"),
+    text:"Googleマップで周辺の駐車場を表示します。予約なしで、今から向かえる場所を探したいときに。" }
+];
+const MONTHLY = [
+  { name:"Park Direct（パークダイレクト）", tag:"ネットで契約", url:"https://www.park-direct.jp/",
+    text:"検索から申し込み、契約、支払いまでオンラインで進められる月極駐車場サービス。満車の駐車場も空き待ちの予約ができます。" },
+  { name:"タイムズ 月極駐車場検索", tag:"ネットで契約", url:"https://times-info.net/monthly/",
+    text:"Webから申し込みができる月極駐車場の検索サイトです。電話でのやり取りなしで手続きを進めやすいのが利点です。" },
+  { name:"三井のリパーク 月極駐車場", tag:"大手", url:"https://www.repark.jp/parking_user/monthly/",
+    text:"都道府県・市区町村から月極駐車場を絞り込めます。大手ならではの掲載数で、候補を見つけやすいです。" },
+  { name:"特P 月極・マンスリー", tag:"個人の区画も", url:"https://toku-p.earth-car.com/",
+    text:"個人が貸し出している月極スペースも掲載。大手のサイトでは見つからない区画が出てくることがあります。" }
+];
+const CYCLE = [
+  { name:"みんちゅう SHARE-LIN", tag:"予約OK", url:"https://www.min-chu.jp/",
+    text:"空いている駐輪スペースを貸し借りできるシェアサービス。事前予約制で、バイクがとめられる場所もあります。" },
+  { name:"近くの駐輪場を地図で見る", tag:"すぐ行ける", now:true, url:MAP("駐輪場"),
+    text:"Googleマップで周辺の駐輪場を表示します。" },
+  { name:"近くのバイク駐車場を地図で見る", tag:"すぐ行ける", now:true, url:MAP("バイク駐車場"),
+    text:"バイクをとめられる場所は意外と少なめ。行く前に確認しておくと安心です。" }
+];
+
+/* 大阪府内の市区町村（参考ツールと同じ範囲） */
+const CITIES = {
+  "大阪市":["大阪市北区","大阪市都島区","大阪市福島区","大阪市此花区","大阪市中央区","大阪市西区",
+    "大阪市港区","大阪市大正区","大阪市天王寺区","大阪市浪速区","大阪市西淀川区","大阪市淀川区",
+    "大阪市東淀川区","大阪市東成区","大阪市生野区","大阪市旭区","大阪市城東区","大阪市鶴見区",
+    "大阪市阿倍野区","大阪市住之江区","大阪市住吉区","大阪市東住吉区","大阪市平野区","大阪市西成区"],
+  "府内の市":["堺市","岸和田市","豊中市","池田市","吹田市","泉大津市","高槻市","貝塚市","守口市","枚方市",
+    "茨木市","八尾市","泉佐野市","富田林市","寝屋川市","河内長野市","松原市","大東市","和泉市",
+    "箕面市","柏原市","羽曳野市","門真市","摂津市","高石市","藤井寺市","東大阪市","泉南市",
+    "四條畷市","交野市","大阪狭山市","阪南市"]
+};
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function renderList(id, items){
+  document.getElementById(id).innerHTML = items.map(x =>
+    '<a class="svc" href="' + esc(x.url) + '" target="_blank" rel="noopener">' +
+      '<span class="svc-head"><span class="chip' + (x.now ? ' now' : '') + '">' + esc(x.tag) + '</span>' +
+      '<span class="ext">外部サイト</span></span>' +
+      '<span class="svc-name">' + esc(x.name) + '</span>' +
+      '<span class="svc-text">' + esc(x.text) + '</span>' +
+      '<span class="svc-go">サイトをひらく →</span>' +
+    '</a>'
+  ).join("");
+}
+renderList("list-hourly", HOURLY);
+renderList("list-monthly", MONTHLY);
+renderList("list-cycle", CYCLE);
+
+document.getElementById("line-btn").href = LINE_URL;
+
+const sel = document.getElementById("city");
+Object.keys(CITIES).forEach(group => {
+  const og = document.createElement("optgroup");
+  og.label = group;
+  CITIES[group].forEach(c => {
+    const o = document.createElement("option");
+    o.value = c; o.textContent = c;
+    og.appendChild(o);
+  });
+  sel.appendChild(og);
+});
+
+const out = document.getElementById("city-result");
+function showCity(){
+  const c = sel.value;
+  if (!c){ out.hidden = true; out.innerHTML = ""; return; }
+  out.innerHTML =
+    '<a href="' + esc(SEARCH(c + " 自転車駐車場 駐輪場")) + '" target="_blank" rel="noopener">' +
+      '<b>' + esc(c) + 'の公営駐輪場をさがす</b><span>場所・料金・定期利用の申し込み方法など</span></a>' +
+    '<a href="' + esc(SEARCH(c + " 自転車 放置禁止区域")) + '" target="_blank" rel="noopener">' +
+      '<b>' + esc(c) + 'の放置禁止区域をさがす</b><span>撤去の対象になるエリアの地図など</span></a>';
+  out.hidden = false;
+}
+sel.addEventListener("change", showCity);
+showCity();
+</script>
+</body>
+</html>
