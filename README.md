@@ -1,4 +1,8 @@
-# 株式会社CLASSICAL 公式LINE友だち限定 7大特典
+# classical-work
+
+CLASSICALの作業用リポジトリ。
+
+## 株式会社CLASSICAL 公式LINE友だち限定 7大特典
 
 静的HTMLのみ（ビルド不要）。リポジトリのルートをそのまま Netlify 等で公開できます。
 
