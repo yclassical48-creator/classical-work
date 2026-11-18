@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>家賃相場マップ｜クラシカル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14418B; --navy-deep:#0D2E66; --navy-light:#2E62B8;
+  --orange:#F47B20; --green:#1E8B4A;
+  --ink:#1B2433; --ink-60:#5A6475;
+  --bg:#F5F7FB; --mist:#EDF2FA; --line:#DCE4EF; --paper:#FFFFFF;
+  --shadow:0 3px 14px rgba(13,46,102,.09); --r:16px;
+  --lv1:#BFD3F0; --lv2:#86A9E0; --lv3:#4F7FCB; --lv4:#2A58A6; --lv5:#0D2E66;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:"Noto Sans JP",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);
+  font-size:15px;line-height:1.75;padding-bottom:96px;overflow-x:hidden}
+h1,h2,h3,.maru{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif}
+button{font-family:inherit}
+
+/* header */
+.hd{background:linear-gradient(155deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:#fff;padding:14px 16px 22px}
+.hd-in{max-width:640px;margin:0 auto}
+.back{display:inline-block;color:#fff;text-decoration:none;font-size:12.5px;opacity:.88;margin-bottom:12px}
+.logo{display:flex;align-items:center;gap:8px}
+.logo svg{width:22px;height:22px;flex:0 0 auto}
+.logo b{font-family:"Noto Serif",serif;font-weight:700;letter-spacing:.06em;font-size:16px}
+.hd h1{font-size:25px;font-weight:900;margin:8px 0 2px;letter-spacing:.02em}
+.hd p{margin:0;font-size:12.5px;opacity:.9}
+
+.main{max-width:640px;margin:0 auto;padding:14px 16px 24px}
+
+/* segmented controls */
+.tabs{display:flex;gap:3px;background:#E1E8F3;border-radius:12px;padding:3px}
+.tabs button{flex:1;border:0;background:transparent;border-radius:9px;padding:9px 2px;cursor:pointer;
+  font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13px;color:var(--ink-60);transition:background .15s,color .15s}
+.tabs button[aria-pressed="true"]{background:var(--paper);color:var(--navy);box-shadow:0 1px 5px rgba(13,46,102,.15)}
+.pin{position:sticky;top:0;z-index:20;background:var(--bg);padding:8px 0;margin:0 0 6px}
+.pin-l{font-size:11px;color:var(--ink-60);margin:0 0 4px 2px}
+#areaTabs{margin-bottom:4px}
+
+/* legend */
+.scale{display:flex;flex-wrap:wrap;gap:5px;margin:12px 0 10px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;color:var(--ink-60);background:var(--paper);
+  border:1px solid var(--line);border-radius:999px;padding:3px 8px;white-space:nowrap}
+.chip i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.scale-cap{font-size:11px;color:var(--ink-60);margin:0 0 6px}
+
+/* map */
+.board{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.slot{aspect-ratio:1/1;min-width:0}
+.tile{width:100%;height:100%;border:0;border-radius:10px;cursor:pointer;color:#fff;padding:2px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+  font-family:"Zen Maru Gothic",sans-serif;transition:transform .15s}
+.tile:active{transform:scale(.94)}
+.tile.lvl1,.tile.lvl2{color:var(--navy-deep)}
+.tile .tn{font-size:11px;font-weight:700;line-height:1.2;letter-spacing:-.03em}
+.tile .tv{font-size:10px;font-weight:500}
+.tile.picked{box-shadow:0 0 0 3px var(--orange);transform:scale(1.04)}
+.lvl1{background:var(--lv1)}.lvl2{background:var(--lv2)}.lvl3{background:var(--lv3)}.lvl4{background:var(--lv4)}.lvl5{background:var(--lv5)}
+.compass{font-size:10.5px;color:var(--ink-60);text-align:right;margin:6px 2px 0}
+
+/* list */
+.blk{margin-bottom:16px}
+.blk h3{font-size:13.5px;color:var(--navy);margin:0 0 7px;display:flex;align-items:center;gap:8px}
+.blk h3::after{content:"";flex:1;height:1px;background:var(--line)}
+.line{width:100%;display:flex;align-items:center;gap:9px;background:var(--paper);border:0;border-radius:11px;
+  padding:9px 12px;margin-bottom:5px;box-shadow:var(--shadow);cursor:pointer;text-align:left;color:var(--ink)}
+.line:active{transform:scale(.99)}
+.line.picked{box-shadow:0 0 0 2px var(--orange)}
+.line .ln{flex:0 0 34%;font-size:13.5px;font-weight:500;letter-spacing:-.02em;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.line .meter{flex:1;height:7px;border-radius:4px;background:var(--mist);overflow:hidden;min-width:0}
+.line .meter span{display:block;height:100%;border-radius:4px}
+.line .lv{min-width:52px;text-align:right;font-family:"Zen Maru Gothic";font-weight:900;font-size:14px;color:var(--navy)}
+.home{display:inline-block;font-size:9.5px;font-weight:700;color:#fff;background:var(--orange);border-radius:6px;padding:0 5px;margin-left:4px;vertical-align:1px}
+
+/* detail */
+.info{margin-top:14px;background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;border-top:4px solid var(--navy)}
+.info .i-name{font-family:"Zen Maru Gothic";font-weight:900;font-size:19px;margin:0}
+.info .i-name small{font-size:12.5px;font-weight:700;color:var(--ink-60);margin-left:6px}
+.info .i-price{font-family:"Zen Maru Gothic";font-weight:900;font-size:32px;line-height:1.2;color:var(--orange);margin:2px 0 0}
+.info .i-price small{font-size:13px;font-weight:700;color:var(--ink)}
+.info .i-st{font-size:12px;color:var(--ink-60);margin:2px 0 8px}
+.info .i-txt{font-size:13.5px;margin:0}
+.badge{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;padding:2px 10px;margin:9px 6px 0 0;background:var(--mist);color:var(--navy)}
+.badge.est{background:#FEF0E4;color:#B4570F}
+.badge.home2{background:#E6F4EC;color:var(--green)}
+.cmp{margin-top:10px;font-size:12px;color:var(--ink-60);background:var(--mist);border-radius:10px;padding:8px 11px}
+.cmp b{color:var(--ink)}
+
+.src{font-size:11px;line-height:1.65;color:var(--ink-60);margin:14px 0 0}
+
+/* footer */
+.ft{text-align:center;font-size:11px;line-height:1.85;color:var(--ink-60);padding:22px 16px 10px}
+
+/* fixed bottom bar */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.97);border-top:1px solid var(--line);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.dock-in{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.dock .dm{flex:1;min-width:0;font-size:11.5px;line-height:1.5;color:var(--ink-60)}
+.dock .dm b{display:block;font-family:"Zen Maru Gothic";font-size:13px;color:var(--ink)}
+.cta{flex:0 0 auto;background:var(--orange);color:#fff;text-decoration:none;font-family:"Zen Maru Gothic";font-weight:700;
+  font-size:13px;padding:11px 15px;border-radius:12px;box-shadow:0 3px 10px rgba(244,123,32,.35);white-space:nowrap}
+.cta:active{transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a class="back" href="../../">← 特典一覧</a>
+    <div class="logo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 11.5 12 3l10 8.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="5" y="10.5" width="14" height="10.5" rx="1" fill="none" stroke="#fff" stroke-width="2"/><rect x="10" y="13.5" width="4" height="4" fill="#F47B20"/></svg>
+      <b>CLASSICAL</b>
+    </div>
+    <h1>家賃相場マップ</h1>
+    <p>大阪府内の相場を間取り別に（1K・1LDK・2LDK・3LDK）</p>
+  </div>
+</header>
+
+<main class="main">
+  <div class="pin">
+    <p class="pin-l">間取り</p>
+    <div class="tabs" id="roomTabs" role="group" aria-label="間取り">
+      <button type="button" data-r="0" aria-pressed="true">1K</button>
+      <button type="button" data-r="1" aria-pressed="false">1LDK</button>
+      <button type="button" data-r="2" aria-pressed="false">2LDK</button>
+      <button type="button" data-r="3" aria-pressed="false">3LDK</button>
+    </div>
+  </div>
+  <div class="tabs" id="areaTabs" role="group" aria-label="表示範囲">
+    <button type="button" data-v="city" aria-pressed="true">大阪市24区マップ</button>
+    <button type="button" data-v="pref" aria-pressed="false">大阪府の市区一覧</button>
+  </div>
+
+  <div class="scale" id="scale"></div>
+
+  <section id="mapView">
+    <div class="board" id="board"></div>
+    <p class="compass">↑北　※実際の地図ではなく、おおよその位置関係です</p>
+  </section>
+  <section id="listView" hidden></section>
+
+  <section class="info" id="info" aria-live="polite">
+    <p class="i-name">エリアを選んでください</p>
+    <p class="i-st">タップすると相場・主な駅・街の様子を表示します</p>
+    <p class="i-txt">間取りを切り替えると、同じエリアでも色分けが変わります。まずは「このくらいの予算で、どのあたりに住めそうか」の目安づくりにお使いください。</p>
+  </section>
+
+  <p class="src" id="src"></p>
+</main>
+
+<footer class="ft">
+  株式会社CLASSICAL／大阪府知事（1）第65247号<br>
+  〒564-0053 大阪府吹田市江の木町16-34-501<br>
+  表示している金額はおおよその目安です。実際の賃料は物件ごとの条件で変わりますので、個別にお問い合わせください。
+</footer>
+
+<div class="dock">
+  <div class="dock-in">
+    <div class="dm"><b>予算に合うエリア、一緒に探します</b>気になる間取り・エリアをLINEで送ってください</div>
+    <a class="cta" id="lineBtn" href="#" target="_blank" rel="noopener">LINEで相談</a>
+  </div>
+</div>
+
+<script>
+const LINE_URL = "#";  // TODO: 公式LINEのURL
+document.getElementById("lineBtn").href = LINE_URL;
+
+/* 相場データ: [1K, 1LDK, 2LDK, 3LDK]（万円）／ st=主な駅 ／ tx=街の様子 ／ grp=地域グループ */
+const AREAS = {
+  "都島":{v:[7.15,10.7,13.2,15.0],st:"京橋・都島",tx:"京橋駅が生活圏。大川沿いには落ち着いた住宅地も広がります。",grp:"city"},
+  "福島":{v:[7.81,12.5,16.4,19.1],st:"福島・野田",tx:"梅田のすぐ西隣。駅の周りに飲食店が集まるにぎやかなエリアです。",grp:"city"},
+  "此花":{v:[6.48,9.2,10.9,12.0],st:"西九条・ユニバーサルシティ",tx:"西九条から市内各方面へ。USJ周辺で働く人の通勤にも便利です。",grp:"city"},
+  "西":{v:[8.14,13.0,17.1,19.9],st:"本町・四ツ橋",tx:"堀江・靱公園まわりは人気が高く、市内でも上位の相場です。",grp:"city"},
+  "港":{v:[6.91,10.4,12.8,14.5],st:"弁天町・朝潮橋",tx:"地下鉄中央線で本町方面へ乗り換えなし。ベイエリアに近い区です。",grp:"city"},
+  "大正":{v:[6.96,10.4,12.9,14.6],st:"大正・ドーム前",tx:"京セラドームのそば。中心部に近いわりに相場は抑えめです。",grp:"city"},
+  "天王寺":{v:[7.67,12.3,16.1,18.8],st:"天王寺・鶴橋",tx:"上町台地の文教エリア。学校が多く、ファミリーにも選ばれます。",grp:"city"},
+  "浪速":{v:[7.64,12.2,16.0,18.7],st:"難波・恵美須町",tx:"ミナミの繁華街に歩いて出られる、便利さ重視の人向けの区です。",grp:"city"},
+  "西淀川":{v:[6.83,10.2,12.6,14.3],st:"塚本・御幣島",tx:"梅田に近いのに相場は控えめ。JR・阪神沿線の穴場です。",grp:"city"},
+  "東淀川":{v:[6.94,10.4,12.8,14.6],st:"淡路・上新庄",tx:"阪急沿線で梅田へ出やすく、単身向けの物件が多いエリアです。",grp:"city"},
+  "東成":{v:[6.93,10.4,12.8,14.6],st:"今里・玉造",tx:"地下鉄2路線が通り中心部へのアクセス良好。価格は落ち着いています。",grp:"city"},
+  "生野":{v:[5.99,8.5,10.1,11.1],st:"鶴橋・今里",tx:"鶴橋の商店街が身近。市内では相場が低めの区です。",grp:"city"},
+  "旭":{v:[6.61,9.9,12.2,13.9],st:"千林大宮・関目",tx:"千林商店街など、毎日の買い物がしやすい下町エリアです。",grp:"city"},
+  "城東":{v:[6.85,10.3,12.7,14.4],st:"京橋・蒲生四丁目",tx:"京橋に近く、単身・ファミリーどちらにも選択肢が多い区です。",grp:"city"},
+  "阿倍野":{v:[7.28,10.9,13.5,15.3],st:"天王寺・阿倍野",tx:"あべのハルカス周辺の商業と、南側の静かな住宅街が同居しています。",grp:"city"},
+  "住吉":{v:[6.33,9.0,10.6,11.7],st:"我孫子・帝塚山",tx:"帝塚山など閑静な住宅地。なんば方面へも出やすい立地です。",grp:"city"},
+  "東住吉":{v:[6.26,8.9,10.5,11.6],st:"田辺・駒川中野",tx:"谷町線で天王寺方面へ。比較的広めの部屋を探しやすい区です。",grp:"city"},
+  "西成":{v:[6.07,8.6,10.2,11.2],st:"天下茶屋・岸里",tx:"なんばに近く相場は低め。物件ごとに周辺環境を確かめるのがおすすめです。",grp:"city"},
+  "淀川":{v:[7.31,11.0,13.5,15.4],st:"十三・新大阪",tx:"新大阪駅に近く、新幹線をよく使う人には便利なエリアです。",grp:"city"},
+  "鶴見":{v:[6.89,10.3,12.7,14.5],st:"鶴見緑地・横堤",tx:"花博記念公園鶴見緑地があり緑が多め。車があるとより快適です。",grp:"city"},
+  "住之江":{v:[5.97,8.5,10.0,11.0],st:"住之江公園・北加賀屋",tx:"北加賀屋はアートの街として知られます。相場は市内で低い部類です。",grp:"city"},
+  "平野":{v:[5.89,8.4,9.9,10.9],st:"平野・喜連瓜破",tx:"市内で最も相場が低い区。同じ予算で広さを優先できます。",grp:"city"},
+  "北":{v:[8.0,12.8,16.8,19.6],st:"梅田・中崎町",tx:"梅田を抱える区。通勤・通学時間を短くしたい人向けです。",grp:"city"},
+  "中央":{v:[8.56,13.7,18.0,21.0],st:"本町・心斎橋",tx:"市内で相場が最も高い都心の区。利便性を最優先する人に。",grp:"city"},
+  "堺市堺区":{v:[6.48,9.2,10.9,12.0],st:"堺・堺東",tx:"南海線とJR阪和線が使える堺の中心部。なんば方面へも出やすいです。",grp:"sakai"},
+  "堺市中区":{v:[5.01,6.8,7.8,8.5],st:"深井",tx:"泉北高速鉄道の沿線。府内でも相場が低めのエリアです。",grp:"sakai"},
+  "堺市東区":{v:[5.57,7.9,9.4,10.3],st:"北野田・初芝",tx:"南海高野線沿いの住宅地。ファミリー向けの物件が多めです。",grp:"sakai"},
+  "堺市西区":{v:[5.63,8.0,9.5,10.4],st:"鳳・上野芝",tx:"鳳駅周辺に商業施設が集まります。車があると行動範囲が広がります。",grp:"sakai"},
+  "堺市北区":{v:[5.91,8.4,9.9,10.9],st:"中百舌鳥・新金岡",tx:"なかもず駅は御堂筋線の始発駅。梅田方面へ座って通勤しやすいです。",grp:"sakai"},
+  "豊中":{v:[6.17,8.8,10.4,11.4],st:"豊中・蛍池",tx:"阪急宝塚線と大阪モノレール。伊丹空港にも近い住宅都市です。",grp:"hokusetsu"},
+  "池田":{v:[6.26,8.9,10.5,11.6],st:"池田・石橋阪大前",tx:"阪急宝塚線沿線の落ち着いた街並み。大学が近く学生も多めです。",grp:"hokusetsu"},
+  "吹田":{v:[7.3,10.9,13.5,15.3],st:"江坂・千里中央",tx:"江坂は御堂筋線で梅田へ直通。北摂の中では相場が高めのエリアです。",grp:"hokusetsu"},
+  "高槻":{v:[6.88,10.3,12.7,14.4],st:"高槻・高槻市",tx:"JRと阪急で大阪・京都のどちらにも出やすい、生活施設のそろった街です。",grp:"hokusetsu"},
+  "茨木":{v:[6.51,9.8,12.0,13.7],st:"茨木市・南茨木",tx:"JRと阪急の両方が使えます。大学が多く単身向けの物件も豊富です。",grp:"hokusetsu"},
+  "箕面":{v:[5.7,8.1,9.6,10.5],st:"箕面・千里中央",tx:"北大阪急行の延伸で市内に新駅が開業。子育て環境で選ばれることの多い街です。",grp:"hokusetsu"},
+  "摂津":{v:[6.53,9.8,12.1,13.7],st:"摂津市・南摂津",tx:"大阪モノレールと阪急京都線。新大阪にも比較的近く、落ち着いた環境です。",grp:"hokusetsu"},
+  "守口":{v:[6.21,8.8,10.4,11.5],st:"守口市・大日",tx:"谷町線の終点・大日と京阪沿線。梅田・京橋方面に出やすい立地です。",grp:"kitakawachi"},
+  "枚方":{v:[5.71,8.1,9.6,10.6],st:"枚方市・樟葉",tx:"京阪沿線の大きな街。ファミリー向けの物件がそろっています。",grp:"kitakawachi"},
+  "寝屋川":{v:[5.22,7.0,8.1,8.9],st:"寝屋川市・香里園",tx:"京阪本線で京橋方面へ。府内でも相場が低めの市です。",grp:"kitakawachi"},
+  "大東":{v:[5.62,8.0,9.4,10.4],st:"住道・野崎",tx:"JR学研都市線で京橋まで乗り換えなし。静かな住宅地が中心です。",grp:"kitakawachi"},
+  "門真":{v:[5.64,8.0,9.5,10.4],st:"古川橋・門真市",tx:"京阪本線と大阪モノレール。大型の商業施設も身近です。",grp:"kitakawachi"},
+  "四條畷":{v:[5.25,7.1,8.1,8.9],st:"四条畷・忍ケ丘",tx:"生駒山系のふもとで緑が多め。落ち着いて暮らしたい人向けです。",grp:"kitakawachi"},
+  "交野":{v:[5.73,8.1,9.6,10.6],st:"交野市・河内磐船",tx:"自然が身近な住宅地。子育て世帯にも向いた環境です。",grp:"kitakawachi"},
+  "八尾":{v:[6.02,8.5,10.1,11.1],st:"近鉄八尾・久宝寺",tx:"近鉄大阪線・JR大和路線の沿線。買い物施設がそろい暮らしやすい街です。",grp:"nakakawachi"},
+  "柏原":{v:[5.11,6.9,7.9,8.7],st:"柏原・河内国分",tx:"のどかな環境で相場はかなり低め。天王寺方面へも出られます。",grp:"nakakawachi"},
+  "東大阪":{v:[5.56,7.9,9.3,10.3],st:"布施・長田",tx:"難波・鶴橋・本町方面へ出やすく、相場とのバランスが良いエリアです。",grp:"nakakawachi"},
+  "富田林":{v:[4.36,5.9,6.8,7.4],st:"富田林・川西",tx:"府内でも相場が最も低い水準。広さを最優先したい人に。",grp:"minamikawachi"},
+  "河内長野":{v:[4.46,6.0,6.9,7.6],st:"河内長野・千代田",tx:"山と川が近い環境。同じ予算でゆとりのある間取りを選びやすいです。",grp:"minamikawachi"},
+  "松原":{v:[5.74,8.2,9.6,10.6],st:"河内松原",tx:"近鉄南大阪線で天王寺方面へ。相場は控えめで便利さも十分です。",grp:"minamikawachi"},
+  "羽曳野":{v:[4.87,6.6,7.5,8.3],st:"古市・恵我ノ荘",tx:"近鉄南大阪線沿いの落ち着いた住宅地です。",grp:"minamikawachi"},
+  "藤井寺":{v:[4.76,6.4,7.4,8.1],st:"藤井寺",tx:"駅前に買い物施設がまとまり、相場は低め。天王寺方面へも出やすいです。",grp:"minamikawachi"},
+  "大阪狭山":{v:[5.36,7.2,8.3,9.1],st:"金剛・大阪狭山市",tx:"南海高野線でなんば方面へ。区画の整った静かな住宅地です。",grp:"minamikawachi"},
+  "岸和田":{v:[5.26,7.1,8.2,8.9],st:"岸和田・和泉大宮",tx:"だんじり祭で知られる街。海も山も近く、相場は控えめです。",grp:"senshu"},
+  "泉大津":{v:[5.42,7.3,8.4,9.2],st:"泉大津",tx:"南海本線でなんば方面へ。買い物環境がそろっています。",grp:"senshu"},
+  "貝塚":{v:[5.11,6.9,7.9,8.7],st:"貝塚・二色浜",tx:"二色の浜など海が身近。のんびり暮らしたい人向けです。",grp:"senshu"},
+  "泉佐野":{v:[5.63,8.0,9.5,10.4],st:"泉佐野・りんくうタウン",tx:"関西空港に近く、空港関連で働く人には便利な立地です。",grp:"senshu"},
+  "和泉":{v:[5.71,8.1,9.6,10.6],st:"和泉府中・和泉中央",tx:"和泉中央周辺に新しい住宅地と商業施設が広がります。",grp:"senshu"},
+  "高石":{v:[5.86,8.3,9.8,10.8],st:"高石・北助松",tx:"南海本線沿いのコンパクトな市。なんば方面にも出やすいです。",grp:"senshu"},
+  "泉南":{v:[5.51,7.8,9.3,10.2],st:"和泉砂川・樽井",tx:"関西空港の対岸。海沿いの開放感がある街です。",grp:"senshu"},
+  "阪南":{v:[4.87,6.6,7.5,8.3],st:"尾崎・鳥取ノ荘",tx:"府の南西部。静かな環境と低めの相場が魅力です。",grp:"senshu"}
+};
+const REGIONS = [
+  ["city","大阪市"],
+  ["sakai","堺市"],
+  ["hokusetsu","北摂（吹田・豊中・高槻ほか）"],
+  ["kitakawachi","北河内（守口・枚方・寝屋川ほか）"],
+  ["nakakawachi","中河内（八尾・東大阪ほか）"],
+  ["minamikawachi","南河内（富田林・松原ほか）"],
+  ["senshu","泉州（岸和田・和泉ほか）"]
+];
+/* 大阪市24区のおおよその配置（6列×5行、空文字は空きマス） */
+const LAYOUT = [
+  ["","西淀川","淀川","東淀川","旭",""],
+  ["此花","福島","北","都島","城東","鶴見"],
+  ["港","西","中央","東成","生野",""],
+  ["大正","西成","浪速","天王寺","",""],
+  ["住之江","住吉","阿倍野","東住吉","平野",""]
+];
+const ROOMS = ["1K","1LDK","2LDK","3LDK"];
+const HOME_AREA = "吹田"; // 当社所在地
+const LEVEL_COLORS = ["var(--lv1)","var(--lv2)","var(--lv3)","var(--lv4)","var(--lv5)"];
+const STORE_KEY = "classical_yatin_v1";
+
+const state = { room:0, view:"city", pick:null };
+
+function loadPrefs(){
+  try{
+    const s = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+    if(s){
+      if([0,1,2,3].includes(s.room)) state.room = s.room;
+      if(s.view==="city"||s.view==="pref") state.view = s.view;
+    }
+  }catch(e){}
+}
+function savePrefs(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify({room:state.room, view:state.view})); }catch(e){}
+}
+
+const $ = id => document.getElementById(id);
+function targets(){ return Object.keys(AREAS).filter(k => state.view==="pref" || AREAS[k].grp==="city"); }
+function price(k){ return AREAS[k].v[state.room]; }
+function show(x){ return state.room===0 ? x.toFixed(2) : x.toFixed(1); }
+function fullName(k){
+  const g = AREAS[k].grp;
+  if(g==="city") return k + "区";
+  if(g==="sakai") return k;
+  return k + "市";
+}
+/* 表示対象の分布を5段階に分ける境目（20/40/60/80パーセンタイル） */
+function cuts(){
+  const arr = targets().map(price).sort((a,b)=>a-b);
+  return [0.2,0.4,0.6,0.8].map(p => arr[Math.floor(arr.length*p)]);
+}
+function level(x, c){ let n=1; for(const t of c){ if(x>=t) n++; } return n; }
+
+function renderScale(c){
+  const r = ["〜"+c[0].toFixed(1)+"万", c[0].toFixed(1)+"〜"+c[1].toFixed(1), c[1].toFixed(1)+"〜"+c[2].toFixed(1),
+             c[2].toFixed(1)+"〜"+c[3].toFixed(1), c[3].toFixed(1)+"万〜"];
+  $("scale").innerHTML = r.map((t,i)=>'<span class="chip"><i style="background:'+LEVEL_COLORS[i]+'"></i>'+t+'</span>').join("")
+    + '<span class="chip" style="border:0;background:none;padding-left:2px">'+ROOMS[state.room]+'・月額</span>';
+}
+function renderBoard(c){
+  const out = [];
+  LAYOUT.forEach(row => row.forEach(k => {
+    if(!k){ out.push('<div class="slot" aria-hidden="true"></div>'); return; }
+    const x = price(k);
+    out.push('<div class="slot"><button type="button" class="tile lvl'+level(x,c)+(state.pick===k?' picked':'')+'" data-k="'+k+'" aria-label="'+k+'区 '+show(x)+'万円">'
+      +'<span class="tn">'+k+'</span><span class="tv">'+show(x)+'</span></button></div>');
+  }));
+  $("board").innerHTML = out.join("");
+}
+function renderList(c){
+  const all = targets().map(price), hi = Math.max(...all), lo = Math.min(...all);
+  let html = "";
+  REGIONS.forEach(([g,title]) => {
+    const keys = Object.keys(AREAS).filter(k => AREAS[k].grp===g).sort((a,b)=>price(a)-price(b));
+    html += '<div class="blk"><h3>'+title+'</h3>';
+    keys.forEach(k => {
+      const x = price(k), w = Math.max(8, (x-lo)/((hi-lo)||1)*100);
+      html += '<button type="button" class="line'+(state.pick===k?' picked':'')+'" data-k="'+k+'">'
+        +'<span class="ln">'+fullName(k)+(k===HOME_AREA?'<span class="home">当社</span>':'')+'</span>'
+        +'<span class="meter"><span style="width:'+w+'%;background:'+LEVEL_COLORS[level(x,c)-1]+'"></span></span>'
+        +'<span class="lv">'+show(x)+'</span></button>';
+    });
+    html += '</div>';
+  });
+  $("listView").innerHTML = html;
+}
+function renderInfo(){
+  const k = state.pick; if(!k) return;
+  const a = AREAS[k], pool = targets().sort((p,q)=>price(p)-price(q));
+  const rank = pool.indexOf(k) + 1;
+  const scope = state.view==="city" ? "24区のうち" : "府内"+pool.length+"エリアのうち";
+  let cmp = "";
+  if(k!==HOME_AREA && state.view==="pref"){
+    const diff = price(k) - price(HOME_AREA);
+    const s = Math.abs(diff) < 0.05 ? "とほぼ同じ" : (diff>0 ? "より約"+Math.abs(diff).toFixed(1)+"万円高め" : "より約"+Math.abs(diff).toFixed(1)+"万円安め");
+    cmp = '<div class="cmp">当社のある<b>吹田市</b>（'+show(price(HOME_AREA))+'万円）'+s+'</div>';
+  }
+  $("info").innerHTML =
+    '<p class="i-name">'+fullName(k)+'<small>'+ROOMS[state.room]+'</small></p>'
+    +'<p class="i-price">'+show(price(k))+'<small> 万円／月</small></p>'
+    +'<p class="i-st">主な駅：'+a.st+'</p>'
+    +'<p class="i-txt">'+a.tx+'</p>'
+    +'<span class="badge">'+scope+' 安い順 '+rank+'位</span>'
+    +(state.room>0 ? '<span class="badge est">1K相場から換算した目安</span>' : '')
+    +(k===HOME_AREA ? '<span class="badge home2">当社所在地のエリア</span>' : '')
+    + cmp;
+}
+function renderSrc(){
+  $("src").innerHTML = "※ 1Kはワンルーム〜1DKの実勢相場（2026年8月時点・賃貸情報サイトの公開データをもとにした値）です。1LDK・2LDK・3LDKは1K相場から換算した目安のため、実際の募集賃料とは差があります。築年数・駅からの距離・設備などで上下しますので、正確な相場はお気軽にお問い合わせください。"
+    + (state.view==="pref" ? "<br>※ 堺市南区・美原区、および郡部の町村はデータが少ないため掲載していません。" : "");
+}
+function syncTabs(){
+  document.querySelectorAll("#roomTabs button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.r===state.room)));
+  document.querySelectorAll("#areaTabs button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.v===state.view)));
+  $("mapView").hidden = state.view!=="city";
+  $("listView").hidden = state.view!=="pref";
+}
+function render(){
+  const c = cuts();
+  syncTabs(); renderScale(c); renderBoard(c); renderList(c); renderSrc(); renderInfo();
+}
+
+$("roomTabs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  state.room = +b.dataset.r; savePrefs(); render();
+});
+$("areaTabs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  state.view = b.dataset.v;
+  if(state.pick && state.view==="city" && AREAS[state.pick].grp!=="city") state.pick = null;
+  savePrefs(); render();
+  if(!state.pick) resetInfo();
+});
+document.addEventListener("click", e => {
+  const b = e.target.closest(".tile,.line"); if(!b) return;
+  state.pick = b.dataset.k; render();
+  $("info").scrollIntoView({behavior:"smooth", block:"nearest"});
+});
+const INFO_DEFAULT = $("info").innerHTML;
+function resetInfo(){ $("info").innerHTML = INFO_DEFAULT; }
+
+loadPrefs();
+render();
+</script>
+</body>
+</html>
