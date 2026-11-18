@@ -4,171 +4,154 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="クラシカル不動産のLINE友だち限定、7大特典。お部屋さがしから退去まで使える無料ツールです。">
-<title>LINE友だち限定 7大特典｜クラシカル不動産</title>
+<meta name="description" content="株式会社CLASSICAL（クラシカル）公式LINE友だち限定。お部屋探しから退去まで使える7つの無料ツール。">
+<meta name="theme-color" content="#14418B">
+<title>LINE友だち限定 7大特典｜株式会社CLASSICAL</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
 <style>
-/* ===== 色はここで変更できます（ブランドカラーに合わせて調整してください） ===== */
 :root{
-  --ink:#1E1B18;        /* 本文の文字色 */
-  --ink-60:#5E5850;     /* 補足テキスト */
-  --main:#1F3A5F;       /* メインカラー（濃紺） */
-  --main-deep:#14273F;  /* メインカラー（濃い） */
-  --main-light:#3C5F8A; /* メインカラー（明るい） */
-  --accent:#C9A45C;     /* アクセント（ゴールド） */
-  --mist:#F3EFE7;       /* 薄い背景 */
-  --bg:#F7F4EE;         /* ページ背景 */
-  --paper:#FFF;
-  --num:#D9CFBD;        /* カード番号の色 */
-  --shadow:0 3px 14px rgba(30,27,24,.08);
-  --r:16px;
+  --navy:#14418B; --navy-deep:#0D2E66; --navy-light:#2E62B8;
+  --orange:#F47B20; --green:#1E8B4A;
+  --ink:#1B2433; --ink-60:#5A6475;
+  --bg:#F5F7FB; --mist:#EDF2FA; --line:#DCE4EF; --paper:#FFFFFF;
+  --shadow:0 3px 14px rgba(13,46,102,.09); --r:16px;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
-body{font-family:"Noto Sans JP",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);
-line-height:1.7;font-size:15px;padding-bottom:32px}
+body{font-family:"Noto Sans JP",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;font-size:15px;padding-bottom:28px}
 h1,h2{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif}
 
-/* hero */
-.hero{background:linear-gradient(165deg,var(--main-deep) 0%,var(--main) 50%,var(--main-light) 100%);color:#fff;
-padding:24px 20px 32px;text-align:center;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-30px;height:56px;background:var(--bg);border-radius:50% 50% 0 0}
-.brand{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;letter-spacing:.14em;opacity:.92}
-.brand .mark{width:15px;height:15px;background:var(--accent);clip-path:polygon(50% 0,100% 45%,100% 100%,0 100%,0 45%);display:inline-block}
-.ribbon{display:inline-block;margin:15px 0 8px;border:1.5px solid rgba(255,255,255,.55);border-radius:30px;
-padding:5px 16px;font-size:12px;font-weight:700;letter-spacing:.08em;font-family:"Zen Maru Gothic",sans-serif}
-.big{font-size:44px;font-weight:900;margin:0;line-height:1.15;font-family:"Zen Maru Gothic",sans-serif}
-.big em{font-style:normal;color:var(--accent);font-size:66px;line-height:1;margin-right:2px;text-shadow:0 2px 10px rgba(0,0,0,.18)}
-.chips{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:12px;position:relative;z-index:1}
-.chip{background:rgba(255,255,255,.16);border-radius:20px;padding:4px 12px;font-size:11.5px;font-weight:700;font-family:"Zen Maru Gothic",sans-serif}
+/* ヘッダー */
+.top{background:linear-gradient(160deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:#fff;text-align:center;padding:22px 20px 44px;position:relative;overflow:hidden}
+.top::before{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.06)}
+.top::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-30px;height:56px;background:var(--bg);border-radius:50% 50% 0 0}
+.logo{display:inline-flex;align-items:center;gap:8px}
+.logo svg{width:24px;height:24px}
+.logo b{font-family:"Noto Serif",serif;font-weight:700;font-size:19px;letter-spacing:.08em}
+.tag{font-size:11px;opacity:.85;margin-top:2px;letter-spacing:.04em}
+.badge{display:inline-block;margin:16px 0 6px;background:#fff;color:var(--navy);border-radius:30px;padding:4px 16px;font-size:12.5px;font-weight:900;font-family:"Zen Maru Gothic",sans-serif;letter-spacing:.06em}
+.ttl{font-size:42px;font-weight:900;margin:0;line-height:1.15}
+.ttl span{color:var(--orange);font-size:64px;line-height:1;margin-right:2px;text-shadow:0 2px 10px rgba(0,0,0,.18)}
+.pts{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:12px;position:relative;z-index:1}
+.pts li{list-style:none;background:rgba(255,255,255,.15);border-radius:20px;padding:4px 12px;font-size:11.5px;font-weight:700;font-family:"Zen Maru Gothic",sans-serif}
+.pts{padding:0}
 
-.wrap{padding:4px 14px 10px;max-width:640px;margin:0 auto;position:relative;z-index:1}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px;position:relative;z-index:1}
 
-/* はじめに */
-.start{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:13px 14px;margin:10px 0 16px}
-.start .h{display:flex;align-items:center;gap:7px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
-font-size:13.5px;color:var(--main);margin-bottom:10px}
-.steps{display:flex;gap:8px}
-.stp{flex:1;background:var(--mist);border-radius:11px;padding:10px 8px;text-align:center}
-.stp .em{font-size:22px;line-height:1.4}
-.stp .t{font-size:11.5px;font-weight:700;font-family:"Zen Maru Gothic",sans-serif;line-height:1.5}
-.stp .s{font-size:10.5px;color:var(--ink-60);line-height:1.5}
-.arw{align-self:center;color:var(--accent);font-weight:700;font-size:16px}
+/* ホーム画面に追加 */
+.howto{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:13px 14px;margin:4px 0 16px}
+.howto h2{font-size:13.5px;color:var(--navy);margin:0 0 10px;display:flex;align-items:center;gap:6px}
+.flow{display:flex;gap:8px;align-items:stretch}
+.flow div{flex:1;background:var(--mist);border-radius:11px;padding:9px 8px;text-align:center;font-size:11.5px;line-height:1.5}
+.flow div i{display:block;font-style:normal;font-size:21px;line-height:1.4}
+.flow div strong{display:block;font-family:"Zen Maru Gothic",sans-serif}
+.flow div small{color:var(--ink-60);font-size:10.5px}
+.flow .to{flex:0 0 auto;background:none;padding:0;align-self:center;color:var(--orange);font-weight:900;font-size:16px}
 
-/* grid */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-a.tk{display:block;background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);
-padding:16px 12px 14px;text-decoration:none;color:inherit;position:relative;text-align:center;transition:transform .12s}
-a.tk:active{transform:scale(.98)}
-a.tk:last-child{grid-column:1/-1;display:flex;align-items:center;gap:14px;text-align:left;padding:14px}
-.nr{position:absolute;left:10px;top:8px;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;
-font-size:13px;color:var(--num);letter-spacing:.02em}
-a.tk:last-child .nr{left:auto;right:12px;top:10px}
-.ic{width:56px;height:56px;border-radius:50%;background:linear-gradient(150deg,#F6F1E6,#ECE3D1);
-display:flex;align-items:center;justify-content:center;font-size:27px;margin:6px auto 9px}
-a.tk:last-child .ic{margin:0;flex:0 0 56px}
-.tt{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:14.5px;margin:0 0 3px;line-height:1.4}
-.td{margin:0;font-size:12px;color:var(--main);font-weight:700;font-family:"Zen Maru Gothic",sans-serif}
-a.tk:last-child .tx{flex:1}
-a.tk:last-child .td{color:var(--ink-60);font-weight:400;font-family:inherit;font-size:12px}
+/* ツール */
+.sec{font-size:13px;font-weight:700;color:var(--ink-60);margin:0 2px 8px;letter-spacing:.05em}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tool{display:block;background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 12px 14px;text-decoration:none;color:inherit;text-align:center;position:relative;border-top:4px solid var(--c,var(--navy));transition:transform .12s}
+.tool:active{transform:scale(.98)}
+.tool .no{position:absolute;left:10px;top:7px;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:12.5px;color:var(--c,var(--navy));opacity:.45}
+.tool .ico{width:56px;height:56px;border-radius:50%;background:var(--mist);display:flex;align-items:center;justify-content:center;font-size:27px;margin:6px auto 9px}
+.tool h2{font-size:14.5px;font-weight:900;margin:0 0 3px;line-height:1.4}
+.tool p{margin:0;font-size:12px;font-weight:700;color:var(--c,var(--navy));font-family:"Zen Maru Gothic",sans-serif}
+.tool.wide{grid-column:1/-1;display:flex;align-items:center;gap:14px;text-align:left;padding:14px}
+.tool.wide .no{left:auto;right:12px;top:9px}
+.tool.wide .ico{margin:0;flex:0 0 56px}
+.tool.wide p{color:var(--ink-60);font-weight:400;font-family:inherit}
+.c-n{--c:var(--navy)} .c-o{--c:var(--orange)} .c-g{--c:var(--green)}
 
-.note{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:15px;font-size:12.5px;
-line-height:1.8;color:var(--ink-60);margin-top:18px;text-align:center}
-.note b{color:var(--ink);font-family:"Zen Maru Gothic",sans-serif;display:block;margin-bottom:3px}
-.foot{text-align:center;font-size:10.5px;color:var(--ink-60);padding:18px 16px 10px;line-height:1.8}
+/* 相談 */
+.ask{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-top:18px;text-align:center;font-size:12.5px;color:var(--ink-60);line-height:1.8}
+.ask h2{font-size:15px;color:var(--navy);margin:0 0 4px}
+.ask a{display:block;margin:12px auto 0;max-width:320px;background:var(--orange);color:#fff;text-decoration:none;border-radius:30px;padding:11px 16px;font-weight:900;font-family:"Zen Maru Gothic",sans-serif;font-size:14.5px;box-shadow:0 3px 0 #C65D0F}
+.ask a:active{transform:translateY(2px);box-shadow:0 1px 0 #C65D0F}
+
+.foot{text-align:center;font-size:10.5px;color:var(--ink-60);padding:20px 16px 8px;line-height:1.8}
+.foot .logo b{font-size:14px;color:var(--navy)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="brand"><span class="mark"></span>クラシカル不動産</div>
-  <div class="ribbon">LINE友だち限定</div>
-  <h1 class="big"><em>7</em>大特典</h1>
-  <div class="chips"><span class="chip">ぜんぶ無料</span><span class="chip">登録不要</span><span class="chip">スマホで完結</span></div>
+<header class="top">
+  <div class="logo" aria-label="CLASSICAL">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M5.5 9.5V21h13V9.5"/><path d="M10 13h4v4h-4z"/></svg>
+    <b>CLASSICAL</b>
+  </div>
+  <div class="tag">お部屋探しはクラシカルにお任せください！</div>
+  <div class="badge">公式LINE 友だち限定</div>
+  <h1 class="ttl"><span>7</span>大特典</h1>
+  <ul class="pts"><li>すべて無料</li><li>会員登録なし</li><li>スマホだけでOK</li></ul>
 </header>
 
 <main class="wrap">
 
-  <div class="start">
-    <div class="h">📱 ホーム画面に置くと、アプリのように使えます</div>
-    <div class="steps">
-      <div class="stp"><div class="em">⋯</div><div class="t">他のブラウザで開く</div><div class="s">LINEの右下メニュー</div></div>
-      <div class="arw">›</div>
-      <div class="stp"><div class="em">⬆️</div><div class="t">ホーム画面に追加</div><div class="s">共有ボタンから</div></div>
+  <section class="howto">
+    <h2>📱 ホーム画面に追加すると、アプリ感覚ですぐ開けます</h2>
+    <div class="flow">
+      <div><i>⋯</i><strong>ブラウザで開く</strong><small>LINE画面右下のメニュー</small></div>
+      <div class="to">›</div>
+      <div><i>⬆️</i><strong>ホーム画面に追加</strong><small>共有ボタンから選択</small></div>
     </div>
-  </div>
+  </section>
 
-  <!-- ===== 各ツールのURLは href="#" を差し替えてください ===== -->
-  <div class="grid">
-
-    <a class="tk" href="#"><!-- TODO: 家賃相場マップのURL -->
-      <span class="nr">01</span>
-      <span class="ic">🗺️</span>
-      <h2 class="tt">家賃相場マップ</h2>
-      <p class="td">どこに住める？</p>
+  <p class="sec">お部屋探し〜退去まで使えるツール</p>
+  <div class="tools">
+    <a class="tool c-n" href="tools/yatin/">
+      <span class="no">01</span><span class="ico">🗺️</span>
+      <h2>家賃相場マップ</h2><p>どのエリアに住める？</p>
     </a>
-
-    <a class="tk" href="#"><!-- TODO: 初期費用シミュレーターのURL -->
-      <span class="nr">02</span>
-      <span class="ic">🧮</span>
-      <h2 class="tt">初期費用<br>シミュレーター</h2>
-      <p class="td">いくら必要？</p>
+    <a class="tool c-o" href="tools/shokihiyou/">
+      <span class="no">02</span><span class="ico">🧮</span>
+      <h2>初期費用<br>シミュレーター</h2><p>入居にいくらかかる？</p>
     </a>
-
-    <a class="tk" href="#"><!-- TODO: 内見チェックシートのURL -->
-      <span class="nr">03</span>
-      <span class="ic">🔎</span>
-      <h2 class="tt">内見<br>チェックシート</h2>
-      <p class="td">どこを見る？</p>
+    <a class="tool c-g" href="tools/naiken/">
+      <span class="no">03</span><span class="ico">🔎</span>
+      <h2>内見<br>チェックシート</h2><p>どこを確認する？</p>
     </a>
-
-    <a class="tk" href="#"><!-- TODO: 入居審査の準備のURL -->
-      <span class="nr">04</span>
-      <span class="ic">📋</span>
-      <h2 class="tt">入居審査<br>の準備</h2>
-      <p class="td">何を用意する？</p>
+    <a class="tool c-n" href="tools/junbi/">
+      <span class="no">04</span><span class="ico">📋</span>
+      <h2>入居審査<br>準備リスト</h2><p>何をそろえる？</p>
     </a>
-
-    <a class="tk" href="#"><!-- TODO: 引越しやることカレンダーのURL -->
-      <span class="nr">05</span>
-      <span class="ic">📅</span>
-      <h2 class="tt">引越しやること<br>カレンダー</h2>
-      <p class="td">いつ何をする？</p>
+    <a class="tool c-o" href="tools/hikkoshi/">
+      <span class="no">05</span><span class="ico">📅</span>
+      <h2>引越し<br>やることカレンダー</h2><p>いつまでに何をする？</p>
     </a>
-
-    <a class="tk" href="#"><!-- TODO: とめる場所さがしのURL -->
-      <span class="nr">06</span>
-      <span class="ic">🅿️</span>
-      <h2 class="tt">とめる場所<br>さがし</h2>
-      <p class="td">車・自転車は？</p>
+    <a class="tool c-g" href="tools/parking/">
+      <span class="no">06</span><span class="ico">🅿️</span>
+      <h2>とめる場所<br>さがし</h2><p>車・バイク・自転車は？</p>
     </a>
-
-    <a class="tk" href="#"><!-- TODO: 退去費用チェッカーのURL -->
-      <span class="nr">07</span>
-      <span class="ic">🧾</span>
-      <span class="tx">
-        <h2 class="tt">退去費用チェッカー</h2>
-        <p class="td">その請求、払わなくていいかも。国のガイドラインで確認できます</p>
+    <a class="tool wide c-n" href="tools/taikyo/">
+      <span class="no">07</span><span class="ico">🧾</span>
+      <span>
+        <h2>退去費用チェッカー</h2>
+        <p>その請求、本当に入居者負担？ 国土交通省のガイドラインをもとに確認できます</p>
       </span>
     </a>
-
   </div>
 
-  <div class="note">
-    <b>わからないことは、そのまま聞いてください</b>
-    使っていて迷ったところ、他社で見つけたお部屋のこと。何でもトークに送っていただければお答えします。
-  </div>
+  <section class="ask">
+    <h2>気になることは、気軽にご相談ください</h2>
+    ツールの使い方はもちろん、他社で見かけたお部屋のことも大丈夫です。<br>トークで送っていただければ、スタッフがお答えします。
+    <a id="line-btn" href="#">LINEで相談する</a>
+  </section>
 
-  <!-- TODO: 正式な会社名・免許番号・住所に差し替えてください -->
-  <p class="foot">
-    クラシカル不動産／【宅建業免許番号】<br>
-    【所在地】<br>
-    各ツールの内容は一般的な目安です。
-  </p>
+  <footer class="foot">
+    <div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#14418B" stroke-width="2" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px"><path d="M3 11 12 3l9 8"/><path d="M5.5 9.5V21h13V9.5"/><path d="M10 13h4v4h-4z"/></svg><b>CLASSICAL</b></div><br>
+    株式会社CLASSICAL／大阪府知事（1）第65247号<br>
+    〒564-0053 大阪府吹田市江の木町16-34-501<br>
+    各ツールの結果は一般的な目安です。詳しくはお気軽にご相談ください。
+  </footer>
 </main>
 
+<script>
+  const LINE_URL = "#"; // TODO: 公式LINEのURL（例: https://lin.ee/xxxxxxx）
+  document.getElementById("line-btn").href = LINE_URL;
+</script>
 </body>
 </html>
