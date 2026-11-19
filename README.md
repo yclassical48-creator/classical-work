@@ -16,6 +16,7 @@ CLASSICALの作業用リポジトリ。
 | 05 | 引越しやることカレンダー | `/tools/hikkoshi/` |
 | 06 | とめる場所さがし | `/tools/parking/` |
 | 07 | 退去費用チェッカー | `/tools/taikyo/` |
+| - | よくあるご質問（FAQ・22問） | `/faq/` |
 
 ## 公開前にやること
 - [x] 公式LINE（@770zgakn）への相談ボタンを設定（各ページの `LINE_ID` / `LINE_TEXT`）
