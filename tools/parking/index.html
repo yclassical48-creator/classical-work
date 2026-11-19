@@ -8,149 +8,114 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/classical.css">
 <style>
-:root{
-  --navy:#14418B;
-  --navy-deep:#0D2E66;
-  --navy-light:#2E62B8;
-  --orange:#F47B20;
-  --green:#1E8B4A;
-  --ink:#1B2433;  --ink-60:#5A6475;
-  --bg:#F5F7FB;  --mist:#EDF2FA;  --line:#DCE4EF;  --paper:#FFFFFF;
-  --shadow:0 3px 14px rgba(13,46,102,.09);  --r:16px;
-}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{
   background:var(--bg);color:var(--ink);
-  font-family:"Noto Sans JP",sans-serif;font-size:15px;line-height:1.75;
+  font-family:var(--font-body);font-size:15px;line-height:1.75;
   overflow-x:hidden;
 }
 a{color:inherit}
-h1,h2,h3{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif}
-.wrap{max-width:640px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display)}
 
-/* header */
-.top{
-  background:linear-gradient(150deg,var(--navy-light) 0%,var(--navy) 45%,var(--navy-deep) 100%);
-  color:#fff;padding:14px 16px 26px;
-}
-.top-in{max-width:640px;margin:0 auto}
-.back{display:inline-block;font-size:13px;color:rgba(255,255,255,.85);text-decoration:none;padding:4px 0}
-.back:hover{color:#fff}
-.logo{display:flex;align-items:center;gap:9px;margin:14px 0 14px}
-.logo svg{width:30px;height:30px;flex:none}
-.logo span{font-family:"Noto Serif",serif;font-weight:700;font-size:19px;letter-spacing:.06em}
-.top .kicker{font-size:12px;font-weight:700;letter-spacing:.08em;color:#FFD2AE}
-.top h1{font-size:27px;font-weight:900;line-height:1.35;margin:2px 0 10px}
-.top .intro{font-size:14px;color:rgba(255,255,255,.88);line-height:1.85}
+.c-hero{align-items:flex-start}
+.c-hero .c-icon{margin-top:8px}
+.c-hero p.kicker{margin:0 0 2px;font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--orange);font-family:var(--font-display)}
 
 /* jump chips */
-.jump{
-  display:flex;flex-wrap:wrap;gap:8px;padding:16px;max-width:640px;margin:0 auto;
-}
+.jump{display:flex;flex-wrap:wrap;gap:8px;padding:16px;max-width:640px;margin:0 auto}
 .jump a{
-  padding:7px 14px;border-radius:999px;background:var(--paper);border:1px solid var(--line);
-  font-size:13px;font-weight:700;color:var(--navy);text-decoration:none;
+  padding:6px 14px;border-radius:var(--r-pill);background:var(--paper);border:1.5px solid var(--c);
+  font-size:13px;font-weight:700;color:var(--c-deep);text-decoration:none;font-family:var(--font-display);
 }
-.jump a:hover{border-color:var(--navy-light)}
+.jump a:hover{background:#EAF5EE}
 
 /* blocks */
 .block{padding:22px 16px 4px;max-width:640px;margin:0 auto;scroll-margin-top:8px}
-.eyebrow{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--orange);letter-spacing:.06em}
+.eyebrow{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--orange);letter-spacing:.06em;font-family:var(--font-display)}
 .eyebrow::before{content:"";width:16px;height:3px;border-radius:2px;background:var(--orange)}
-.block h2{font-size:21px;font-weight:900;color:var(--navy-deep);line-height:1.4;margin-top:4px}
+.block h2{font-size:21px;font-weight:900;color:var(--ink);line-height:1.4;margin-top:4px}
 .block .note{font-size:14px;color:var(--ink-60);margin-top:6px}
 
 .links{display:grid;gap:12px;margin-top:16px}
 .svc{
-  display:flex;flex-direction:column;gap:6px;background:var(--paper);border-radius:var(--r);
-  padding:16px 18px;text-decoration:none;box-shadow:var(--shadow);border:1px solid transparent;
-  transition:transform .15s,border-color .15s;
+  display:flex;flex-direction:column;gap:6px;background:var(--paper);border-radius:var(--r-card);
+  padding:16px 18px;text-decoration:none;border:1px solid var(--line);
+  transition:transform .15s,border-color .15s,box-shadow .15s;
 }
-.svc:hover{transform:translateY(-2px);border-color:var(--line)}
-.svc:focus-visible{outline:2px solid var(--navy-light);outline-offset:3px}
+.svc:hover{transform:translateY(-2px);border-color:var(--c);box-shadow:var(--shadow)}
 .svc-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .chip{
-  display:inline-block;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:7px;
-  background:var(--mist);color:var(--navy);white-space:nowrap;
+  display:inline-block;font-size:11.5px;font-weight:700;padding:3px 11px;border-radius:var(--r-pill);
+  background:#E6F3EB;color:var(--c-deep);white-space:nowrap;
 }
-.chip.now{background:#FFEBDC;color:#B5530A}
-.svc-name{font-family:"Zen Maru Gothic",sans-serif;font-size:17px;font-weight:900;color:var(--ink);line-height:1.45}
+.chip.now{background:#FDEBDC;color:var(--orange-deep)}
+.svc-name{font-family:var(--font-display);font-size:17px;font-weight:900;color:var(--ink);line-height:1.45}
 .svc-text{font-size:13.5px;color:var(--ink-60);line-height:1.8}
-.svc-go{font-size:13px;font-weight:700;color:var(--orange);margin-top:2px}
+.svc-go{font-size:13px;font-weight:700;color:var(--c);margin-top:2px;font-family:var(--font-display)}
 .ext{font-size:11.5px;color:var(--ink-60)}
 
 /* points list */
-.points{margin-top:14px;background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:4px 18px;list-style:none}
+.points{margin-top:14px;padding:4px 18px;list-style:none}
 .points li{display:flex;gap:10px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink-60);line-height:1.8}
 .points li:last-child{border-bottom:0}
-.points li::before{
-  content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--orange);margin-top:9px;
-}
+.points li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--orange);margin-top:9px}
 .points strong{color:var(--ink);font-weight:700}
 
 /* city finder */
-.finder{margin-top:16px;background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:18px}
-.finder label{display:block;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.finder{margin-top:16px;padding:18px}
+.finder label{display:block;font-size:13.5px;font-weight:700;color:var(--c-deep);margin-bottom:8px;font-family:var(--font-display)}
 .finder select{
   width:100%;padding:13px 12px;font:inherit;font-size:16px;color:var(--ink);
-  background:var(--bg);border:1px solid var(--line);border-radius:12px;appearance:auto;
+  background:var(--bg);border:1.5px solid var(--line);border-radius:12px;appearance:auto;
 }
-.finder select:focus{outline:2px solid var(--navy-light);outline-offset:-1px}
+.finder select:focus{outline:3px solid var(--orange);outline-offset:1px}
 .result{margin-top:12px;display:grid;gap:10px}
 .result[hidden]{display:none}
 .result a{
-  display:block;padding:13px 14px;border-radius:12px;background:var(--mist);text-decoration:none;
-  border-left:4px solid var(--navy-light);
+  display:block;padding:13px 14px;border-radius:12px;background:#EEF7F1;text-decoration:none;
+  border-left:4px solid var(--c);
 }
-.result a:hover{background:#E3EBF8}
-.result a b{display:block;font-size:14.5px;color:var(--navy-deep)}
+.result a:hover{background:#E2F1E7}
+.result a b{display:block;font-size:14.5px;color:var(--c-deep)}
 .result a span{display:block;font-size:12.5px;color:var(--ink-60);margin-top:2px}
 
 /* LINE CTA */
-.ask{
-  margin:30px 16px 0;padding:24px 20px;border-radius:20px;color:#fff;
-  background:linear-gradient(155deg,var(--navy-light),var(--navy-deep));box-shadow:0 10px 24px rgba(13,46,102,.22);
-}
+.ask{margin:30px 16px 0;padding:22px 20px}
 @media (min-width:672px){.ask{margin:30px auto 0;max-width:608px}}
-.ask .eyebrow{color:#FFD2AE}
-.ask .eyebrow::before{background:#FFD2AE}
-.ask h2{font-size:20px;font-weight:900;margin-top:4px;line-height:1.45}
-.ask p{font-size:14px;color:rgba(255,255,255,.88);margin-top:8px}
-.ask-btn{
-  display:block;margin-top:18px;padding:15px 12px;border-radius:14px;text-align:center;
-  background:var(--orange);color:#fff;text-decoration:none;box-shadow:0 4px 12px rgba(244,123,32,.35);
-}
-.ask-btn:hover{filter:brightness(1.05)}
-.ask-btn b{display:block;font-size:16.5px;font-weight:700}
-.ask-btn small{display:block;font-size:12px;opacity:.92;margin-top:2px}
+.ask h2{font-size:20px;font-weight:900;margin-top:4px;line-height:1.45;color:var(--ink)}
+.ask p:not(.eyebrow){font-size:14px;color:var(--ink-60);margin-top:8px}
+.ask .c-btn{margin-top:18px;min-height:56px}
+.ask .c-btn>span{display:flex;flex-direction:column;align-items:center;line-height:1.35}
+.ask .c-btn b{font-size:16px;font-weight:900}
+.ask .c-btn small{font-size:11.5px;font-weight:500;font-family:var(--font-body);letter-spacing:0;opacity:.92;margin-top:2px}
 
-/* footer */
-.foot{max-width:640px;margin:0 auto;padding:30px 16px 36px;text-align:center;font-size:11.5px;color:var(--ink-60);line-height:1.9}
-.foot .disc{margin-top:10px}
+.c-foot .disc{margin-top:8px}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
-<body>
+<body class="is-green">
 
-<header class="top">
-  <div class="top-in">
-    <a class="back" href="../../index.html">← 特典一覧</a>
-    <div class="logo">
-      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <path d="M4 15 16 5l12 10" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="8" y="14" width="16" height="13" rx="1.5" stroke="#fff" stroke-width="2.2"/>
-        <rect x="13.5" y="18" width="5" height="5" rx=".8" fill="#F47B20"/>
-      </svg>
-      <span>CLASSICAL</span>
-    </div>
-    <p class="kicker">LINE友だち限定・無料ツール</p>
-    <h1>とめる場所さがし</h1>
-    <p class="intro">車の時間貸し・月極、自転車やバイクの置き場まで。内見の日も、新生活がはじまってからも、お客さまが来るときも、ここから探せるようにまとめました。</p>
+<header class="c-top">
+  <div class="c-top-in">
+    <a class="c-back" href="../../index.html">‹ 特典一覧</a>
+    <a class="c-logo" href="../../index.html" aria-label="CLASSICAL トップ">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 13.5h4v4h-4z"/></svg>
+      <b>CLASSICAL</b>
+    </a>
   </div>
 </header>
+<section class="c-hero">
+  <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 16V8h3a2.5 2.5 0 0 1 0 5h-3"/></svg></span>
+  <div>
+    <p class="kicker">LINE友だち限定・無料ツール</p>
+    <h1>とめる場所さがし</h1>
+    <p>車の<em>時間貸し・月極</em>、<em>自転車やバイク</em>の置き場まで。内見の日も、新生活がはじまってからも、お客さまが来るときも、ここから探せるようにまとめました。</p>
+  </div>
+</section>
 
 <nav class="jump" aria-label="ページ内メニュー">
   <a href="#hourly">時間貸し</a>
@@ -173,7 +138,7 @@ h1,h2,h3{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif}
     <h2>毎日とめる場所を借りたい（月極）</h2>
     <p class="note">暮らしはじめてから使う駐車場は、時間貸しとは別のサイトで探します。人気のエリアは空きが出るとすぐ埋まるため、お部屋が決まったら早めにチェックしましょう。</p>
     <div class="links" id="list-monthly"></div>
-    <ul class="points">
+    <ul class="points c-panel">
       <li><span>月極の空きは<strong>引っ越しが多い2〜4月ごろに動きやすい</strong>です。入居日が決まった段階で探しはじめるのが安心です。</span></li>
       <li><span>満車の駐車場でも<strong>空き待ちの登録</strong>を受け付けているサービスがあります。登録しておくと、空いたときに知らせてもらえます。</span></li>
       <li><span>車庫証明を取る予定なら、駐車場側に<strong>保管場所使用承諾証明書</strong>を出してもらう必要があります。申し込みの際に忘れずに伝えましょう。</span></li>
@@ -191,7 +156,7 @@ h1,h2,h3{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif}
     <p class="eyebrow">公営</p>
     <h2>市の公営駐輪場を調べる</h2>
     <p class="note">市が運営する駐輪場は料金が手ごろで、定期利用ができるところも多いです。市区町村を選ぶと、駐輪場と放置禁止区域の情報をすぐ検索できます。</p>
-    <div class="finder">
+    <div class="finder c-card">
       <label for="city">市区町村を選ぶ</label>
       <select id="city">
         <option value="">選択してください</option>
@@ -203,7 +168,7 @@ h1,h2,h3{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif}
   <section class="block" id="hints">
     <p class="eyebrow">豆知識</p>
     <h2>知っておきたいこと</h2>
-    <ul class="points">
+    <ul class="points c-panel">
       <li><span>駅のまわりは<strong>自転車等の放置禁止区域</strong>に指定されていることがあります。区域内にとめると撤去され、引き取りに手数料がかかります。範囲は市のサイトで地図とともに公開されています。</span></li>
       <li><span>公営駐輪場の<strong>定期利用は申込の時期が決まっている</strong>場合があり、年度の変わり目は特に混み合います。早めに募集時期を確認しておきましょう。</span></li>
       <li><span>コインパーキングの<strong>最大料金</strong>は「入庫後24時間まで」と「当日24時まで」など条件がさまざまで、同じ時間とめても金額が変わります。看板の注意書きまで確認を。</span></li>
@@ -211,18 +176,20 @@ h1,h2,h3{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif}
     </ul>
   </section>
 
-  <section class="ask" aria-labelledby="ask-title">
+  <section class="ask c-card" aria-labelledby="ask-title">
     <p class="eyebrow">ご相談</p>
     <h2 id="ask-title">探しても見つからないときは</h2>
     <p>月極の空き具合や契約できるかどうか、実際のとめやすさなど、ネットだけではわからないことはクラシカルにお気軽にご相談ください。物件名や住所をそのまま送っていただければOKです。</p>
-    <a class="ask-btn" id="line-btn" href="#" target="_blank" rel="noopener">
-      <b>LINEで相談する</b>
-      <small>お部屋探しはクラシカルにお任せください！</small>
+    <a class="c-btn is-green" id="line-btn" href="#" target="_blank" rel="noopener">
+      <span><b>LINEで相談する</b><small>お部屋探しはクラシカルにお任せください！</small></span>
     </a>
   </section>
 </main>
 
-<footer class="foot">
+<footer class="c-foot">
+  <div class="c-sky" aria-hidden="true"></div>
+  <a class="c-logo" href="../../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 13.5h4v4h-4z"/></svg><b>CLASSICAL</b></a>
+  <span class="c-tagline">お部屋探しはクラシカルにお任せください！</span>
   株式会社CLASSICAL／大阪府知事（1）第65247号<br>〒564-0053 大阪府吹田市江の木町16-34-501
   <p class="disc">このページは外部サービスへのご案内です。各サービスの内容・料金・掲載情報は変更されることがあるため、ご利用前に各公式サイトで最新情報をご確認ください。</p>
 </footer>
