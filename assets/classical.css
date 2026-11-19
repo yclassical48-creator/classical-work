@@ -1,0 +1,89 @@
+/* =====================================================================
+   CLASSICAL 共通デザイン（公式LINEリッチメニュー準拠）
+   レイアウト方針: 明るい背景に「色枠の白カード＋塗りの丸アイコン＋矢印付き丸ボタン」。
+   色は 3 色（ネイビー／オレンジ／グリーン）をカードごとに割り当てる。
+   ※ リッチメニューと同じ明るい世界観で統一するため、ライトテーマ固定。
+   ===================================================================== */
+:root{
+  --navy:#1B4592;  --navy-deep:#12316B;
+  --orange:#F07A1C; --orange-deep:#C85F0C;
+  --green:#1E8A4C; --green-deep:#156638;
+  --ink:#1A2740;   /* 見出し・本文（ネイビー寄りの墨） */
+  --ink-60:#55607A;
+  --bg:#F5F6F2;    /* 生成りがかった白（リッチメニューの室内写真の明るさ） */
+  --paper:#FFFFFF;
+  --line:#DFE3EA;
+  --mist:#EEF2F8;
+  --shadow:0 2px 10px rgba(18,49,107,.07);
+  --r-card:18px; --r-pill:999px;
+  --font-display:"Zen Maru Gothic","Noto Sans JP",system-ui,sans-serif;
+  --font-body:"Noto Sans JP",system-ui,-apple-system,sans-serif;
+  --font-logo:"Noto Serif","Times New Roman",serif;
+  --c:var(--navy); --c-deep:var(--navy-deep);
+  color-scheme:light;
+}
+.is-navy{--c:var(--navy);--c-deep:var(--navy-deep)}
+.is-orange{--c:var(--orange);--c-deep:var(--orange-deep)}
+.is-green{--c:var(--green);--c-deep:var(--green-deep)}
+
+/* ---------- ロゴ ---------- */
+.c-logo{display:inline-flex;align-items:center;gap:7px;color:var(--navy);text-decoration:none}
+.c-logo svg{width:24px;height:24px;flex:none}
+.c-logo b{font-family:var(--font-logo);font-weight:700;font-size:18px;letter-spacing:.07em;line-height:1}
+
+/* ---------- 上部バー（全ページ共通） ---------- */
+.c-top{background:var(--paper);border-bottom:1px solid var(--line)}
+.c-top-in{max-width:640px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding-block:11px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.c-back{display:inline-flex;align-items:center;gap:2px;font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;
+  border:1.5px solid var(--navy);border-radius:var(--r-pill);padding:4px 12px 4px 9px;font-family:var(--font-display);white-space:nowrap}
+.c-back:hover{background:var(--mist)}
+.c-badge{font-size:11.5px;font-weight:700;font-family:var(--font-display);color:#fff;background:var(--orange);
+  border-radius:var(--r-pill);padding:4px 11px;white-space:nowrap}
+
+/* ---------- 丸アイコン（リッチメニューの塗り円＋ひらめき線） ---------- */
+.c-icon{position:relative;width:64px;height:64px;border-radius:50%;background:var(--c);
+  display:inline-flex;align-items:center;justify-content:center;flex:none}
+.c-icon svg{width:56%;height:56%;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.c-icon::after{content:"";position:absolute;right:-13px;top:-9px;width:22px;height:22px;background:var(--c);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 15 2.5 10.5M11 12V5M16.5 14.5 21 10' stroke='black' stroke-width='2.8' stroke-linecap='round' fill='none'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 15 2.5 10.5M11 12V5M16.5 14.5 21 10' stroke='black' stroke-width='2.8' stroke-linecap='round' fill='none'/%3E%3C/svg%3E") center/contain no-repeat}
+.c-icon.sm{width:46px;height:46px}
+.c-icon.sm::after{right:-10px;top:-8px;width:17px;height:17px}
+
+/* ---------- カード ---------- */
+.c-card{background:var(--paper);border:2.5px solid var(--c);border-radius:var(--r-card);box-shadow:var(--shadow)}
+.c-panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-card)}
+
+/* ---------- 丸ボタン（矢印付き） ---------- */
+.c-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:46px;
+  background:var(--c);color:#fff;border:0;border-radius:var(--r-pill);padding:10px 20px;
+  font-family:var(--font-display);font-weight:900;font-size:15px;letter-spacing:.04em;text-decoration:none;cursor:pointer;
+  box-shadow:0 3px 0 var(--c-deep);transition:transform .1s,box-shadow .1s}
+.c-btn::after{content:"";width:8px;height:8px;border-top:3px solid currentColor;border-right:3px solid currentColor;
+  transform:rotate(45deg);margin-left:auto;flex:none;border-radius:1px}
+.c-btn>span:first-child{margin-left:auto}
+.c-btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--c-deep)}
+.c-btn.ghost{background:var(--paper);color:var(--c);box-shadow:none;border:2px solid var(--c)}
+.c-btn.no-arrow::after{display:none}
+.c-chev{width:11px;height:11px;border-top:3.5px solid var(--c);border-right:3.5px solid var(--c);transform:rotate(45deg);flex:none;border-radius:1px}
+
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+
+/* ---------- ページ見出し（ツール用） ---------- */
+.c-hero{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:16px;
+  padding-block:20px 6px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.c-hero .c-icon{margin-right:6px}
+.c-hero h1{margin:0;font-family:var(--font-display);font-weight:900;font-size:24px;line-height:1.3;color:var(--ink);text-wrap:balance}
+.c-hero p{margin:4px 0 0;font-size:13px;line-height:1.6;color:var(--ink-60)}
+.c-hero p em{font-style:normal;font-weight:700;color:var(--c)}
+
+/* ---------- フッター（街並みライン＋ロゴ） ---------- */
+.c-foot{max-width:640px;margin:28px auto 0;text-align:center;color:var(--ink-60);font-size:10.5px;line-height:1.8;
+  padding-block:0 20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.c-sky{height:40px;margin-bottom:8px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 40' fill='none' stroke='%231B4592' stroke-width='1.3' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M0 39h360'/%3E%3Cpath d='M20 39V30M20 30a5 5 0 1 1 0-.1'/%3E%3Cpath d='M38 39V18h14v21M42 22h2M46 22h2M42 27h2M46 27h2M42 32h2M46 32h2'/%3E%3Cpath d='M56 39V8h12v31M59 12h2M63 12h2M59 17h2M63 17h2M59 22h2M63 22h2M59 27h2M63 27h2M59 32h2M63 32h2'/%3E%3Cpath d='M72 39V24h10v15M75 28h4M75 33h4'/%3E%3Cpath d='M92 39V31M92 31a4 4 0 1 1 0-.1'/%3E%3Cpath d='M268 39V31M268 31a4 4 0 1 1 0-.1'/%3E%3Cpath d='M278 39V27l9-7 9 7v12M284 39v-6h6v6'/%3E%3Cpath d='M300 39V12h13v27M303 16h2M308 16h2M303 21h2M308 21h2M303 26h2M308 26h2M303 31h2M308 31h2'/%3E%3Cpath d='M317 39V22h12v17M320 26h2M325 26h2M320 31h2M325 31h2'/%3E%3Cpath d='M342 39V30M342 30a5 5 0 1 1 0-.1'/%3E%3C/svg%3E") center bottom/360px 40px no-repeat;opacity:.55}
+.c-foot .c-logo{margin-bottom:4px}
+.c-foot .c-logo b{font-size:15px}
+.c-tagline{display:block;font-size:11px;color:var(--navy);font-weight:700;margin-bottom:6px;font-family:var(--font-display)}
+
+@media (prefers-reduced-motion:reduce){.c-btn{transition:none}}

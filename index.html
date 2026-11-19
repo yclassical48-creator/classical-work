@@ -3,151 +3,169 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="株式会社CLASSICAL（クラシカル）公式LINE友だち限定。お部屋探しから退去まで使える7つの無料ツール。">
-<meta name="theme-color" content="#14418B">
+<meta name="theme-color" content="#FFFFFF">
 <title>LINE友だち限定 7大特典｜株式会社CLASSICAL</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/classical.css">
 <style>
-:root{
-  --navy:#14418B; --navy-deep:#0D2E66; --navy-light:#2E62B8;
-  --orange:#F47B20; --green:#1E8B4A;
-  --ink:#1B2433; --ink-60:#5A6475;
-  --bg:#F5F7FB; --mist:#EDF2FA; --line:#DCE4EF; --paper:#FFFFFF;
-  --shadow:0 3px 14px rgba(13,46,102,.09); --r:16px;
-}
+/* トップページ固有：リッチメニューと同じ「色枠カード＋丸アイコン＋丸ボタン」を2列で並べ、最後に横長カードを置く */
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;padding:0}
-body{font-family:"Noto Sans JP",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;font-size:15px;padding-bottom:28px}
-h1,h2{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.7}
+.wrap{max-width:640px;margin:0 auto;padding-block:0 8px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
-/* ヘッダー */
-.top{background:linear-gradient(160deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:#fff;text-align:center;padding:22px 20px 44px;position:relative;overflow:hidden}
-.top::before{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.06)}
-.top::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-30px;height:56px;background:var(--bg);border-radius:50% 50% 0 0}
-.logo{display:inline-flex;align-items:center;gap:8px}
-.logo svg{width:24px;height:24px}
-.logo b{font-family:"Noto Serif",serif;font-weight:700;font-size:19px;letter-spacing:.08em}
-.tag{font-size:11px;opacity:.85;margin-top:2px;letter-spacing:.04em}
-.badge{display:inline-block;margin:16px 0 6px;background:#fff;color:var(--navy);border-radius:30px;padding:4px 16px;font-size:12.5px;font-weight:900;font-family:"Zen Maru Gothic",sans-serif;letter-spacing:.06em}
-.ttl{font-size:42px;font-weight:900;margin:0;line-height:1.15}
-.ttl span{color:var(--orange);font-size:64px;line-height:1;margin-right:2px;text-shadow:0 2px 10px rgba(0,0,0,.18)}
-.pts{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:12px;position:relative;z-index:1}
-.pts li{list-style:none;background:rgba(255,255,255,.15);border-radius:20px;padding:4px 12px;font-size:11.5px;font-weight:700;font-family:"Zen Maru Gothic",sans-serif}
-.pts{padding:0}
+/* 導入 */
+.intro{padding-block:22px 4px;display:grid;gap:10px}
+.eyebrow{margin:0;font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--navy);letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:"";width:18px;height:3px;border-radius:3px;background:var(--orange)}
+.intro h1{margin:0;font-family:var(--font-display);font-weight:900;font-size:27px;line-height:1.35;text-wrap:balance}
+.intro h1 .num{color:var(--orange);font-size:44px;line-height:1;margin:0 2px;vertical-align:-3px}
+.intro h1 em{font-style:normal;color:var(--navy)}
+.perks{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 0;padding:0;list-style:none}
+.perks li{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;font-family:var(--font-display);
+  color:var(--green);background:var(--paper);border:1.5px solid var(--green);border-radius:var(--r-pill);padding:3px 11px 3px 8px}
+.perks li::before{content:"";width:9px;height:5px;border-left:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(-45deg) translateY(-2px)}
 
-.wrap{max-width:640px;margin:0 auto;padding:0 16px;position:relative;z-index:1}
+/* ツールカード */
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.tool{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:20px 12px 14px;text-decoration:none;color:inherit;min-width:0}
+.tool .c-icon{margin:0 0 6px}
+.tool h2{margin:0;font-family:var(--font-display);font-weight:900;font-size:16.5px;line-height:1.35;color:var(--ink);text-wrap:balance}
+.tool p{margin:0;font-size:12px;line-height:1.6;color:var(--ink-60);font-weight:500}
+.tool p b{color:var(--c);font-weight:700}
+.tool .c-btn{margin-top:auto;min-height:40px;font-size:13.5px;padding:8px 14px}
+.tool .c-btn::after{width:7px;height:7px;border-width:2.5px}
+.tool .spacer{flex:1;min-height:8px}
+.tool:hover .c-btn{filter:brightness(1.05)}
 
-/* ホーム画面に追加 */
-.howto{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:13px 14px;margin:4px 0 16px}
-.howto h2{font-size:13.5px;color:var(--navy);margin:0 0 10px;display:flex;align-items:center;gap:6px}
-.flow{display:flex;gap:8px;align-items:stretch}
-.flow div{flex:1;background:var(--mist);border-radius:11px;padding:9px 8px;text-align:center;font-size:11.5px;line-height:1.5}
-.flow div i{display:block;font-style:normal;font-size:21px;line-height:1.4}
-.flow div strong{display:block;font-family:"Zen Maru Gothic",sans-serif}
-.flow div small{color:var(--ink-60);font-size:10.5px}
-.flow .to{flex:0 0 auto;background:none;padding:0;align-self:center;color:var(--orange);font-weight:900;font-size:16px}
+/* 横長カード（リッチメニュー下段の「よくある質問」「電話する」と同じ形） */
+.row{display:flex;align-items:center;gap:16px;padding:14px 16px;text-decoration:none;color:inherit}
+.row .c-icon{margin-right:6px}
+.row .tx{flex:1;min-width:0}
+.row h2{margin:0;font-family:var(--font-display);font-weight:900;font-size:18px;line-height:1.35;color:var(--ink)}
+.row p{margin:2px 0 0;font-size:12px;line-height:1.6;color:var(--ink-60)}
+.row p b{color:var(--c)}
+.tools .row{grid-column:1/-1}
 
-/* ツール */
-.sec{font-size:13px;font-weight:700;color:var(--ink-60);margin:0 2px 8px;letter-spacing:.05em}
-.tools{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.tool{display:block;background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 12px 14px;text-decoration:none;color:inherit;text-align:center;position:relative;border-top:4px solid var(--c,var(--navy));transition:transform .12s}
-.tool:active{transform:scale(.98)}
-.tool .no{position:absolute;left:10px;top:7px;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:12.5px;color:var(--c,var(--navy));opacity:.45}
-.tool .ico{width:56px;height:56px;border-radius:50%;background:var(--mist);display:flex;align-items:center;justify-content:center;font-size:27px;margin:6px auto 9px}
-.tool h2{font-size:14.5px;font-weight:900;margin:0 0 3px;line-height:1.4}
-.tool p{margin:0;font-size:12px;font-weight:700;color:var(--c,var(--navy));font-family:"Zen Maru Gothic",sans-serif}
-.tool.wide{grid-column:1/-1;display:flex;align-items:center;gap:14px;text-align:left;padding:14px}
-.tool.wide .no{left:auto;right:12px;top:9px}
-.tool.wide .ico{margin:0;flex:0 0 56px}
-.tool.wide p{color:var(--ink-60);font-weight:400;font-family:inherit}
-.c-n{--c:var(--navy)} .c-o{--c:var(--orange)} .c-g{--c:var(--green)}
+/* 下段 */
+.more{display:grid;gap:12px;margin-top:22px}
+.more-h{margin:0;font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--ink-60);letter-spacing:.04em}
+.steps{display:flex;gap:6px;align-items:center;margin-top:8px}
+.steps span{flex:1;background:var(--mist);border-radius:10px;padding:6px 8px;font-size:11px;line-height:1.45;text-align:center;color:var(--ink)}
+.steps span b{display:block;font-family:var(--font-display);font-size:12px}
+.steps i{font-style:normal;color:var(--green);font-weight:900}
 
-/* 相談 */
-.ask{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-top:18px;text-align:center;font-size:12.5px;color:var(--ink-60);line-height:1.8}
-.ask h2{font-size:15px;color:var(--navy);margin:0 0 4px}
-.ask a{display:block;margin:12px auto 0;max-width:320px;background:var(--orange);color:#fff;text-decoration:none;border-radius:30px;padding:11px 16px;font-weight:900;font-family:"Zen Maru Gothic",sans-serif;font-size:14.5px;box-shadow:0 3px 0 #C65D0F}
-.ask a:active{transform:translateY(2px);box-shadow:0 1px 0 #C65D0F}
-
-.foot{text-align:center;font-size:10.5px;color:var(--ink-60);padding:20px 16px 8px;line-height:1.8}
-.foot .logo b{font-size:14px;color:var(--navy)}
+@media (max-width:359px){.tools{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 
-<header class="top">
-  <div class="logo" aria-label="CLASSICAL">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M5.5 9.5V21h13V9.5"/><path d="M10 13h4v4h-4z"/></svg>
-    <b>CLASSICAL</b>
+<header class="c-top">
+  <div class="c-top-in">
+    <span class="c-logo" aria-label="CLASSICAL">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 13.5h4v4h-4z"/></svg>
+      <b>CLASSICAL</b>
+    </span>
+    <span class="c-badge">公式LINE 友だち限定</span>
   </div>
-  <div class="tag">お部屋探しはクラシカルにお任せください！</div>
-  <div class="badge">公式LINE 友だち限定</div>
-  <h1 class="ttl"><span>7</span>大特典</h1>
-  <ul class="pts"><li>すべて無料</li><li>会員登録なし</li><li>スマホだけでOK</li></ul>
 </header>
 
 <main class="wrap">
 
-  <section class="howto">
-    <h2>📱 ホーム画面に追加すると、アプリ感覚ですぐ開けます</h2>
-    <div class="flow">
-      <div><i>⋯</i><strong>ブラウザで開く</strong><small>LINE画面右下のメニュー</small></div>
-      <div class="to">›</div>
-      <div><i>⬆️</i><strong>ホーム画面に追加</strong><small>共有ボタンから選択</small></div>
-    </div>
+  <section class="intro">
+    <p class="eyebrow">LINE友だち限定の特典</p>
+    <h1>お部屋探しから退去まで<br>使える<em>無料ツール</em><span class="num">7</span>つ</h1>
+    <ul class="perks"><li>すべて無料</li><li>会員登録なし</li><li>スマホで完結</li></ul>
   </section>
 
-  <p class="sec">お部屋探し〜退去まで使えるツール</p>
   <div class="tools">
-    <a class="tool c-n" href="tools/yatin/index.html">
-      <span class="no">01</span><span class="ico">🗺️</span>
-      <h2>家賃相場マップ</h2><p>どのエリアに住める？</p>
+    <a class="c-card tool is-navy" href="tools/yatin/index.html">
+      <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg></span>
+      <h2>家賃相場マップ</h2>
+      <p>エリア・駅ごとの<br><b>今の相場</b>がわかる</p>
+      <span class="spacer"></span>
+      <span class="c-btn"><span>相場を見る</span></span>
     </a>
-    <a class="tool c-o" href="tools/shokihiyou/index.html">
-      <span class="no">02</span><span class="ico">🧮</span>
-      <h2>初期費用<br>シミュレーター</h2><p>入居にいくらかかる？</p>
+    <a class="c-card tool is-orange" href="tools/shokihiyou/index.html">
+      <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3" rx=".5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 17h.01M12 17h.01M15.5 17h.01" stroke-width="2.6"/></svg></span>
+      <h2>初期費用<br>シミュレーター</h2>
+      <p>入居に必要なお金を<br><b>かんたん計算</b></p>
+      <span class="spacer"></span>
+      <span class="c-btn"><span>計算する</span></span>
     </a>
-    <a class="tool c-g" href="tools/naiken/index.html">
-      <span class="no">03</span><span class="ico">🔎</span>
-      <h2>内見<br>チェックシート</h2><p>どこを確認する？</p>
+    <a class="c-card tool is-green" href="tools/naiken/index.html">
+      <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 11 4l8 7"/><path d="M5 9.5V19h6"/><circle cx="16.5" cy="15.5" r="3"/><path d="m18.7 17.7 2.3 2.3"/></svg></span>
+      <h2>内見<br>チェックシート</h2>
+      <p>見落としがちな所を<br><b>現地で確認</b></p>
+      <span class="spacer"></span>
+      <span class="c-btn"><span>チェックする</span></span>
     </a>
-    <a class="tool c-n" href="tools/junbi/index.html">
-      <span class="no">04</span><span class="ico">📋</span>
-      <h2>入居審査<br>準備リスト</h2><p>何をそろえる？</p>
+    <a class="c-card tool is-navy" href="tools/junbi/index.html">
+      <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v2.5H9z"/><path d="m8.5 13.5 2.3 2.3 4.7-4.8"/></svg></span>
+      <h2>入居審査<br>準備リスト</h2>
+      <p>必要な書類と<br><b>年収の目安</b>を確認</p>
+      <span class="spacer"></span>
+      <span class="c-btn"><span>準備する</span></span>
     </a>
-    <a class="tool c-o" href="tools/hikkoshi/index.html">
-      <span class="no">05</span><span class="ico">📅</span>
-      <h2>引越し<br>やることカレンダー</h2><p>いつまでに何をする？</p>
+    <a class="c-card tool is-orange" href="tools/hikkoshi/index.html">
+      <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/><path d="M8 14h2M12 14h2M8 17h2"/></svg></span>
+      <h2>引越しやること<br>カレンダー</h2>
+      <p>引越し日から<br><b>期限を逆算</b></p>
+      <span class="spacer"></span>
+      <span class="c-btn"><span>予定を立てる</span></span>
     </a>
-    <a class="tool c-g" href="tools/parking/index.html">
-      <span class="no">06</span><span class="ico">🅿️</span>
-      <h2>とめる場所<br>さがし</h2><p>車・バイク・自転車は？</p>
+    <a class="c-card tool is-green" href="tools/parking/index.html">
+      <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 16V8h3a2.5 2.5 0 0 1 0 5h-3"/></svg></span>
+      <h2>とめる場所<br>さがし</h2>
+      <p>車・バイク・自転車の<br><b>置き場所</b>を探す</p>
+      <span class="spacer"></span>
+      <span class="c-btn"><span>探す</span></span>
     </a>
-    <a class="tool wide c-n" href="tools/taikyo/index.html">
-      <span class="no">07</span><span class="ico">🧾</span>
-      <span>
+    <a class="c-card row is-navy" href="tools/taikyo/index.html">
+      <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5L6 21z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span>
+      <span class="tx">
         <h2>退去費用チェッカー</h2>
-        <p>その請求、本当に入居者負担？ 国土交通省のガイドラインをもとに確認できます</p>
+        <p>その請求、本当に入居者負担？<br><b>国のガイドライン</b>で確認できます</p>
       </span>
+      <span class="c-chev" aria-hidden="true"></span>
     </a>
   </div>
 
-  <section class="ask">
-    <h2>気になることは、気軽にご相談ください</h2>
-    ツールの使い方はもちろん、他社で見かけたお部屋のことも大丈夫です。<br>トークで送っていただければ、スタッフがお答えします。
-    <a id="line-btn" href="#">LINEで相談する</a>
+  <section class="more" aria-label="ご案内">
+    <p class="more-h">あわせてどうぞ</p>
+    <a class="c-card row is-green" id="line-btn" href="#">
+      <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-7l-4 3v-3H6a2 2 0 0 1-2-2z"/><path d="M8 10h8M8 13h5"/></svg></span>
+      <span class="tx">
+        <h2>LINEで相談する</h2>
+        <p>ツールの使い方、他社で見つけたお部屋のことも<br><b>スタッフがお答えします</b></p>
+      </span>
+      <span class="c-chev" aria-hidden="true"></span>
+    </a>
+    <div class="c-panel row is-orange">
+      <span class="c-icon sm"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg></span>
+      <span class="tx">
+        <h2 style="font-size:15px">ホーム画面に追加しておくと便利です</h2>
+        <span class="steps"><span><b>ブラウザで開く</b>LINE右下のメニュー</span><i>›</i><span><b>ホーム画面に追加</b>共有ボタンから</span></span>
+      </span>
+    </div>
   </section>
 
-  <footer class="foot">
-    <div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#14418B" stroke-width="2" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px"><path d="M3 11 12 3l9 8"/><path d="M5.5 9.5V21h13V9.5"/><path d="M10 13h4v4h-4z"/></svg><b>CLASSICAL</b></div><br>
-    株式会社CLASSICAL／大阪府知事（1）第65247号<br>
-    〒564-0053 大阪府吹田市江の木町16-34-501<br>
-    各ツールの結果は一般的な目安です。詳しくはお気軽にご相談ください。
-  </footer>
 </main>
+
+<footer class="c-foot">
+  <div class="c-sky" aria-hidden="true"></div>
+  <span class="c-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 13.5h4v4h-4z"/></svg><b>CLASSICAL</b></span>
+  <span class="c-tagline">お部屋探しはクラシカルにお任せください！</span>
+  株式会社CLASSICAL／大阪府知事（1）第65247号<br>
+  〒564-0053 大阪府吹田市江の木町16-34-501<br>
+  各ツールの結果は一般的な目安です。詳しくはお気軽にご相談ください。
+</footer>
 
 <script>
   const LINE_URL = "#"; // TODO: 公式LINEのURL（例: https://lin.ee/xxxxxxx）
