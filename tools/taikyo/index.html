@@ -8,126 +8,119 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/classical.css">
 <style>
 :root{
-  --navy:#14418B;--navy-deep:#0D2E66;--navy-light:#2E62B8;
-  --orange:#F47B20;--green:#1E8B4A;
-  --ink:#1B2433;--ink-60:#5A6475;
-  --bg:#F5F7FB;--mist:#EDF2FA;--line:#DCE4EF;--paper:#FFFFFF;
-  --shadow:0 3px 14px rgba(13,46,102,.09);--r:16px;
-  --red:#C8443C;
+  --r:18px;
+  /* 負担区分の色（意味を持つので3色で区別） 貸主=グリーン／借主=オレンジ／契約しだい=ネイビー */
+  --kL:var(--green);  --kL-bg:#E3F2E9; --kL-ink:var(--green-deep);
+  --kT:var(--orange); --kT-bg:#FDEBDB; --kT-ink:#B4530A;
+  --kC:var(--navy);   --kC-bg:#E4EBF7; --kC-ink:var(--navy-deep);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
-body{font-family:"Noto Sans JP",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.75;overflow-x:hidden}
-h1,h2,h3{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif;margin:0}
+body{font-family:var(--font-body);color:var(--ink);background:var(--bg);font-size:15px;line-height:1.75;overflow-x:hidden}
+h1,h2,h3{font-family:var(--font-display);margin:0}
 button{font-family:inherit}
 
-/* header */
-.hdr{background:linear-gradient(155deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:#fff}
-.hdr-in{max-width:640px;margin:0 auto;padding:12px 16px 22px}
-.back{display:inline-block;color:#fff;text-decoration:none;font-size:12.5px;opacity:.88;padding:4px 0}
-.back:hover{opacity:1}
-.logo{display:flex;align-items:center;gap:8px;margin-top:10px}
-.logo svg{width:22px;height:22px;flex:0 0 auto}
-.logo span{font-family:"Noto Serif",serif;font-weight:700;font-size:15px;letter-spacing:.06em}
-.hdr h1{font-size:25px;font-weight:900;margin:8px 0 2px;letter-spacing:.02em}
-.hdr .sub{margin:0;font-size:13px;opacity:.92}
-
-main{max-width:640px;margin:0 auto;padding:18px 16px 28px}
+main{max-width:640px;margin:0 auto;padding:14px 16px 28px}
 .intro{font-size:13.5px;color:var(--ink-60);margin:0 0 16px}
 .small{font-size:11.5px;color:var(--ink-60);line-height:1.7}
 
-/* years box */
-.yrs{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 16px;margin-bottom:10px;border-top:5px solid var(--navy)}
-.yrs h2{font-size:16px;font-weight:700;color:var(--navy-deep)}
+/* years box（主役カード1） */
+.yrs{padding:18px 16px;margin-bottom:10px}
+.yrs h2{font-size:18px;font-weight:900;color:var(--ink)}
 .yrs .hint{margin:2px 0 12px;font-size:12.5px;color:var(--ink-60)}
-.yin{display:flex;align-items:center;gap:10px;background:var(--mist);border:1.5px solid var(--line);border-radius:12px;padding:6px 14px}
-.yin:focus-within{border-color:var(--navy-light)}
-.yin input{flex:1;min-width:0;width:100%;border:0;background:none;outline:none;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:24px;color:var(--navy-deep)}
+.yin{display:flex;align-items:center;gap:10px;background:var(--mist);border:1.5px solid var(--line);border-radius:14px;padding:6px 16px}
+.yin:focus-within{border-color:var(--c)}
+.yin input{flex:1;min-width:0;width:100%;border:0;background:none;outline:none;font-family:var(--font-display);font-weight:900;font-size:24px;color:var(--c-deep)}
 .yin input::placeholder{color:#A9B6CA}
 .yin .u{font-weight:700;color:var(--ink-60)}
 .ratio{margin-top:14px}
 .ratio .lbl{font-size:12.5px;color:var(--ink-60)}
-.ratio .num{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:30px;line-height:1.3;color:var(--orange)}
+.ratio .num{font-family:var(--font-display);font-weight:900;font-size:32px;line-height:1.3;color:var(--orange)}
 .ratio .num small{font-size:15px;color:var(--ink);font-weight:700;margin-right:4px}
-.meter{height:10px;border-radius:6px;background:var(--mist);overflow:hidden;margin:6px 0 6px}
-.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),#F9A05A);border-radius:6px;transition:width .3s}
+.meter{height:10px;border-radius:var(--r-pill);background:var(--mist);overflow:hidden;margin:6px 0 6px}
+.meter i{display:block;height:100%;width:0;background:var(--orange);border-radius:var(--r-pill);transition:width .3s}
 .ratio .msg{font-size:12.5px;color:var(--ink)}
 .ratio .msg.ok{color:var(--green);font-weight:700}
 .yrs-note{margin:0 2px 18px}
 
 /* checklist */
-.grp{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-bottom:14px}
-.grp h2{font-size:16px;font-weight:700;color:var(--navy-deep);display:flex;align-items:center;gap:8px}
-.grp h2::before{content:"";width:6px;height:18px;border-radius:3px;background:var(--navy);flex:0 0 auto}
+.grp{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.grp h2{font-size:16px;font-weight:900;color:var(--ink);display:flex;align-items:center;gap:8px}
+.grp h2::before{content:"";width:6px;height:18px;border-radius:3px;background:var(--c);flex:0 0 auto}
 .grp .gd{margin:2px 0 4px}
 .it{display:flex;gap:11px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
 .it:last-child{border-bottom:0;padding-bottom:2px}
 .it input{appearance:none;-webkit-appearance:none;margin:2px 0 0;width:22px;height:22px;flex:0 0 auto;border:2px solid #B9C6D9;border-radius:7px;background:#fff;position:relative;cursor:pointer;transition:background .15s,border-color .15s}
-.it input:checked{background:var(--green);border-color:var(--green)}
+.it input:checked{background:var(--c);border-color:var(--c)}
 .it input:checked::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
-.it input:focus-visible{outline:3px solid rgba(46,98,184,.35);outline-offset:2px}
 .it .tx{flex:1;min-width:0;font-size:14px;line-height:1.6}
 .it .nm{display:block;font-weight:500}
-.tag{display:inline-block;margin-top:5px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11px;padding:1px 10px;border-radius:999px;white-space:nowrap}
-.tag.L{background:#E4F3EA;color:var(--green)}
-.tag.T{background:#FBE9E7;color:var(--red)}
-.tag.C{background:#FEEFE2;color:#B85A10}
+.tag{display:inline-flex;align-items:center;gap:5px;margin-top:5px;font-family:var(--font-display);font-weight:700;font-size:11px;padding:1px 10px 1px 8px;border-radius:var(--r-pill);white-space:nowrap;border:1px solid transparent}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.tag.L{background:var(--kL-bg);color:var(--kL-ink);border-color:rgba(30,138,76,.25)}
+.tag.T{background:var(--kT-bg);color:var(--kT-ink);border-color:rgba(240,122,28,.3)}
+.tag.C{background:var(--kC-bg);color:var(--kC-ink);border-color:rgba(27,69,146,.25)}
 .it .ex{display:block;margin-top:3px;font-size:12px;color:var(--ink-60);line-height:1.65}
-.it.on .nm{color:var(--navy-deep);font-weight:700}
+.it.on .nm{color:var(--c-deep);font-weight:700}
 
-/* result */
-.res{background:linear-gradient(155deg,var(--navy-deep),var(--navy));color:#fff;border-radius:var(--r);padding:18px 16px;margin-bottom:14px;box-shadow:var(--shadow)}
-.res h2{font-size:16px;font-weight:700;margin-bottom:10px}
-.cnt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
-.cnt div{background:rgba(255,255,255,.13);border-radius:12px;padding:10px 4px;text-align:center}
-.cnt b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:26px;line-height:1.2}
-.cnt .L b{color:#7EE0A6}
-.cnt .T b{color:#FFB2A8}
-.cnt .C b{color:#FFC48F}
-.cnt span{font-size:11px;opacity:.92}
-.btn{display:block;width:100%;border:0;border-radius:12px;padding:13px 14px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:14.5px;text-align:center;text-decoration:none;cursor:pointer}
-.btn:active{transform:scale(.98)}
-.btn.pri{background:var(--orange);color:#fff;box-shadow:0 4px 12px rgba(244,123,32,.35)}
-.btn.line{background:#fff;color:var(--navy-deep);margin-top:8px}
-.btn.reset{background:transparent;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.35);font-size:12.5px;padding:9px;margin-top:10px}
-.res .how{margin:10px 0 0;font-size:12px;opacity:.92;line-height:1.7}
+/* result（主役カード2） */
+.res{padding:18px 16px;margin-bottom:14px}
+.res h2{font-size:18px;font-weight:900;color:var(--ink);margin-bottom:10px}
+.cnt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.cnt div{border-radius:14px;padding:10px 4px 8px;text-align:center;border:1.5px solid transparent}
+.cnt b{display:block;font-family:var(--font-display);font-weight:900;font-size:28px;line-height:1.2}
+.cnt span{font-size:11px;font-weight:700;font-family:var(--font-display)}
+.cnt .L{background:var(--kL-bg);border-color:rgba(30,138,76,.3)} .cnt .L b{color:var(--kL)} .cnt .L span{color:var(--kL-ink)}
+.cnt .T{background:var(--kT-bg);border-color:rgba(240,122,28,.35)} .cnt .T b{color:var(--kT)} .cnt .T span{color:var(--kT-ink)}
+.cnt .C{background:var(--kC-bg);border-color:rgba(27,69,146,.3)} .cnt .C b{color:var(--kC)} .cnt .C span{color:var(--kC-ink)}
+.res .c-btn{font-size:14.5px;letter-spacing:.02em}
+.res .c-btn+.c-btn{margin-top:12px}
+.btn.reset{display:block;width:100%;background:transparent;color:var(--ink-60);border:1px solid var(--line);border-radius:var(--r-pill);font-family:var(--font-display);font-weight:700;font-size:12.5px;padding:9px;margin-top:12px;cursor:pointer}
+.btn.reset:hover{background:var(--mist)}
+.res .how{margin:12px 0 0;font-size:12px;color:var(--ink-60);line-height:1.7}
 
 /* tips */
-.tips{background:#FFF7F0;border:1px solid #F8D5B8;border-radius:var(--r);padding:16px;margin-bottom:14px}
-.tips h2{font-size:16px;font-weight:700;color:#A54C0B;display:flex;align-items:center;gap:8px}
+.tips{padding:16px;margin-bottom:14px}
+.tips h2{font-size:16px;font-weight:900;color:var(--ink);display:flex;align-items:center;gap:8px}
 .tips h2::before{content:"";width:6px;height:18px;border-radius:3px;background:var(--orange);flex:0 0 auto}
 .tips ol{margin:10px 0 0;padding-left:1.3em;font-size:13.5px}
 .tips li{margin-bottom:7px}
+.tips li::marker{color:var(--orange);font-weight:700}
 .tips li:last-child{margin-bottom:0}
 
-.disc{margin:0 2px 18px}
-.foot{text-align:center;font-size:11px;color:var(--ink-60);line-height:1.85;padding:4px 16px 24px}
+.disc{margin:0 2px 4px}
 
-.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,12px);background:var(--ink);color:#fff;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13px;padding:10px 18px;border-radius:24px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;max-width:calc(100% - 32px);text-align:center}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,12px);background:var(--ink);color:#fff;font-family:var(--font-display);font-weight:700;font-size:13px;padding:10px 18px;border-radius:var(--r-pill);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;max-width:calc(100% - 32px);text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
-<body>
+<body class="is-navy">
 
-<header class="hdr">
-  <div class="hdr-in">
-    <a class="back" href="../../index.html">← 特典一覧</a>
-    <div class="logo">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3.5 21 11" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="5.5" y="10.5" width="13" height="10" rx="1" fill="none" stroke="#fff" stroke-width="2"/><rect x="10" y="13.5" width="4" height="4" fill="#fff"/></svg>
-      <span>CLASSICAL</span>
-    </div>
-    <h1>退去費用チェッカー</h1>
-    <p class="sub">その請求、本当にあなたが払うべきもの？</p>
+<header class="c-top">
+  <div class="c-top-in">
+    <a class="c-back" href="../../index.html">‹ 特典一覧</a>
+    <a class="c-logo" href="../../index.html" aria-label="CLASSICAL トップ">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 13.5h4v4h-4z"/></svg>
+      <b>CLASSICAL</b>
+    </a>
   </div>
 </header>
+<section class="c-hero">
+  <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5L6 21z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span>
+  <div>
+    <h1>退去費用チェッカー</h1>
+    <p>その請求、本当に<em>あなたが払うべきもの</em>？</p>
+  </div>
+</section>
 
 <main>
   <p class="intro">退去時の修繕費を貸主・借主のどちらが負担するかは、国土交通省のガイドラインに基本的な考え方がまとめられています。お部屋の状態に近いものを選んで、負担の目安を確認してみましょう。</p>
 
-  <section class="yrs" aria-labelledby="yrsTitle">
+  <section class="yrs c-card" aria-labelledby="yrsTitle">
     <h2 id="yrsTitle">何年住みましたか？</h2>
     <p class="hint">住んだ期間が長いほど、クロスなどの借主負担は小さくなります</p>
     <div class="yin">
@@ -145,20 +138,20 @@ main{max-width:640px;margin:0 auto;padding:18px 16px 28px}
 
   <div id="groups"></div>
 
-  <section class="res" aria-labelledby="resTitle">
+  <section class="res c-card" aria-labelledby="resTitle">
     <h2 id="resTitle">チェック結果</h2>
     <div class="cnt">
       <div class="L"><b id="nL">0</b><span>貸主の負担</span></div>
       <div class="T"><b id="nT">0</b><span>借主の負担</span></div>
       <div class="C"><b id="nC">0</b><span>契約しだい</span></div>
     </div>
-    <button class="btn pri" id="copyBtn" type="button">結果をコピーしてクラシカルに相談</button>
-    <a class="btn line" id="lineBtn" href="#" target="_blank" rel="noopener">LINEでトークを開く</a>
+    <button class="c-btn" id="copyBtn" type="button"><span>結果をコピーしてクラシカルに相談</span></button>
+    <a class="c-btn is-green" id="lineBtn" href="#" target="_blank" rel="noopener"><span>LINEでトークを開く</span></a>
     <p class="how">チェックした項目と居住年数が文章でコピーされます。LINEのトークに貼り付けて、見積書や請求書の写真と一緒に送ってください。金額が妥当かどうか、一緒に確認します。</p>
     <button class="btn reset" id="resetBtn" type="button">チェックをすべてリセット</button>
   </section>
 
-  <section class="tips" aria-labelledby="tipsTitle">
+  <section class="tips c-panel" aria-labelledby="tipsTitle">
     <h2 id="tipsTitle">請求書を受け取ったら確認したいこと</h2>
     <ol>
       <li><b>明細があるか。</b>「原状回復費 一式」とだけ書かれていたら、項目ごとの内訳を出してもらいましょう。</li>
@@ -171,7 +164,10 @@ main{max-width:640px;margin:0 auto;padding:18px 16px 28px}
   <p class="small disc">※ この判定は、国土交通省「原状回復をめぐるトラブルとガイドライン」の考え方に沿った一般的な目安です。実際にどちらが負担するかは、賃貸借契約書（特約）の内容、お部屋の状態、当事者間の合意によって異なります。迷ったときは、契約書と請求書を用意してご相談ください。</p>
 </main>
 
-<footer class="foot">
+<footer class="c-foot">
+  <div class="c-sky" aria-hidden="true"></div>
+  <a class="c-logo" href="../../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 13.5h4v4h-4z"/></svg><b>CLASSICAL</b></a>
+  <span class="c-tagline">お部屋探しはクラシカルにお任せください！</span>
   株式会社CLASSICAL／大阪府知事（1）第65247号<br>
   〒564-0053 大阪府吹田市江の木町16-34-501<br>
   本ツールの結果は目安であり、法的な判断を保証するものではありません。
