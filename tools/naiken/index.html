@@ -226,7 +226,9 @@ textarea:focus{border-color:var(--c)}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-const LINE_URL = "#";  // TODO: 公式LINEのURL
+const LINE_ID = "@770zgakn";  // 公式LINEのベーシックID
+const LINE_TEXT = "内見チェックシートを使って相談したいです";  // トークの入力欄にあらかじめ入る文章（空 "" にすると入力欄は空で開きます）
+const LINE_URL = "https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID) + "/" + (LINE_TEXT ? "?" + encodeURIComponent(LINE_TEXT) : "");
 
 /* ===== チェック項目（id は保存データのキー。変更しないこと） ===== */
 const SECTIONS = [

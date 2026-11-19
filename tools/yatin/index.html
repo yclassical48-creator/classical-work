@@ -158,7 +158,9 @@ button{font-family:inherit}
 </div>
 
 <script>
-const LINE_URL = "#";  // TODO: 公式LINEのURL
+const LINE_ID = "@770zgakn";  // 公式LINEのベーシックID
+const LINE_TEXT = "家賃相場マップを見て相談したいです";  // トークの入力欄にあらかじめ入る文章（空 "" にすると入力欄は空で開きます）
+const LINE_URL = "https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID) + "/" + (LINE_TEXT ? "?" + encodeURIComponent(LINE_TEXT) : "");
 document.getElementById("lineBtn").href = LINE_URL;
 
 /* 相場データ: v=[1K, 1LDK, 2LDK, 3LDK]（家賃＋管理費の中央値・万円、null=データ不足）／ n=集計した部屋数 ／ c=集計条件（0=基本 1〜3=条件を広げた段階、COND参照）／ st=主な駅 ／ tx=街の様子 ／ grp=地域グループ */

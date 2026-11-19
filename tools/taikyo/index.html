@@ -176,7 +176,9 @@ main{max-width:640px;margin:0 auto;padding:14px 16px 28px}
 <div class="toast" id="toast" role="status"></div>
 
 <script>
-const LINE_URL = "#";  // TODO: 公式LINEのURL
+const LINE_ID = "@770zgakn";  // 公式LINEのベーシックID
+const LINE_TEXT = "退去費用チェッカーを使って相談したいです";  // トークの入力欄にあらかじめ入る文章（空 "" にすると入力欄は空で開きます）
+const LINE_URL = "https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID) + "/" + (LINE_TEXT ? "?" + encodeURIComponent(LINE_TEXT) : "");
 
 (function(){
   "use strict";

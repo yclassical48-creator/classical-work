@@ -168,7 +168,9 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body)
 </footer>
 
 <script>
-  const LINE_URL = "#"; // TODO: 公式LINEのURL（例: https://lin.ee/xxxxxxx）
+  const LINE_ID = "@770zgakn";  // 公式LINEのベーシックID
+const LINE_TEXT = "特典ツールについて相談したいです";  // トークの入力欄にあらかじめ入る文章（空 "" にすると入力欄は空で開きます）
+const LINE_URL = "https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID) + "/" + (LINE_TEXT ? "?" + encodeURIComponent(LINE_TEXT) : "");
   document.getElementById("line-btn").href = LINE_URL;
 </script>
 </body>
