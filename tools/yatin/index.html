@@ -90,8 +90,6 @@ button{font-family:inherit}
 .badge{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;padding:2px 10px;margin:9px 6px 0 0;background:var(--mist);color:var(--navy)}
 .badge.est{background:#FEF0E4;color:#B4570F}
 .badge.home2{background:#E6F4EC;color:var(--green)}
-.cmp{margin-top:10px;font-size:12px;color:var(--ink-60);background:var(--mist);border-radius:10px;padding:8px 11px}
-.cmp b{color:var(--ink)}
 
 .src{font-size:11px;line-height:1.65;color:var(--ink-60);margin:14px 0 0}
 
@@ -350,14 +348,6 @@ function renderInfo(){
   const a = AREAS[k], pool = priced().sort((p,q)=>price(p)-price(q)), x = price(k);
   const rank = pool.indexOf(k) + 1;
   const scope = state.view==="city" ? "24区のうち" : state.view==="eki" ? "吹田周辺"+pool.length+"駅のうち" : "府内"+pool.length+"エリアのうち";
-  let cmp = "";
-  if(k!==HOME_AREA && state.view!=="city" && x!==null && wide(k)){
-    cmp = '<div class="cmp">集計条件が吹田市（築10年以内・マンション）と異なるため、金額の単純比較はできません</div>';
-  } else if(k!==HOME_AREA && state.view!=="city" && x!==null){
-    const diff = price(k) - price(HOME_AREA);
-    const s = Math.abs(diff) < 0.05 ? "とほぼ同じ" : (diff>0 ? "より約"+Math.abs(diff).toFixed(1)+"万円高め" : "より約"+Math.abs(diff).toFixed(1)+"万円安め");
-    cmp = '<div class="cmp">当社のある<b>吹田市</b>（'+show(price(HOME_AREA))+'万円）'+s+'</div>';
-  }
   $("info").innerHTML =
     '<p class="i-name">'+fullName(k)+'<small>'+ROOMS[state.room]+'</small></p>'
     +(x===null ? '<p class="i-price" style="font-size:20px">データ不足</p>' : '<p class="i-price">'+show(x)+'<small> 万円／月</small></p>')
@@ -367,8 +357,7 @@ function renderInfo(){
     +(x!==null ? '<p class="i-st" style="margin-top:6px">集計条件：'+COND[a.c[state.room]]+'（'+a.n[state.room]+'室）</p>' : '')
     +(x!==null && wide(k) ? '<span class="badge est">＊物件が少ないため条件を広げた値</span>' : '')
     +(x!==null && few(k) ? '<span class="badge est">※10室未満の参考値</span>' : '')
-    +(k===HOME_AREA ? '<span class="badge home2">当社所在地のエリア</span>' : '')
-    + cmp;
+    +(k===HOME_AREA ? '<span class="badge home2">当社所在地のエリア</span>' : '');
 }
 function renderSrc(){
   $("src").innerHTML = "※ 出典：SUUMOに2026年11月18〜19日時点で掲載中の賃貸物件（同じ部屋の重複掲載は1件にまとめて集計）。<b>築10年以内・賃貸マンション・駅徒歩10分以内</b>の部屋の「家賃＋管理費・共益費」の中央値を当社で算出した目安です。10室に満たない場所は、築15年以内→アパートを含む→徒歩15分以内の順に条件を広げています（＊印）。それでも10室未満のものは参考値（※印）、該当がない場合は「—」です。掲載中の物件をもとにしているため、時期によって変わります。"
