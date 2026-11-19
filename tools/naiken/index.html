@@ -7,76 +7,63 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/classical.css">
 <style>
-:root{
-  --navy:#14418B;--navy-deep:#0D2E66;--navy-light:#2E62B8;
-  --orange:#F47B20;--green:#1E8B4A;
-  --ink:#1B2433;--ink-60:#5A6475;
-  --bg:#F5F7FB;--mist:#EDF2FA;--line:#DCE4EF;--paper:#FFFFFF;
-  --shadow:0 3px 14px rgba(13,46,102,.09);--r:16px;
-}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
-body{font-family:"Noto Sans JP",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);
+body{font-family:var(--font-body);color:var(--ink);background:var(--bg);
   font-size:15px;line-height:1.75;padding-bottom:92px;overflow-x:hidden}
-h1,h2,h3{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif;margin:0}
+h1,h2,h3{font-family:var(--font-display);margin:0}
 button,input,textarea{font:inherit}
 
-/* header */
-.top{background:linear-gradient(155deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:#fff}
-.top-in{max-width:640px;margin:0 auto;padding:12px 16px 22px}
-.back{display:inline-block;color:#fff;text-decoration:none;font-size:12.5px;opacity:.9;padding:4px 0}
-.logo{display:flex;align-items:center;gap:8px;margin-top:10px}
-.logo svg{width:24px;height:24px;flex:0 0 auto}
-.logo b{font-family:"Noto Serif",serif;font-weight:700;letter-spacing:.06em;font-size:17px}
-.top h1{font-size:25px;font-weight:900;margin-top:8px;letter-spacing:.02em}
-.top p{margin:2px 0 0;font-size:13px;opacity:.9}
-
-.main{max-width:640px;margin:0 auto;padding:0 16px 24px}
+.main{max-width:640px;margin:0 auto;padding:0 16px 8px}
 
 /* property tabs */
-.tabbar{position:sticky;top:0;z-index:20;background:var(--bg);padding:10px 0 6px}
+.tabbar{position:sticky;top:0;z-index:20;background:var(--bg);padding:12px 0 6px}
 .tabs{display:flex;gap:7px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tab{flex:0 0 auto;max-width:168px;text-align:left;background:var(--paper);border:1.5px solid var(--line);
-  border-radius:12px;padding:6px 12px;cursor:pointer;color:var(--ink)}
-.tab .t-name{display:block;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13px;
+  border-radius:14px;padding:6px 14px;cursor:pointer;color:var(--ink)}
+.tab .t-name{display:block;font-family:var(--font-display);font-weight:700;font-size:13px;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tab .t-meta{display:block;font-size:10.5px;color:var(--ink-60)}
 .tab .t-meta em{font-style:normal;color:var(--orange)}
-.tab.is-on{border-color:var(--navy);background:var(--mist);box-shadow:0 2px 8px rgba(20,65,139,.16)}
-.tab.tab-new{border-style:dashed;color:var(--navy);font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:12.5px;
-  display:flex;align-items:center}
+.tab.is-on{border:2px solid var(--c);padding:5.5px 13.5px;background:var(--paper);box-shadow:var(--shadow)}
+.tab.is-on .t-name{color:var(--c-deep)}
+.tab.tab-new{border-style:dashed;border-color:var(--c);color:var(--c);font-family:var(--font-display);font-weight:700;font-size:12.5px;
+  display:flex;align-items:center;border-radius:var(--r-pill)}
 
-.box{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-bottom:14px}
-.ttl{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;color:var(--navy-deep);margin-bottom:8px}
-.ttl .num{width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;
-  display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-weight:700}
-.ttl .cnt{margin-left:auto;font-family:"Noto Sans JP",sans-serif;font-size:11.5px;font-weight:500;color:var(--ink-60)}
-.ttl .cnt.all{color:var(--green);font-weight:700}
+/* section boxes (built by JS as .box) */
+.box{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-card);padding:16px;margin-bottom:14px}
+.box.c-card{border:2.5px solid var(--c);box-shadow:var(--shadow)}
+.ttl{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:900;color:var(--ink);margin-bottom:8px}
+.ttl .num{width:26px;height:26px;border-radius:50%;background:var(--c);color:#fff;font-size:12.5px;
+  display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-weight:900}
+.ttl .cnt{margin-left:auto;font-family:var(--font-body);font-size:11.5px;font-weight:500;color:var(--ink-60);white-space:nowrap}
+.ttl .cnt.all{color:var(--c);font-weight:700}
 .small{font-size:11.5px;color:var(--ink-60);line-height:1.65;margin:0}
 
 /* name */
-.namebox label{display:block;font-size:12px;color:var(--ink-60);margin-bottom:2px}
+.namebox label{display:block;font-size:12px;font-weight:700;color:var(--c-deep);margin-bottom:2px;font-family:var(--font-display)}
 .namebox input{width:100%;border:0;border-bottom:2px solid var(--line);background:none;outline:none;
-  padding:4px 0;font-family:"Zen Maru Gothic",sans-serif;font-size:17px;font-weight:700;color:var(--ink)}
-.namebox input:focus{border-color:var(--navy)}
-.privacy{margin:12px 0 0;padding:10px 12px;background:var(--mist);border-radius:10px;font-size:11.5px;line-height:1.7;color:var(--ink-60)}
+  padding:4px 0;font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--ink)}
+.namebox input:focus{border-color:var(--c)}
+.privacy{margin:12px 0 0;padding:10px 12px;background:var(--mist);border-radius:12px;font-size:11.5px;line-height:1.7;color:var(--ink-60)}
 .privacy strong{color:var(--navy)}
-.intro{font-size:13px;color:var(--ink-60);margin:0 0 12px}
+.intro{font-size:13px;color:var(--ink-60);margin:0 2px 12px}
 
 /* progress */
-.meter{display:flex;align-items:center;gap:12px;background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);
-  padding:12px 14px;margin-bottom:14px}
-.meter-l{font-size:12px;color:var(--ink-60);white-space:nowrap}
+.meter{display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-pill);
+  padding:10px 16px;margin-bottom:14px}
+.meter-l{font-size:12px;font-weight:700;color:var(--ink-60);white-space:nowrap;font-family:var(--font-display)}
 .track{flex:1;height:9px;background:var(--mist);border-radius:6px;overflow:hidden}
-.track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--navy-light),var(--navy));border-radius:6px;transition:width .3s}
-.track i.full{background:var(--green)}
-.meter-v{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:15px;color:var(--orange);min-width:58px;text-align:right}
+.track i{display:block;height:100%;width:0;background:var(--c);border-radius:6px;transition:width .3s}
+.track i.full{background:var(--orange)}
+.meter-v{font-family:var(--font-display);font-weight:900;font-size:15px;color:var(--orange);min-width:58px;text-align:right}
 
 /* rating */
 .rate{display:flex;gap:7px}
-.rate button{flex:1;aspect-ratio:1/1;max-height:62px;border:1.5px solid var(--line);background:var(--paper);border-radius:12px;
+.rate button{flex:1;aspect-ratio:1/1;max-height:62px;border:1.5px solid var(--line);background:var(--paper);border-radius:14px;
   font-size:24px;line-height:1;color:#CFD8E6;cursor:pointer;transition:.15s}
 .rate button.lit{color:var(--orange);border-color:#F9C9A2;background:#FFF6EE}
 .rate button:active{transform:scale(.94)}
@@ -87,81 +74,79 @@ button,input,textarea{font:inherit}
 .item{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-top:1px dashed var(--line);cursor:pointer;font-size:14px}
 .ttl + .item{border-top:0}
 .item input{appearance:none;-webkit-appearance:none;margin:2px 0 0;flex:0 0 auto;width:22px;height:22px;border-radius:7px;
-  border:2px solid var(--line);background:var(--paper);position:relative;cursor:pointer;transition:.15s}
-.item input:checked{background:var(--green);border-color:var(--green)}
+  border:2px solid #C9D1DD;background:var(--paper);position:relative;cursor:pointer;transition:.15s}
+.item input:checked{background:var(--c);border-color:var(--c)}
 .item input:checked::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid #fff;
   border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
-.item input:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.item input:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
 .item .txt{flex:1;min-width:0}
 .item input:checked + .txt .main-t{color:var(--ink-60);text-decoration:line-through;text-decoration-color:#B9C5D6}
 .item .sub-t{display:block;font-size:11.5px;color:var(--ink-60);line-height:1.6;margin-top:1px}
 
 /* memo */
-.mlabel{display:block;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13px;margin:0 0 5px}
+.mlabel{display:block;font-family:var(--font-display);font-weight:700;font-size:13px;margin:0 0 5px}
 .mlabel.mt{margin-top:14px}
-textarea{width:100%;min-height:80px;resize:vertical;border:1.5px solid var(--line);border-radius:11px;padding:10px 11px;
+textarea{width:100%;min-height:80px;resize:vertical;border:1.5px solid var(--line);border-radius:12px;padding:10px 11px;
   font-size:14px;line-height:1.7;color:var(--ink);background:var(--paper);outline:none}
-textarea:focus{border-color:var(--navy)}
+textarea:focus{border-color:var(--c)}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;cursor:pointer;text-decoration:none;
-  font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13.5px;padding:11px 15px;border-radius:12px;white-space:nowrap;
-  background:var(--orange);color:#fff;box-shadow:0 3px 10px rgba(244,123,32,.32)}
-.btn:active{transform:scale(.97)}
-.btn.sub{background:var(--paper);color:var(--navy);border:1.5px solid var(--line);box-shadow:none}
-.btn.line{background:#06C755;box-shadow:0 3px 10px rgba(6,199,85,.28)}
-.btn.wide{display:flex;width:100%}
-.btn-stack{display:grid;gap:8px;margin-top:14px}
-
-.foot{text-align:center;font-size:11px;color:var(--ink-60);line-height:1.85;padding:8px 0 16px}
+.btn-stack{display:grid;gap:10px;margin-top:14px}
+.btn-stack .c-btn{font-size:14px}
 
 /* bottom bar */
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.96);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
-.dock-in{max-width:640px;margin:0 auto;padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px}
-.dock .btn{flex:1;padding:11px 6px}
-.dock .btn.sub{flex:1}
+.dock-in{max-width:640px;margin:0 auto;padding:10px 16px calc(12px + env(safe-area-inset-bottom));display:flex;gap:8px}
+.dock .c-btn{flex:1;width:auto;min-width:0;padding:8px 6px;font-size:13.5px;letter-spacing:.02em;white-space:nowrap}
+.dock .c-btn.ghost{border-width:1.5px}
+.dock #saveNow{flex:1.15}
 
 /* sheets */
-.overlay{position:fixed;inset:0;z-index:50;background:rgba(13,46,102,.42);display:none;align-items:flex-end;justify-content:center}
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(26,39,64,.42);display:none;align-items:flex-end;justify-content:center}
 .overlay.show{display:flex}
-.panel{background:var(--paper);width:100%;max-width:640px;max-height:86vh;overflow:auto;border-radius:20px 20px 0 0;
-  padding:18px 16px calc(18px + env(safe-area-inset-bottom))}
-.panel h3{font-size:16px;color:var(--navy-deep);margin-bottom:10px}
+.panel{background:var(--paper);width:100%;max-width:640px;max-height:86vh;overflow:auto;border-radius:22px 22px 0 0;
+  border-top:3px solid var(--c);padding:18px 16px calc(18px + env(safe-area-inset-bottom))}
+.panel h3{font-size:17px;font-weight:900;color:var(--ink);margin-bottom:10px}
 .rec{display:flex;align-items:center;gap:8px;padding:11px 0;border-bottom:1px dashed var(--line)}
 .rec-i{flex:1;min-width:0}
-.rec-n{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rec-n{font-family:var(--font-display);font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rec-d{font-size:11px;color:var(--ink-60)}
-.rec button{border:0;cursor:pointer;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:12px;padding:7px 10px;border-radius:9px}
-.rec .r-open{background:var(--mist);color:var(--navy)}
+.rec button{border:0;cursor:pointer;font-family:var(--font-display);font-weight:700;font-size:12px;padding:7px 12px;border-radius:var(--r-pill)}
+.rec .r-open{background:var(--c);color:#fff}
 .rec .r-del{background:none;color:#C0392B}
 .none{text-align:center;color:var(--ink-60);font-size:13px;padding:22px 0}
-.preview{display:block;width:100%;border:1px solid var(--line);border-radius:11px}
+.preview{display:block;width:100%;border:1px solid var(--line);border-radius:12px}
 
-.toast{position:fixed;left:50%;bottom:104px;transform:translate(-50%,10px);max-width:calc(100% - 32px);background:var(--navy-deep);color:#fff;
-  font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13px;padding:10px 18px;border-radius:22px;opacity:0;
+.toast{position:fixed;left:50%;bottom:104px;transform:translate(-50%,10px);max-width:calc(100% - 32px);background:var(--ink);color:#fff;
+  font-family:var(--font-display);font-weight:700;font-size:13px;padding:10px 18px;border-radius:22px;opacity:0;
   pointer-events:none;transition:.25s;z-index:60;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
-<body>
+<body class="is-green">
 
-<header class="top">
-  <div class="top-in">
-    <a class="back" href="../../index.html">← 特典一覧</a>
-    <div class="logo" aria-label="CLASSICAL">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 11.5 12 3l9.5 8.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="5" y="10.5" width="14" height="10.5" rx="1" fill="none" stroke="#fff" stroke-width="2"/><rect x="10" y="13.5" width="4" height="4" fill="#F47B20"/></svg>
+<header class="c-top">
+  <div class="c-top-in">
+    <a class="c-back" href="../../index.html">‹ 特典一覧</a>
+    <a class="c-logo" href="../../index.html" aria-label="CLASSICAL トップ">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 13.5h4v4h-4z"/></svg>
       <b>CLASSICAL</b>
-    </div>
-    <h1>内見チェックシート</h1>
-    <p>1日の暮らしの順にチェック。物件ごとに記録が残せます。</p>
+    </a>
   </div>
 </header>
+<section class="c-hero">
+  <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 11 4l8 7"/><path d="M5 9.5V19h6"/><circle cx="16.5" cy="15.5" r="3"/><path d="m18.7 17.7 2.3 2.3"/></svg></span>
+  <div>
+    <h1>内見チェックシート</h1>
+    <p><em>1日の暮らしの順</em>にチェック。物件ごとに記録が残せます。</p>
+  </div>
+</section>
 
 <main class="main">
   <div class="tabbar"><div class="tabs" id="tabs" role="tablist" aria-label="物件の切り替え"></div></div>
 
-  <section class="box namebox">
+  <section class="box c-card namebox">
     <label for="propName">物件名（あとから変更できます）</label>
     <input id="propName" type="text" placeholder="例）〇〇ハイツ 203号室" autocomplete="off">
     <p class="privacy">記録は<strong>お使いの端末のブラウザ内だけ</strong>に保存され、クラシカルを含むどこにも送信されません。
@@ -186,31 +171,34 @@ textarea:focus{border-color:var(--navy)}
 
   <div id="checklist"></div>
 
-  <section class="box">
+  <section class="box c-card">
     <h2 class="ttl">内見を終えてのメモ</h2>
     <label class="mlabel" for="memoGood">良かったところ</label>
     <textarea id="memoGood" placeholder="例）南向きで明るい、キッチンが広い、駅前がにぎやか"></textarea>
     <label class="mlabel mt" for="memoWorry">気になった点・質問したいこと</label>
     <textarea id="memoWorry" placeholder="例）収納が少なめ、夜道が暗そう、更新料はいくら？"></textarea>
     <div class="btn-stack">
-      <button type="button" class="btn wide" data-copy>内容をコピーしてクラシカルに相談する</button>
-      <a class="btn line wide" id="lineBtn" href="#" target="_blank" rel="noopener">LINEを開く</a>
+      <button type="button" class="c-btn ghost" data-copy><span>内容をコピーしてクラシカルに相談する</span></button>
+      <a class="c-btn is-green" id="lineBtn" href="#" target="_blank" rel="noopener"><span>LINEを開く</span></a>
     </div>
     <p class="small" style="margin-top:8px">チェックした項目・お気に入り度・メモが文章でコピーされます。クラシカル公式LINEのトークに貼り付けて送っていただければ、気になる点にお答えします。</p>
   </section>
-
-  <footer class="foot">
-    株式会社CLASSICAL／大阪府知事（1）第65247号<br>
-    〒564-0053 大阪府吹田市江の木町16-34-501<br>
-    チェック項目は一般的な確認ポイントです。物件ごとの設備・契約条件は個別にお問い合わせください。
-  </footer>
 </main>
+
+<footer class="c-foot">
+  <div class="c-sky" aria-hidden="true"></div>
+  <a class="c-logo" href="../../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 13.5h4v4h-4z"/></svg><b>CLASSICAL</b></a>
+  <span class="c-tagline">お部屋探しはクラシカルにお任せください！</span>
+  株式会社CLASSICAL／大阪府知事（1）第65247号<br>
+  〒564-0053 大阪府吹田市江の木町16-34-501<br>
+  チェック項目は一般的な確認ポイントです。物件ごとの設備・契約条件は個別にお問い合わせください。
+</footer>
 
 <nav class="dock">
   <div class="dock-in">
-    <button type="button" class="btn sub" id="openList">記録一覧</button>
-    <button type="button" class="btn sub" id="openImg">画像で保存</button>
-    <button type="button" class="btn" id="saveNow">保存する</button>
+    <button type="button" class="c-btn ghost no-arrow" id="openList">記録一覧</button>
+    <button type="button" class="c-btn ghost no-arrow" id="openImg">画像で保存</button>
+    <button type="button" class="c-btn no-arrow" id="saveNow">保存する</button>
   </div>
 </nav>
 
@@ -219,7 +207,7 @@ textarea:focus{border-color:var(--navy)}
     <h3 id="listTtl">保存した記録</h3>
     <p class="privacy" style="margin:0 0 8px">この一覧はこの端末のブラウザ内にだけあります。機種変更や履歴の削除では引き継がれません。</p>
     <div id="recList"></div>
-    <button type="button" class="btn sub wide" data-close style="margin-top:14px">閉じる</button>
+    <button type="button" class="c-btn ghost no-arrow" data-close style="margin-top:14px">閉じる</button>
   </div>
 </div>
 
@@ -228,9 +216,9 @@ textarea:focus{border-color:var(--navy)}
     <h3 id="imgTtl">画像を長押しで保存できます</h3>
     <img class="preview" id="previewImg" alt="内見チェックの記録画像">
     <div class="btn-stack">
-      <a class="btn wide" id="dlLink" download>画像をダウンロード</a>
-      <button type="button" class="btn sub wide" data-copy>文章としてコピー</button>
-      <button type="button" class="btn sub wide" data-close>閉じる</button>
+      <a class="c-btn" id="dlLink" download><span>画像をダウンロード</span></a>
+      <button type="button" class="c-btn ghost no-arrow" data-copy>文章としてコピー</button>
+      <button type="button" class="c-btn ghost no-arrow" data-close>閉じる</button>
     </div>
   </div>
 </div>
@@ -544,42 +532,43 @@ async function makeImage() {
   const HEAD = 200;
   const H = HEAD + 30 + rows.reduce((a, r) => a + (r.k === "gap" ? 14 : r.k === "h" ? 46 : LH), 0) + 70;
   cv.width = W; cv.height = H;
-  ctx.fillStyle = "#F5F7FB"; ctx.fillRect(0, 0, W, H);
-  const gr = ctx.createLinearGradient(0, 0, W, HEAD);
-  gr.addColorStop(0, "#0D2E66"); gr.addColorStop(1, "#2E62B8");
-  ctx.fillStyle = gr; ctx.fillRect(0, 0, W, HEAD);
-  ctx.fillStyle = "#fff";
+  ctx.fillStyle = "#FFFFFF"; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = "#1E8A4C"; ctx.fillRect(0, 0, W, 10);
+  ctx.fillStyle = "#DFE3EA"; ctx.fillRect(P, HEAD - 2, W - P * 2, 2);
+  ctx.fillStyle = "#1B4592";
   ctx.font = '700 22px "Noto Serif",serif'; ctx.fillText("CLASSICAL", P, 52);
-  ctx.font = "500 18px " + F; ctx.fillText("内見チェックシート", P + 150, 51);
+  ctx.fillStyle = "#1E8A4C";
+  ctx.font = "700 18px " + F; ctx.fillText("内見チェックシート", P + 150, 51);
+  ctx.fillStyle = "#1A2740";
   ctx.font = "700 38px " + F;
   let nm = name; while (ctx.measureText(nm).width > W - P * 2 && nm.length > 1) nm = nm.slice(0, -1);
   if (nm !== name) nm = nm.slice(0, -1) + "…";
   ctx.fillText(nm, P, 112);
   const done = boxes.filter(b => b.checked).length;
-  ctx.font = "400 20px " + F;
+  ctx.font = "400 20px " + F; ctx.fillStyle = "#55607A";
   ctx.fillText(today() + "　確認済み " + done + " / " + TOTAL, P, 156);
-  if (rating) { ctx.fillStyle = "#F47B20"; ctx.font = "700 22px " + F; ctx.fillText(starStr(rating), W - P - ctx.measureText(starStr(rating)).width, 156); }
+  if (rating) { ctx.fillStyle = "#F07A1C"; ctx.font = "700 22px " + F; ctx.fillText(starStr(rating), W - P - ctx.measureText(starStr(rating)).width, 156); }
   let y = HEAD + 40;
   rows.forEach(r => {
     if (r.k === "gap") { y += 14; return; }
     if (r.k === "h") {
       y += 10;
-      ctx.fillStyle = "#14418B"; ctx.fillRect(P, y - 21, 6, 24);
-      ctx.font = "700 24px " + F; ctx.fillStyle = "#0D2E66"; ctx.fillText(r.t, P + 16, y);
-      if (r.r) { ctx.font = "400 18px " + F; ctx.fillStyle = "#5A6475"; ctx.fillText(r.r, W - P - ctx.measureText(r.r).width, y); }
+      ctx.fillStyle = "#1E8A4C"; ctx.fillRect(P, y - 21, 6, 24);
+      ctx.font = "700 24px " + F; ctx.fillStyle = "#1A2740"; ctx.fillText(r.t, P + 16, y);
+      if (r.r) { ctx.font = "400 18px " + F; ctx.fillStyle = "#55607A"; ctx.fillText(r.r, W - P - ctx.measureText(r.r).width, y); }
       y += 36; return;
     }
-    if (r.k === "m") { ctx.font = "400 22px " + F; ctx.fillStyle = "#1B2433"; ctx.fillText(r.t, P, y); y += LH; return; }
+    if (r.k === "m") { ctx.font = "400 22px " + F; ctx.fillStyle = "#1A2740"; ctx.fillText(r.t, P, y); y += LH; return; }
     if (r.first) {
       const bx = P, by = y - 20;
-      if (r.c) { ctx.fillStyle = "#1E8B4A"; ctx.fillRect(bx, by, 22, 22);
+      if (r.c) { ctx.fillStyle = "#1E8A4C"; ctx.fillRect(bx, by, 22, 22);
         ctx.strokeStyle = "#fff"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(bx + 5, by + 11); ctx.lineTo(bx + 10, by + 16); ctx.lineTo(bx + 17, by + 6); ctx.stroke(); }
       else { ctx.strokeStyle = "#B9C5D6"; ctx.lineWidth = 2; ctx.strokeRect(bx + 1, by + 1, 20, 20); }
     }
-    ctx.font = "400 22px " + F; ctx.fillStyle = r.c ? "#5A6475" : "#1B2433"; ctx.fillText(r.t, P + 36, y);
+    ctx.font = "400 22px " + F; ctx.fillStyle = r.c ? "#55607A" : "#1A2740"; ctx.fillText(r.t, P + 36, y);
     y += LH;
   });
-  ctx.fillStyle = "#5A6475"; ctx.font = "400 18px " + F;
+  ctx.fillStyle = "#55607A"; ctx.font = "400 18px " + F;
   ctx.fillText("株式会社CLASSICAL　大阪府知事（1）第65247号", P, H - 30);
   const url = cv.toDataURL("image/png");
   $("previewImg").src = url;
