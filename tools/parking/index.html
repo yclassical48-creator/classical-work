@@ -83,14 +83,6 @@ h1,h2,h3{font-family:var(--font-display)}
 .result a span{display:block;font-size:12.5px;color:var(--ink-60);margin-top:2px}
 
 /* LINE CTA */
-.ask{margin:30px 16px 0;padding:22px 20px}
-@media (min-width:672px){.ask{margin:30px auto 0;max-width:608px}}
-.ask h2{font-size:20px;font-weight:900;margin-top:4px;line-height:1.45;color:var(--ink)}
-.ask p:not(.eyebrow){font-size:14px;color:var(--ink-60);margin-top:8px}
-.ask .c-btn{margin-top:18px;min-height:56px}
-.ask .c-btn>span{display:flex;flex-direction:column;align-items:center;line-height:1.35}
-.ask .c-btn b{font-size:16px;font-weight:900}
-.ask .c-btn small{font-size:11.5px;font-weight:500;font-family:var(--font-body);letter-spacing:0;opacity:.92;margin-top:2px}
 
 .c-foot .disc{margin-top:8px}
 
@@ -176,14 +168,6 @@ h1,h2,h3{font-family:var(--font-display)}
     </ul>
   </section>
 
-  <section class="ask c-card" aria-labelledby="ask-title">
-    <p class="eyebrow">ご相談</p>
-    <h2 id="ask-title">探しても見つからないときは</h2>
-    <p>月極の空き具合や契約できるかどうか、実際のとめやすさなど、ネットだけではわからないことはクラシカルにお気軽にご相談ください。物件名や住所をそのまま送っていただければOKです。</p>
-    <a class="c-btn is-green" id="line-btn" href="#" target="_blank" rel="noopener">
-      <span><b>LINEで相談する</b><small>お部屋探しはクラシカルにお任せください！</small></span>
-    </a>
-  </section>
 </main>
 
 <footer class="c-foot">
@@ -195,7 +179,6 @@ h1,h2,h3{font-family:var(--font-display)}
 </footer>
 
 <script>
-const LINE_URL = "#";  // TODO: 公式LINEのURL
 
 /* 外部サービス一覧（アフィリエイトリンクに変える場合は、該当セクションに「PR」「広告」表記を入れてください） */
 const MAP = q => "https://www.google.com/maps/search/" + encodeURIComponent(q);
@@ -258,8 +241,6 @@ function renderList(id, items){
 renderList("list-hourly", HOURLY);
 renderList("list-monthly", MONTHLY);
 renderList("list-cycle", CYCLE);
-
-document.getElementById("line-btn").href = LINE_URL;
 
 const sel = document.getElementById("city");
 Object.keys(CITIES).forEach(group => {
