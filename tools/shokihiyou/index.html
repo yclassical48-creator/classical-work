@@ -9,15 +9,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/classical.css">
 <style>
 :root{
-  --navy:#14418B; --navy-deep:#0D2E66; --navy-light:#2E62B8;
-  --orange:#F47B20; --green:#1E8B4A;
-  --ink:#1B2433; --ink-60:#5A6475;
-  --bg:#F5F7FB; --mist:#EDF2FA; --line:#DCE4EF; --paper:#FFFFFF;
-  --shadow:0 3px 14px rgba(13,46,102,.09); --r:16px;
-  --head:"Zen Maru Gothic",-apple-system,"Hiragino Sans",sans-serif;
-  --text:"Noto Sans JP",-apple-system,"Hiragino Sans",sans-serif;
+  --head:var(--font-display);
+  --text:var(--font-body);
+  --r:var(--r-card);
 }
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -28,37 +25,17 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 h1,h2,h3,p{margin:0}
-:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
 .container{max-width:640px;margin:0 auto;padding:0 16px}
 
-/* ===== ヘッダー ===== */
-.top{
-  background:linear-gradient(150deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);
-  color:#fff;padding:14px 0 26px;
-}
-.back{
-  display:inline-flex;align-items:center;gap:4px;color:#fff;opacity:.86;
-  font-size:12.5px;text-decoration:none;margin-bottom:14px;
-}
-.back:hover{opacity:1;text-decoration:underline}
-.brand{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.brand svg{width:28px;height:28px;flex:none}
-.brand-name{font-family:"Noto Serif",serif;font-weight:700;font-size:18px;letter-spacing:.06em}
-.top h1{font-family:var(--head);font-weight:900;font-size:25px;line-height:1.4}
-.top .lead{font-size:13px;opacity:.86;margin-top:8px;line-height:1.75}
-
 /* ===== 入力パネル ===== */
-.panel{
-  background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);
-  padding:4px 16px 14px;margin-top:16px;
-}
+.panel{padding:4px 16px 14px;margin-top:16px}
 .panel-title{
   display:flex;align-items:center;gap:9px;
-  font-family:var(--head);font-weight:900;font-size:16px;color:var(--navy);
+  font-family:var(--head);font-weight:900;font-size:16px;color:var(--ink);
   padding:14px 0 12px;border-bottom:2px solid var(--mist);
 }
 .step{
-  flex:none;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;
+  flex:none;width:24px;height:24px;border-radius:50%;background:var(--c);color:#fff;
   font-size:12.5px;display:grid;place-items:center;font-family:var(--text);font-weight:700;
 }
 .row{padding:12px 0;border-bottom:1px solid var(--mist)}
@@ -75,7 +52,7 @@ h1,h2,h3,p{margin:0}
   font-family:var(--head);font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;
 }
 .num.short{width:72px}
-.num:focus,.pick:focus{border-color:var(--navy-light);outline:none;box-shadow:0 0 0 3px rgba(46,98,184,.15)}
+.num:focus,.pick:focus{border-color:var(--c);outline:none;box-shadow:0 0 0 3px rgba(240,122,28,.16)}
 .pick{
   padding:9px 8px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);
   color:var(--ink);font-family:var(--head);font-weight:700;font-size:15px;
@@ -83,7 +60,7 @@ h1,h2,h3,p{margin:0}
 .override{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin-top:8px}
 .override .tip{margin-right:auto;font-size:11px;color:var(--ink-60)}
 .override .num{background:var(--mist);border-color:transparent;font-size:14.5px;padding:7px 10px;color:var(--ink-60)}
-.override .num:focus{background:var(--paper);color:var(--ink);border-color:var(--navy-light)}
+.override .num:focus{background:var(--paper);color:var(--ink);border-color:var(--c)}
 .override .unit{font-size:11.5px;color:var(--ink-60)}
 .optional-box{
   margin:14px 0 2px;padding:11px 13px;border-radius:12px;
@@ -92,93 +69,85 @@ h1,h2,h3,p{margin:0}
 }
 
 /* ===== 結果 ===== */
-.summary{
-  margin-top:18px;border-radius:var(--r);padding:20px 17px 14px;color:#fff;
-  background:linear-gradient(160deg,var(--navy-deep) 0%,var(--navy) 100%);box-shadow:var(--shadow);
-}
-.summary h2{font-family:var(--head);font-weight:900;font-size:16px;margin-bottom:12px}
-.sum-box{background:#fff;color:var(--ink);border-radius:14px;padding:16px;text-align:center}
+.summary{margin-top:18px;padding:18px 17px 12px}
+.summary h2{font-family:var(--head);font-weight:900;font-size:16px;color:var(--ink);margin-bottom:10px}
+.sum-box{background:#FFF4EA;color:var(--ink);border-radius:14px;padding:16px;text-align:center}
 .sum-box .cap{font-size:12px;color:var(--ink-60)}
 .sum-value{
   display:block;font-family:var(--head);font-weight:900;font-size:36px;line-height:1.25;
   color:var(--orange);font-variant-numeric:tabular-nums;margin-top:2px;
 }
-.sum-months{display:block;font-size:12px;color:var(--navy);font-weight:500;margin-top:4px;min-height:1em}
-.items{margin:14px 0 0;padding:0}
+.sum-months{display:block;font-size:12px;color:var(--ink);font-weight:500;margin-top:4px;min-height:1em}
+.items{margin:12px 0 0;padding:0}
 .items .it{
   display:flex;justify-content:space-between;gap:10px;padding:7px 2px;font-size:13px;
-  border-bottom:1px solid rgba(255,255,255,.14);
+  border-bottom:1px solid var(--mist);
 }
 .items .it:last-child{border-bottom:none}
-.items dt{opacity:.88}
-.items dd{margin:0;font-family:var(--head);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.items dt{color:var(--ink-60)}
+.items dd{margin:0;font-family:var(--head);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--ink)}
 
 /* ===== チェック ===== */
 .points{margin-top:16px}
 .point{
   display:flex;gap:11px;align-items:flex-start;padding:13px 14px;border-radius:14px;
-  margin-bottom:10px;background:var(--paper);box-shadow:var(--shadow);border-left:5px solid var(--line);
+  margin-bottom:10px;background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--line);
 }
 .point .mark{
   flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
   color:#fff;font-size:12.5px;font-weight:700;margin-top:1px;
 }
-.point h3{font-family:var(--head);font-weight:700;font-size:14px;line-height:1.5}
+.point h3{font-family:var(--head);font-weight:700;font-size:14px;line-height:1.5;color:var(--ink)}
 .point p{font-size:12px;color:var(--ink-60);line-height:1.75;margin-top:4px}
 .point.good{border-left-color:var(--green)} .point.good .mark{background:var(--green)}
 .point.alert{border-left-color:#D6402F;background:#FFF5F3} .point.alert .mark{background:#D6402F}
 .point.note{border-left-color:var(--orange)} .point.note .mark{background:var(--orange)}
 
 /* ===== アクション ===== */
-.btn-line{
-  display:block;margin-top:18px;padding:16px;border-radius:14px;text-align:center;text-decoration:none;
-  background:var(--orange);color:#fff;box-shadow:0 5px 0 #C9600F;
-}
-.btn-line:active{transform:translateY(3px);box-shadow:0 2px 0 #C9600F}
-.btn-line strong{display:block;font-family:var(--head);font-weight:900;font-size:17px}
-.btn-line span{display:block;font-size:11.5px;opacity:.95;margin-top:3px}
-.btn-copy{
-  display:block;width:100%;margin-top:12px;padding:13px;border-radius:12px;cursor:pointer;
-  background:var(--paper);border:1.5px solid var(--navy);color:var(--navy);
-  font-family:var(--head);font-weight:700;font-size:14px;
-}
-.btn-copy:active{background:var(--mist)}
+.btn-line{margin-top:18px;min-height:60px;padding:12px 20px}
+.btn-line .tx{text-align:center}
+.btn-line strong{display:block;font-family:var(--head);font-weight:900;font-size:16px;line-height:1.4}
+.btn-line small{display:block;font-family:var(--text);font-weight:500;font-size:11px;letter-spacing:0;opacity:.95;margin-top:2px;line-height:1.5}
+.btn-copy{margin-top:12px;font-size:14px}
 .btn-copy.done{border-color:var(--green);color:var(--green)}
 
 .notes{margin:20px 0 0;padding:0 0 0 1.1em;font-size:11px;color:var(--ink-60);line-height:1.8}
 .notes li{margin-bottom:3px}
 
-.foot{margin-top:26px;padding:18px 0 12px;border-top:1px solid var(--line);text-align:center;font-size:10.5px;color:var(--ink-60);line-height:1.9}
-
 /* ===== 固定バー ===== */
 .dock{
   position:fixed;left:0;right:0;bottom:0;z-index:30;
   background:rgba(255,255,255,.97);border-top:1px solid var(--line);
-  box-shadow:0 -3px 12px rgba(13,46,102,.07);
+  box-shadow:0 -3px 12px rgba(18,49,107,.07);
   padding:10px 0 calc(10px + env(safe-area-inset-bottom));
 }
 .dock .container{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.dock .lbl{font-size:12px;color:var(--navy);font-weight:500}
+.dock .lbl{font-size:12px;color:var(--ink);font-weight:700;font-family:var(--head)}
 .dock .val{font-family:var(--head);font-weight:900;font-size:24px;color:var(--orange);font-variant-numeric:tabular-nums}
 </style>
 </head>
-<body>
+<body class="is-orange">
 
-<header class="top">
-  <div class="container">
-    <a class="back" href="../../index.html">← 特典一覧</a>
-    <div class="brand">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 5l12 10" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="14" width="16" height="13" rx="1.5" fill="none" stroke="#fff" stroke-width="2.4"/><rect x="13.5" y="18" width="5" height="5" rx=".8" fill="#F47B20"/></svg>
-      <span class="brand-name">CLASSICAL</span>
-    </div>
-    <h1>初期費用シミュレーター</h1>
-    <p class="lead">見積書を手元に用意して、金額を入力してみましょう。初期費用の合計と、契約前に見ておきたいポイントがすぐにわかります。</p>
+<header class="c-top">
+  <div class="c-top-in">
+    <a class="c-back" href="../../index.html">‹ 特典一覧</a>
+    <a class="c-logo" href="../../index.html" aria-label="CLASSICAL トップ">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 13.5h4v4h-4z"/></svg>
+      <b>CLASSICAL</b>
+    </a>
   </div>
 </header>
+<section class="c-hero">
+  <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="8" y="6" width="8" height="3" rx=".5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 17h.01M12 17h.01M15.5 17h.01" stroke-width="2.6"/></svg></span>
+  <div>
+    <h1>初期費用シミュレーター</h1>
+    <p>見積書を手元に用意して、金額を入力してみましょう。<em>初期費用の合計</em>と、契約前に見ておきたいポイントがすぐにわかります。</p>
+  </div>
+</section>
 
 <main class="container">
 
-  <section class="panel" aria-labelledby="t1">
+  <section class="panel c-panel" aria-labelledby="t1">
     <h2 class="panel-title" id="t1"><span class="step">1</span>物件の基本条件</h2>
 
     <div class="row">
@@ -229,7 +198,7 @@ h1,h2,h3,p{margin:0}
     </div>
   </section>
 
-  <section class="panel" aria-labelledby="t2">
+  <section class="panel c-panel" aria-labelledby="t2">
     <h2 class="panel-title" id="t2"><span class="step">2</span>見積書に載っている費用</h2>
 
     <div class="row">
@@ -293,7 +262,7 @@ h1,h2,h3,p{margin:0}
     </div>
   </section>
 
-  <section class="summary" aria-labelledby="t3" aria-live="polite">
+  <section class="summary c-card" aria-labelledby="t3" aria-live="polite">
     <h2 id="t3">初期費用の合計</h2>
     <div class="sum-box">
       <span class="cap">お支払い総額の目安</span>
@@ -305,11 +274,10 @@ h1,h2,h3,p{margin:0}
 
   <section class="points" id="pointList" aria-label="確認ポイント"></section>
 
-  <a class="btn-line" id="lineLink" href="#">
-    <strong>この見積もりをクラシカルに相談する</strong>
-    <span>LINEで物件名を送るだけ。安くできるか無料でお調べします</span>
+  <a class="c-btn is-green btn-line" id="lineLink" href="#">
+    <span class="tx"><strong>この見積もりをクラシカルに相談する</strong><small>LINEで物件名を送るだけ。安くできるか無料でお調べします</small></span>
   </a>
-  <button class="btn-copy" id="copyResult" type="button">計算結果をコピー</button>
+  <button class="c-btn ghost no-arrow btn-copy" id="copyResult" type="button">計算結果をコピー</button>
 
   <ul class="notes">
     <li>本ツールは入力いただいた金額から合計を算出する目安です。実際の請求額は物件や契約条件によって変わります。</li>
@@ -318,12 +286,16 @@ h1,h2,h3,p{margin:0}
     <li>保証料・火災保険料は会社やプランによって異なります。日割り家賃は1ヶ月を30日として計算しています。</li>
   </ul>
 
-  <footer class="foot">
-    株式会社CLASSICAL／大阪府知事（1）第65247号<br>
-    〒564-0053 大阪府吹田市江の木町16-34-501<br>
-    表示される金額はあくまで概算です。正式なお見積りは物件ごとにご確認ください。
-  </footer>
 </main>
+
+<footer class="c-foot">
+  <div class="c-sky" aria-hidden="true"></div>
+  <a class="c-logo" href="../../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 13.5h4v4h-4z"/></svg><b>CLASSICAL</b></a>
+  <span class="c-tagline">お部屋探しはクラシカルにお任せください！</span>
+  株式会社CLASSICAL／大阪府知事（1）第65247号<br>
+  〒564-0053 大阪府吹田市江の木町16-34-501<br>
+  表示される金額はあくまで概算です。正式なお見積りは物件ごとにご確認ください。
+</footer>
 
 <div class="dock">
   <div class="container">
